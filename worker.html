@@ -4,62 +4,93 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>HOMORA Worker</title>
+
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f5f7fb;color:#111827}
-header{background:#111827;color:white;padding:18px 6%;display:flex;justify-content:space-between}
-.logo{font-size:26px;font-weight:bold}main{max-width:700px;margin:auto;padding:20px}
-.card{background:white;padding:22px;border-radius:18px;margin:16px 0;box-shadow:0 4px 15px #0001}
-input{width:100%;padding:13px;margin:7px 0 13px;border:1px solid #ddd;border-radius:10px}
-button{padding:12px;border:0;border-radius:10px;background:#111827;color:white;font-weight:bold;cursor:pointer}
-.full{width:100%}.accept{background:#16a34a}.reject{background:#dc2626;margin-left:8px}
-.hidden{display:none}.booking{border:1px solid #ddd;border-radius:12px;padding:15px;margin:12px 0}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
+header{background:#111827;color:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:27px;font-weight:800}
+main{max-width:700px;margin:auto;padding:20px}
+.card{background:#fff;padding:22px;border-radius:18px;margin:16px 0;box-shadow:0 4px 15px #0001}
+input{width:100%;padding:13px;margin:7px 0 13px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+button{padding:12px;border:0;border-radius:10px;background:#111827;color:#fff;font-weight:bold;cursor:pointer}
+.full{width:100%;margin-top:5px}
+.forgot{background:#7c3aed;width:100%;margin-top:10px}
+.logout{background:#dc2626}
+.accept{background:#16a34a}
+.reject{background:#dc2626;margin-left:8px}
+.hidden{display:none}
+.booking{border:1px solid #ddd;border-radius:12px;padding:15px;margin:12px 0}
+.message{font-weight:bold}
 </style>
 </head>
 
 <body>
+
 <header>
 <div class="logo">HOMORA 👷</div>
-<button onclick="logout()">Logout</button>
+<button class="logout" onclick="logout()">Logout</button>
 </header>
 
 <main>
 
 <div class="card" id="loginBox">
+
 <h2>👷 Worker Login</h2>
+
 <input id="email" type="email" placeholder="Email">
 <input id="password" type="password" placeholder="Password">
+
 <button class="full" onclick="login()">Login</button>
-<p id="loginMsg"></p>
+
+<button class="forgot" onclick="forgotPassword()">
+Forgot Password?
+</button>
+
+<p id="loginMsg" class="message"></p>
+
 </div>
+
 
 <div id="dashboard" class="hidden">
 
 <div class="card">
 <h2>Welcome, <span id="workerName"></span> 👋</h2>
-<p>🟢 You are available for HOMORA bookings.</p>
+<p>🟢 HOMORA Worker Dashboard</p>
 </div>
 
+
 <div class="card">
+
 <h2>📋 New Customer Bookings</h2>
+
 <div id="bookings">Loading...</div>
+
 </div>
+
 
 <div class="card">
+
 <h2>💰 My Earnings</h2>
+
 <h1>₹<span id="earnings">0</span></h1>
+
 </div>
 
 </div>
+
 </main>
+
 
 <script type="module">
 
-import {initializeApp}
+import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
 getAuth,
 signInWithEmailAndPassword,
+sendPasswordResetEmail,
 onAuthStateChanged,
 signOut
 }
@@ -77,7 +108,8 @@ updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
-const firebaseConfig={
+
+const firebaseConfig = {
 apiKey:"AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
 authDomain:"homora-41400.firebaseapp.com",
 projectId:"homora-41400",
@@ -86,68 +118,160 @@ messagingSenderId:"252376803932",
 appId:"1:252376803932:web:595c23360a014a0cfc9499"
 };
 
-const app=initializeApp(firebaseConfig);
-const auth=getAuth(app);
-const db=getFirestore(app);
 
-window.login=async function(){
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
+
+window.login = async function(){
+
+const email =
+document.getElementById("email").value.trim();
+
+const password =
+document.getElementById("password").value;
+
+if(!email || !password){
+
+document.getElementById("loginMsg").innerText =
+"Please enter email and password.";
+
+return;
+
+}
 
 try{
-await signInWithEmailAndPassword(auth,email,password);
-}catch(e){
-document.getElementById("loginMsg").innerText="❌ "+e.message;
+
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
+
+}catch(error){
+
+document.getElementById("loginMsg").innerText =
+"❌ "+error.message;
+
 }
 
 };
 
-onAuthStateChanged(auth,async user=>{
+
+window.forgotPassword = async function(){
+
+const email =
+document.getElementById("email").value.trim();
+
+if(!email){
+
+document.getElementById("loginMsg").innerText =
+"Please enter your email first.";
+
+return;
+
+}
+
+try{
+
+await sendPasswordResetEmail(
+auth,
+email
+);
+
+document.getElementById("loginMsg").innerText =
+"✅ Password reset link sent to your email.";
+
+}catch(error){
+
+document.getElementById("loginMsg").innerText =
+"❌ "+error.message;
+
+}
+
+};
+
+
+onAuthStateChanged(auth, async user =>{
 
 if(!user)return;
 
-const workerSnap=await getDoc(doc(db,"workers",user.uid));
+try{
+
+const workerSnap =
+await getDoc(
+doc(db,"workers",user.uid)
+);
 
 if(!workerSnap.exists()){
-document.getElementById("loginMsg").innerText="❌ Worker profile not found.";
+
+document.getElementById("loginMsg").innerText =
+"❌ Worker profile not found.";
+
 await signOut(auth);
+
 return;
+
 }
 
-const worker=workerSnap.data();
+const worker =
+workerSnap.data();
 
-document.getElementById("loginBox").classList.add("hidden");
-document.getElementById("dashboard").classList.remove("hidden");
-document.getElementById("workerName").innerText=worker.name;
+document.getElementById("loginBox")
+.classList.add("hidden");
+
+document.getElementById("dashboard")
+.classList.remove("hidden");
+
+document.getElementById("workerName")
+.innerText =
+worker.name || "Worker";
 
 loadBookings();
 
+}catch(error){
+
+document.getElementById("loginMsg").innerText =
+"❌ "+error.message;
+
+}
+
 });
+
 
 async function loadBookings(){
 
 try{
 
-const q=query(
+const q =
+query(
 collection(db,"bookings"),
 where("status","==","pending")
 );
 
-const snap=await getDocs(q);
+const snap =
+await getDocs(q);
 
 let html="";
 
-snap.forEach(item=>{
+snap.forEach(item =>{
 
 const b=item.data();
 
-html+=`
+html += `
+
 <div class="booking">
-<b>🏠 ${b.service}</b>
-<p>⏱️ ${b.hours} Hours</p>
-<p>📍 ${b.address}</p>
-<p>Status: ${b.status}</p>
+
+<b>🏠 ${b.service || "Home Service"}</b>
+
+<p>⏱️ ${b.hours || "-"} Hours</p>
+
+<p>📍 ${b.address || "-"}</p>
+
+<p>📅 ${b.createdAt || "-"}</p>
+
+<p>Status: <b>${b.status}</b></p>
 
 <button class="accept"
 onclick="acceptBooking('${item.id}')">
@@ -158,64 +282,84 @@ onclick="acceptBooking('${item.id}')">
 onclick="rejectBooking('${item.id}')">
 ✕ Reject
 </button>
+
 </div>
+
 `;
 
 });
 
-document.getElementById("bookings").innerHTML=
+document.getElementById("bookings").innerHTML =
 html || "No new bookings right now.";
 
-}catch(e){
+}catch(error){
 
-document.getElementById("bookings").innerText=
-"❌ "+e.message;
-
-}
+document.getElementById("bookings").innerText =
+"❌ "+error.message;
 
 }
 
-window.acceptBooking=async function(id){
+}
+
+
+window.acceptBooking = async function(id){
 
 try{
 
 const user=auth.currentUser;
 
-await updateDoc(doc(db,"bookings",id),{
+await updateDoc(
+doc(db,"bookings",id),
+{
 status:"accepted",
 workerId:user.uid
-});
+}
+);
 
 alert("✅ Booking accepted!");
+
 loadBookings();
 
-}catch(e){
-alert("❌ "+e.message);
+}catch(error){
+
+alert("❌ "+error.message);
+
 }
 
 };
 
-window.rejectBooking=async function(id){
+
+window.rejectBooking = async function(id){
 
 try{
 
-await updateDoc(doc(db,"bookings",id),{
+await updateDoc(
+doc(db,"bookings",id),
+{
 status:"rejected"
-});
+}
+);
 
 alert("Booking rejected.");
+
 loadBookings();
 
-}catch(e){
-alert("❌ "+e.message);
+}catch(error){
+
+alert("❌ "+error.message);
+
 }
 
 };
 
-window.logout=function(){
+
+window.logout = function(){
+
 signOut(auth);
+
 };
 
 </script>
+
 </body>
 </html>
