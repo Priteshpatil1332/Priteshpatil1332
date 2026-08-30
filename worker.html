@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOMORA Worker Panel</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
+header{background:#111827;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:27px;font-weight:800}
+.status{background:#22c55e;border:0;color:white;padding:10px 16px;border-radius:10px;font-weight:bold}
+.container{max-width:1000px;margin:auto;padding:25px}
+.welcome{background:white;padding:25px;border-radius:18px;margin-bottom:20px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.box{background:white;padding:22px;border-radius:18px;box-shadow:0 4px 15px #00000010}
+.box h3{margin-top:0}
+.booking{background:white;padding:22px;border-radius:18px;margin-top:20px}
+.booking button{padding:11px 18px;border:0;border-radius:10px;font-weight:bold;cursor:pointer}
+.accept{background:#16a34a;color:white}
+.reject{background:#ef4444;color:white;margin-left:8px}
+.online{color:#16a34a;font-weight:bold}
+.earning{font-size:28px;font-weight:bold}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.container{padding:15px}}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">HOMORA 👷</div>
+<button class="status" onclick="toggleStatus()" id="statusBtn">ONLINE</button>
+</header>
+
+<div class="container">
+
+<div class="welcome">
+<h2>Welcome, HOMORA Worker 👋</h2>
+<p>Status: <span class="online" id="workerStatus">Online</span></p>
+</div>
+
+<div class="grid">
+
+<div class="box">
+<h3>💰 Today's Earnings</h3>
+<div class="earning">₹900</div>
+</div>
+
+<div class="box">
+<h3>📋 Completed</h3>
+<div class="earning">6</div>
+</div>
+
+<div class="box">
+<h3>⭐ Rating</h3>
+<div class="earning">4.8</div>
+</div>
+
+</div>
+
+<div class="booking">
+
+<h2>📥 New Booking Request</h2>
+
+<p><b>Service:</b> Jhaadu & Pocha</p>
+<p><b>Duration:</b> 4 Hours</p>
+<p><b>Date:</b> Today</p>
+<p><b>Time:</b> 10:00 AM</p>
+<p><b>Customer:</b> Rahul</p>
+<p><b>Address:</b> Kalyan, Maharashtra</p>
+<p><b>Your Earning:</b> ₹600</p>
+
+<button class="accept" onclick="acceptBooking()">✓ Accept</button>
+<button class="reject" onclick="rejectBooking()">✕ Reject</button>
+
+</div>
+
+<div class="booking">
+
+<h2>📜 Booking History</h2>
+
+<p>✅ Cooking — 4 Hours — ₹600</p>
+<p>✅ Cleaning — 2 Hours — ₹300</p>
+<p>✅ Bartan Cleaning — 4 Hours — ₹600</p>
+
+</div>
+
+</div>
+
+<script>
+
+let online=true;
+
+function toggleStatus(){
+online=!online;
+
+document.getElementById("statusBtn").innerText=
+online?"ONLINE":"OFFLINE";
+
+document.getElementById("workerStatus").innerText=
+online?"Online":"Offline";
+
+document.getElementById("workerStatus").style.color=
+online?"#16a34a":"#ef4444";
+}
+
+function acceptBooking(){
+alert("Booking Accepted ✅");
+}
+
+function rejectBooking(){
+alert("Booking Rejected ❌");
+}
+
+</script>
+
+</body>
+</html>
