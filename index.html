@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOMORA - Home Services</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:Arial,sans-serif;
+  background:#f5f7fa;
+  color:#171717;
+}
+header{
+  background:#111827;
+  color:white;
+  padding:22px 18px;
+  text-align:center;
+}
+.logo{
+  font-size:30px;
+  font-weight:800;
+  letter-spacing:2px;
+}
+.tag{
+  margin-top:6px;
+  color:#d1d5db;
+  font-size:14px;
+}
+.hero{
+  padding:30px 18px;
+  background:white;
+  text-align:center;
+}
+.hero h1{font-size:30px;margin-bottom:10px}
+.hero p{color:#666;margin-bottom:20px}
+.btn{
+  display:inline-block;
+  background:#111827;
+  color:white;
+  padding:14px 24px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:bold;
+}
+.section{padding:25px 18px}
+.section h2{text-align:center;margin-bottom:20px}
+.services{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.card{
+  background:white;
+  padding:20px 10px;
+  border-radius:14px;
+  text-align:center;
+  box-shadow:0 3px 12px #00000012;
+  cursor:pointer;
+}
+.icon{font-size:35px;margin-bottom:8px}
+.card b{font-size:15px}
+.booking{
+  background:white;
+  margin:10px 18px 30px;
+  padding:22px;
+  border-radius:15px;
+  box-shadow:0 3px 15px #00000012;
+}
+input,select{
+  width:100%;
+  padding:13px;
+  margin:8px 0 12px;
+  border:1px solid #ddd;
+  border-radius:9px;
+  font-size:15px;
+}
+button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#111827;
+  color:white;
+  font-size:16px;
+  font-weight:bold;
+}
+footer{
+  background:#111827;
+  color:white;
+  text-align:center;
+  padding:22px;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">HOMORA</div>
+  <div class="tag">Trusted Home Services at Your Doorstep</div>
+</header>
+
+<section class="hero">
+  <h1>Ghar Ka Kaam, Ab HOMORA Ke Naam 🏠</h1>
+  <p>Electrician, Plumber, Cleaning aur Home Services — ek hi jagah.</p>
+  <a href="#booking" class="btn">Book a Service</a>
+</section>
+
+<section class="section">
+  <h2>Our Services</h2>
+
+  <div class="services">
+
+    <div class="card" onclick="selectService('Electrician')">
+      <div class="icon">⚡</div>
+      <b>Electrician</b>
+    </div>
+
+    <div class="card" onclick="selectService('Plumber')">
+      <div class="icon">🔧</div>
+      <b>Plumber</b>
+    </div>
+
+    <div class="card" onclick="selectService('AC Service')">
+      <div class="icon">❄️</div>
+      <b>AC Service</b>
+    </div>
+
+    <div class="card" onclick="selectService('Cleaning')">
+      <div class="icon">🧹</div>
+      <b>Cleaning</b>
+    </div>
+
+    <div class="card" onclick="selectService('Carpenter')">
+      <div class="icon">🪚</div>
+      <b>Carpenter</b>
+    </div>
+
+    <div class="card" onclick="selectService('Appliance Repair')">
+      <div class="icon">🔌</div>
+      <b>Appliance Repair</b>
+    </div>
+
+  </div>
+</section>
+
+<section class="booking" id="booking">
+  <h2>Book HOMORA Service</h2>
+
+  <input id="name" type="text" placeholder="Your Name">
+
+  <input id="phone" type="tel" placeholder="Mobile Number">
+
+  <select id="service">
+    <option value="">Select Service</option>
+    <option>Electrician</option>
+    <option>Plumber</option>
+    <option>AC Service</option>
+    <option>Cleaning</option>
+    <option>Carpenter</option>
+    <option>Appliance Repair</option>
+  </select>
+
+  <input id="address" type="text" placeholder="Your Address">
+
+  <button onclick="bookService()">Book Now</button>
+</section>
+
+<footer>
+  © 2026 HOMORA<br>
+  Professional Home Services
+</footer>
+
+<script>
+function selectService(service){
+  document.getElementById("service").value = service;
+  document.getElementById("booking").scrollIntoView({
+    behavior:"smooth"
+  });
+}
+
+function bookService(){
+
+  let name=document.getElementById("name").value;
+  let phone=document.getElementById("phone").value;
+  let service=document.getElementById("service").value;
+  let address=document.getElementById("address").value;
+
+  if(!name || !phone || !service || !address){
+    alert("Please fill all details.");
+    return;
+  }
+
+  alert(
+    "HOMORA booking received!\\n\\n"+
+    "Name: "+name+
+    "\\nService: "+service+
+    "\\nWe will contact you shortly."
+  );
+}
+</script>
+
+</body>
+</html>
