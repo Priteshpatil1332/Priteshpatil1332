@@ -17,7 +17,6 @@ button{width:100%;padding:14px;border:0;border-radius:10px;background:#111827;co
 .secondary{background:#7c3aed}
 .hidden{display:none}
 .status{padding:12px;border-radius:10px;background:#dcfce7;color:#166534;font-weight:bold;text-align:center}
-.booking{border:1px solid #ddd;padding:15px;border-radius:12px;margin-top:12px}
 </style>
 </head>
 
@@ -30,9 +29,7 @@ button{width:100%;padding:14px;border:0;border-radius:10px;background:#111827;co
 
 <main>
 
-<!-- LOGIN / REGISTER -->
 <div class="card" id="authBox">
-
 <h2>👷 Worker Registration</h2>
 
 <input id="name" placeholder="Full Name">
@@ -47,10 +44,8 @@ button{width:100%;padding:14px;border:0;border-radius:10px;background:#111827;co
 <button class="secondary" onclick="loginWorker()">Login</button>
 
 <p id="message"></p>
-
 </div>
 
-<!-- WORKER DASHBOARD -->
 <div id="dashboard" class="hidden">
 
 <div class="card">
@@ -60,12 +55,12 @@ button{width:100%;padding:14px;border:0;border-radius:10px;background:#111827;co
 
 <div class="card">
 <h3>📋 Your Bookings</h3>
-<div id="bookings">No bookings yet.</div>
+<p>No bookings yet.</p>
 </div>
 
 <div class="card">
 <h3>💰 Earnings</h3>
-<h1>₹<span id="earnings">0</span></h1>
+<h1>₹0</h1>
 </div>
 
 <div class="card">
@@ -98,18 +93,21 @@ getDoc
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
+
 const firebaseConfig = {
-apiKey:"AIzaSyAFnzY61X6YVWaKB03ig_a-EUQ6qfFRec",
-authDomain:"homora-41400.firebaseapp.com",
-projectId:"homora-41400",
-storageBucket:"homora-41400.firebasestorage.app",
-messagingSenderId:"252376803932",
-appId:"1:252376803932:web:595c23360a014a0cfc9499"
+  apiKey: "AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
+  authDomain: "homora-41400.firebaseapp.com",
+  projectId: "homora-41400",
+  storageBucket: "homora-41400.firebasestorage.app",
+  messagingSenderId: "252376803932",
+  appId: "1:252376803932:web:595c23360a014a0cfc9499"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+
 
 window.registerWorker = async function(){
 
@@ -120,11 +118,6 @@ const password=document.getElementById("password").value;
 
 if(!name || !phone || !email || !password){
 document.getElementById("message").innerText="Please fill all details.";
-return;
-}
-
-if(password.length<6){
-document.getElementById("message").innerText="Password must be at least 6 characters.";
 return;
 }
 
@@ -155,16 +148,11 @@ document.getElementById("message").innerText=
 
 };
 
+
 window.loginWorker = async function(){
 
 const email=document.getElementById("email").value.trim();
 const password=document.getElementById("password").value;
-
-if(!email || !password){
-document.getElementById("message").innerText=
-"Enter email and password.";
-return;
-}
 
 try{
 
@@ -178,6 +166,7 @@ document.getElementById("message").innerText=
 }
 
 };
+
 
 onAuthStateChanged(auth,async(user)=>{
 
@@ -198,6 +187,7 @@ snap.data().name;
 }
 
 });
+
 
 window.logout=function(){
 signOut(auth);
