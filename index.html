@@ -1,5 +1,4 @@
-
-PE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -7,202 +6,339 @@ PE html>
 <title>HOMORA - Home Services</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:Arial,sans-serif;
-  background:#f5f7fa;
-  color:#171717;
-}
-header{
-  background:#111827;
-  color:white;
-  padding:22px 18px;
-  text-align:center;
-}
-.logo{
-  font-size:30px;
-  font-weight:800;
-  letter-spacing:2px;
-}
-.tag{
-  margin-top:6px;
-  color:#d1d5db;
-  font-size:14px;
-}
-.hero{
-  padding:30px 18px;
-  background:white;
-  text-align:center;
-}
-.hero h1{font-size:30px;margin-bottom:10px}
-.hero p{color:#666;margin-bottom:20px}
-.btn{
-  display:inline-block;
-  background:#111827;
-  color:white;
-  padding:14px 24px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:bold;
-}
-.section{padding:25px 18px}
-.section h2{text-align:center;margin-bottom:20px}
-.services{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:12px;
-}
-.card{
-  background:white;
-  padding:20px 10px;
-  border-radius:14px;
-  text-align:center;
-  box-shadow:0 3px 12px #00000012;
-  cursor:pointer;
-}
-.icon{font-size:35px;margin-bottom:8px}
-.card b{font-size:15px}
-.booking{
-  background:white;
-  margin:10px 18px 30px;
-  padding:22px;
-  border-radius:15px;
-  box-shadow:0 3px 15px #00000012;
-}
-input,select{
-  width:100%;
-  padding:13px;
-  margin:8px 0 12px;
-  border:1px solid #ddd;
-  border-radius:9px;
-  font-size:15px;
-}
-button{
-  width:100%;
-  padding:14px;
-  border:0;
-  border-radius:10px;
-  background:#111827;
-  color:white;
-  font-size:16px;
-  font-weight:bold;
-}
-footer{
-  background:#111827;
-  color:white;
-  text-align:center;
-  padding:22px;
-  font-size:13px;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
+header{background:#111827;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;font-weight:800}
+main{max-width:700px;margin:auto;padding:20px}
+.card{background:white;padding:24px;border-radius:18px;margin:18px 0;box-shadow:0 5px 20px #0001}
+input,select{width:100%;padding:14px;margin:8px 0 14px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+button{width:100%;padding:14px;border:0;border-radius:10px;background:#111827;color:white;font-size:16px;font-weight:bold;margin-top:6px}
+.purple{background:#7c3aed}
+.green{background:#16a34a}
+.hidden{display:none}
+.service{border:1px solid #ddd;padding:14px;border-radius:12px;margin:8px 0;cursor:pointer}
+.service.selected{border:2px solid #7c3aed;background:#f5f3ff}
+#message{font-weight:bold}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">HOMORA</div>
-  <div class="tag">Trusted Home Services at Your Doorstep</div>
+<div class="logo">HOMORA 🏠</div>
+<div>Home Services</div>
 </header>
 
-<section class="hero">
-  <h1>Ghar Ka Kaam, Ab HOMORA Ke Naam 🏠</h1>
-  <p>Electrician, Plumber, Cleaning aur Home Services — ek hi jagah.</p>
-  <a href="#booking" class="btn">Book a Service</a>
-</section>
+<main>
 
-<section class="section">
-  <h2>Our Services</h2>
+<!-- LOGIN / REGISTER -->
+<div class="card" id="authBox">
 
-  <div class="services">
+<h2>👤 Customer Account</h2>
 
-    <div class="card" onclick="selectService('Electrician')">
-      <div class="icon">⚡</div>
-      <b>Electrician</b>
-    </div>
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="Mobile Number">
+<input id="email" type="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
 
-    <div class="card" onclick="selectService('Plumber')">
-      <div class="icon">🔧</div>
-      <b>Plumber</b>
-    </div>
+<button onclick="registerCustomer()">Create Account</button>
+<button class="purple" onclick="loginCustomer()">Login</button>
 
-    <div class="card" onclick="selectService('AC Service')">
-      <div class="icon">❄️</div>
-      <b>AC Service</b>
-    </div>
+<p id="message"></p>
 
-    <div class="card" onclick="selectService('Cleaning')">
-      <div class="icon">🧹</div>
-      <b>Cleaning</b>
-    </div>
+</div>
 
-    <div class="card" onclick="selectService('Carpenter')">
-      <div class="icon">🪚</div>
-      <b>Carpenter</b>
-    </div>
+<!-- CUSTOMER DASHBOARD -->
+<div id="dashboard" class="hidden">
 
-    <div class="card" onclick="selectService('Appliance Repair')">
-      <div class="icon">🔌</div>
-      <b>Appliance Repair</b>
-    </div>
+<div class="card">
+<h2>Welcome, <span id="customerName"></span> 👋</h2>
+<p>Book trusted HOMORA home services.</p>
+</div>
 
-  </div>
-</section>
+<div class="card">
 
-<section class="booking" id="booking">
-  <h2>Book HOMORA Service</h2>
+<h2>🏠 Choose Service</h2>
 
-  <input id="name" type="text" placeholder="Your Name">
+<div class="service" onclick="selectService('Cleaning')">🧹 Cleaning</div>
+<div class="service" onclick="selectService('Cooking')">🍳 Cooking</div>
+<div class="service" onclick="selectService('Bartan')">🍽️ Bartan Cleaning</div>
+<div class="service" onclick="selectService('Laundry')">👕 Laundry</div>
+<div class="service" onclick="selectService('Home Help')">🏠 Home Help</div>
 
-  <input id="phone" type="tel" placeholder="Mobile Number">
+<input id="address" placeholder="Your Full Address">
 
-  <select id="service">
-    <option value="">Select Service</option>
-    <option>Electrician</option>
-    <option>Plumber</option>
-    <option>AC Service</option>
-    <option>Cleaning</option>
-    <option>Carpenter</option>
-    <option>Appliance Repair</option>
-  </select>
+<select id="hours">
+<option value="">Select Hours</option>
+<option value="2">2 Hours</option>
+<option value="4">4 Hours</option>
+<option value="6">6 Hours</option>
+<option value="8">8 Hours</option>
+</select>
 
-  <input id="address" type="text" placeholder="Your Address">
+<button class="green" onclick="createBooking()">📋 Book Service</button>
 
-  <button onclick="bookService()">Book Now</button>
-</section>
+<p id="bookingMessage"></p>
 
-<footer>
-  © 2026 HOMORA<br>
-  Professional Home Services
-</footer>
+</div>
 
-<script>
-function selectService(service){
-  document.getElementById("service").value = service;
-  document.getElementById("booking").scrollIntoView({
-    behavior:"smooth"
-  });
+<div class="card">
+<h2>📋 My Bookings</h2>
+<div id="myBookings">No bookings yet.</div>
+</div>
+
+<div class="card">
+<h3>🎁 Joining Bonus</h3>
+<p>Eligible new customers can receive a <b>₹1,000 joining bonus</b> after completing the required qualifying activity.</p>
+</div>
+
+<div class="card">
+<button onclick="logout()">Logout</button>
+</div>
+
+</div>
+
+</main>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+getAuth,
+createUserWithEmailAndPassword,
+signInWithEmailAndPassword,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+setDoc,
+getDoc,
+addDoc,
+collection,
+query,
+where,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
+  authDomain: "homora-41400.firebaseapp.com",
+  projectId: "homora-41400",
+  storageBucket: "homora-41400.firebasestorage.app",
+  messagingSenderId: "252376803932",
+  appId: "1:252376803932:web:595c23360a014a0cfc9499"
+};
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let selectedService = "";
+
+
+window.selectService = function(service){
+
+selectedService = service;
+
+document.querySelectorAll(".service").forEach(x=>{
+x.classList.remove("selected");
+});
+
+event.currentTarget.classList.add("selected");
+
+};
+
+
+window.registerCustomer = async function(){
+
+const name=document.getElementById("name").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+
+if(!name || !phone || !email || !password){
+document.getElementById("message").innerText=
+"Please fill all details.";
+return;
 }
 
-function bookService(){
+try{
 
-  let name=document.getElementById("name").value;
-  let phone=document.getElementById("phone").value;
-  let service=document.getElementById("service").value;
-  let address=document.getElementById("address").value;
+const result=await createUserWithEmailAndPassword(
+auth,email,password
+);
 
-  if(!name || !phone || !service || !address){
-    alert("Please fill all details.");
-    return;
-  }
+await setDoc(doc(db,"customers",result.user.uid),{
+name:name,
+phone:phone,
+email:email,
+role:"customer",
+bonusEligible:true,
+bonusAmount:1000,
+bonusStatus:"pending",
+createdAt:new Date().toISOString()
+});
 
-  alert(
-    "HOMORA booking received!\\n\\n"+
-    "Name: "+name+
-    "\\nService: "+service+
-    "\\nWe will contact you shortly."
-  );
+document.getElementById("message").innerText=
+"✅ Customer account created successfully!";
+
+}catch(error){
+
+document.getElementById("message").innerText=
+"❌ "+error.message;
+
 }
+
+};
+
+
+window.loginCustomer = async function(){
+
+const email=document.getElementById("email").value.trim();
+const password=document.getElementById("password").value;
+
+try{
+
+await signInWithEmailAndPassword(auth,email,password);
+
+}catch(error){
+
+document.getElementById("message").innerText=
+"❌ "+error.message;
+
+}
+
+};
+
+
+window.createBooking = async function(){
+
+if(!selectedService){
+document.getElementById("bookingMessage").innerText=
+"Please select a service.";
+return;
+}
+
+const address=document.getElementById("address").value.trim();
+const hours=document.getElementById("hours").value;
+
+if(!address || !hours){
+document.getElementById("bookingMessage").innerText=
+"Please enter address and hours.";
+return;
+}
+
+const user=auth.currentUser;
+
+if(!user){
+document.getElementById("bookingMessage").innerText=
+"Please login first.";
+return;
+}
+
+try{
+
+await addDoc(collection(db,"bookings"),{
+
+customerId:user.uid,
+service:selectedService,
+address:address,
+hours:Number(hours),
+status:"pending",
+workerId:null,
+createdAt:new Date().toISOString()
+
+});
+
+document.getElementById("bookingMessage").innerText=
+"✅ Booking request created successfully!";
+
+loadBookings();
+
+}catch(error){
+
+document.getElementById("bookingMessage").innerText=
+"❌ "+error.message;
+
+}
+
+};
+
+
+async function loadBookings(){
+
+const user=auth.currentUser;
+
+if(!user)return;
+
+const q=query(
+collection(db,"bookings"),
+where("customerId","==",user.uid)
+);
+
+const snapshot=await getDocs(q);
+
+let html="";
+
+snapshot.forEach(doc=>{
+const b=doc.data();
+
+html+=`
+<div style="border:1px solid #ddd;padding:12px;border-radius:10px;margin:8px 0">
+<b>${b.service}</b><br>
+${b.hours} Hours<br>
+Status: ${b.status}
+</div>
+`;
+});
+
+document.getElementById("myBookings").innerHTML=
+html || "No bookings yet.";
+
+}
+
+
+onAuthStateChanged(auth,async(user)=>{
+
+if(user){
+
+const snap=await getDoc(
+doc(db,"customers",user.uid)
+);
+
+if(snap.exists()){
+
+document.getElementById("authBox").classList.add("hidden");
+document.getElementById("dashboard").classList.remove("hidden");
+
+document.getElementById("customerName").innerText=
+snap.data().name;
+
+loadBookings();
+
+}
+
+}
+
+});
+
+
+window.logout=function(){
+signOut(auth);
+location.reload();
+};
+
 </script>
 
 </body>
-</html
+</html>
