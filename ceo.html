@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOMORA CEO Dashboard</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
+header{background:#111827;color:white;padding:20px 6%;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:28px;font-weight:800}
+.badge{background:#7c3aed;padding:9px 15px;border-radius:10px;font-weight:bold}
+.container{max-width:1100px;margin:auto;padding:25px}
+.welcome{background:white;padding:25px;border-radius:18px;margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.card{background:white;padding:22px;border-radius:18px;box-shadow:0 4px 15px #00000010}
+.card h3{margin-top:0;color:#667085}
+.number{font-size:30px;font-weight:bold}
+section{margin-top:25px}
+table{width:100%;border-collapse:collapse;background:white;border-radius:15px;overflow:hidden}
+th,td{padding:15px;text-align:left;border-bottom:1px solid #eee}
+th{background:#f2f4f7}
+.approve{background:#16a34a;color:white;border:0;padding:8px 13px;border-radius:8px}
+.block{background:#ef4444;color:white;border:0;padding:8px 13px;border-radius:8px}
+@media(max-width:700px){
+.stats{grid-template-columns:repeat(2,1fr)}
+table{font-size:13px}
+th,td{padding:10px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">HOMORA 👑</div>
+<div class="badge">CEO PANEL</div>
+</header>
+
+<div class="container">
+
+<div class="welcome">
+<h2>Welcome, CEO 👋</h2>
+<p>HOMORA Business Dashboard</p>
+</div>
+
+<div class="stats">
+
+<div class="card">
+<h3>👥 Customers</h3>
+<div class="number">128</div>
+</div>
+
+<div class="card">
+<h3>👷 Workers</h3>
+<div class="number">24</div>
+</div>
+
+<div class="card">
+<h3>📋 Bookings</h3>
+<div class="number">356</div>
+</div>
+
+<div class="card">
+<h3>💰 Revenue</h3>
+<div class="number">₹1,24,600</div>
+</div>
+
+</div>
+
+<section>
+<h2>📋 Recent Bookings</h2>
+
+<table>
+<tr>
+<th>Customer</th>
+<th>Service</th>
+<th>Hours</th>
+<th>Worker</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Rahul</td>
+<td>Jhaadu & Pocha</td>
+<td>4</td>
+<td>Worker #102</td>
+<td>✅ Completed</td>
+</tr>
+
+<tr>
+<td>Priya</td>
+<td>Cooking</td>
+<td>6</td>
+<td>Worker #108</td>
+<td>🟢 Active</td>
+</tr>
+
+<tr>
+<td>Amit</td>
+<td>Deep Cleaning</td>
+<td>2</td>
+<td>Worker #115</td>
+<td>🕐 Pending</td>
+</tr>
+
+</table>
+</section>
+
+<section>
+<h2>👷 Worker Management</h2>
+
+<table>
+<tr>
+<th>Worker</th>
+<th>Service</th>
+<th>Rating</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>Worker #102</td>
+<td>Cleaning</td>
+<td>⭐ 4.8</td>
+<td><button class="approve">Approved</button></td>
+</tr>
+
+<tr>
+<td>Worker #108</td>
+<td>Cooking</td>
+<td>⭐ 4.9</td>
+<td><button class="approve">Approved</button></td>
+</tr>
+
+<tr>
+<td>Worker #115</td>
+<td>Home Help</td>
+<td>⭐ 4.6</td>
+<td><button class="block">Block</button></td>
+</tr>
+
+</table>
+</section>
+
+<section>
+<h2>💰 Business Summary</h2>
+
+<div class="card">
+<p><b>Today's Revenue:</b> ₹8,450</p>
+<p><b>This Month:</b> ₹1,24,600</p>
+<p><b>Completed Jobs:</b> 312</p>
+<p><b>Pending Jobs:</b> 18</p>
+</div>
+
+</section>
+
+</div>
+
+</body>
+  </html>
