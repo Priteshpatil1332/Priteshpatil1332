@@ -3,154 +3,298 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HOMORA CEO Dashboard</title>
+<title>HOMORA CEO Command Center</title>
 
 <style>
 *{box-sizing:border-box}
 body{
 margin:0;
-font-family:Arial,sans-serif;
-background:linear-gradient(135deg,#f7f4ff,#eef5ff);
-color:#171721
+font-family:Inter,Arial,sans-serif;
+background:#050505;
+color:#fff;
+min-height:100vh
 }
 header{
-background:rgba(255,255,255,.85);
-backdrop-filter:blur(14px);
-padding:18px 6%;
+height:72px;
+padding:0 24px;
 display:flex;
-justify-content:space-between;
 align-items:center;
-border-bottom:1px solid #fff;
+justify-content:space-between;
+background:#0b0b0b;
+border-bottom:1px solid #242424;
 position:sticky;
 top:0;
-z-index:10
+z-index:20
 }
-.logo{font-size:28px;font-weight:900;color:#6d28d9}
-.ceo{background:#ede9fe;color:#6d28d9;padding:9px 15px;border-radius:30px;font-weight:bold}
-main{max-width:1200px;margin:auto;padding:25px 18px}
+.logo{
+font-size:25px;
+font-weight:900;
+letter-spacing:1px
+}
+.logo span{color:#a855f7}
+.ceoTag{
+background:#181818;
+border:1px solid #333;
+padding:9px 14px;
+border-radius:30px;
+font-size:12px;
+font-weight:bold;
+letter-spacing:1px
+}
+.layout{
+display:grid;
+grid-template-columns:220px 1fr;
+min-height:calc(100vh - 72px)
+}
+nav{
+background:#090909;
+border-right:1px solid #222;
+padding:20px 12px
+}
+.navBtn{
+width:100%;
+background:transparent;
+color:#aaa;
+border:0;
+padding:14px;
+margin:4px 0;
+border-radius:12px;
+text-align:left;
+font-weight:bold;
+cursor:pointer
+}
+.navBtn:hover,.navBtn.active{
+background:#181818;
+color:#fff
+}
+.content{
+padding:25px;
+max-width:1400px;
+width:100%
+}
 .hero{
-background:linear-gradient(135deg,#7c3aed,#4f46e5);
-color:white;padding:30px 25px;
-border-radius:26px;
-box-shadow:0 15px 35px #6d28d933;
+background:linear-gradient(135deg,#151515,#0b0b0b);
+border:1px solid #292929;
+border-radius:24px;
+padding:28px;
 margin-bottom:22px
 }
-.hero h1{margin:0 0 8px;font-size:32px}
-.hero p{margin:0;opacity:.9}
-.login{
-max-width:480px;margin:60px auto;
-background:rgba(255,255,255,.82);
-padding:25px;border-radius:24px;
-box-shadow:0 12px 35px #0001;
-backdrop-filter:blur(15px)
+.hero h1{
+margin:0 0 8px;
+font-size:32px
 }
-input{
-width:100%;padding:14px;margin:7px 0 13px;
-border:1px solid #ddd;border-radius:12px;
-font-size:15px
+.hero p{
+color:#888;
+margin:0
 }
-button{
-border:0;border-radius:12px;
-padding:12px 16px;
-font-weight:bold;cursor:pointer
-}
-.primary{width:100%;background:#6d28d9;color:#fff}
-.logout{background:#111827;color:#fff}
-.hidden{display:none}
 .stats{
 display:grid;
 grid-template-columns:repeat(4,1fr);
 gap:14px;
-margin-bottom:20px
+margin-bottom:22px
 }
 .stat{
-background:rgba(255,255,255,.85);
+background:#101010;
+border:1px solid #242424;
+border-radius:18px;
 padding:20px;
-border-radius:20px;
-box-shadow:0 8px 25px #0000000d
+position:relative;
+overflow:hidden
 }
-.stat span{display:block;color:#6b7280}
-.stat b{font-size:28px;display:block;margin-top:7px}
+.stat:after{
+content:"";
+position:absolute;
+width:70px;
+height:70px;
+right:-25px;
+top:-25px;
+background:#a855f7;
+opacity:.12;
+border-radius:50%
+}
+.stat small{color:#777}
+.stat h2{
+margin:9px 0 0;
+font-size:29px
+}
 .grid{
 display:grid;
-grid-template-columns:1fr 1fr;
+grid-template-columns:1.4fr 1fr;
 gap:18px
 }
-.card{
-background:rgba(255,255,255,.85);
-padding:20px;
+.panel{
+background:#101010;
+border:1px solid #242424;
 border-radius:20px;
-box-shadow:0 8px 25px #0000000d
+padding:20px;
+margin-bottom:18px
+}
+.panel h2{
+margin-top:0;
+font-size:19px
 }
 .item{
-padding:14px;
-border:1px solid #e5e7eb;
+background:#151515;
+border:1px solid #242424;
 border-radius:14px;
-margin:10px 0;
-background:#fff
+padding:15px;
+margin:10px 0
 }
-.green{color:#16a34a}
-.orange{color:#ea580c}
-.red{color:#dc2626}
-@media(max-width:800px){
+.itemTop{
+display:flex;
+justify-content:space-between;
+gap:10px
+}
+.muted{color:#777}
+.green{color:#22c55e}
+.yellow{color:#f59e0b}
+.red{color:#ef4444}
+.purple{color:#c084fc}
+.loginWrap{
+max-width:450px;
+margin:80px auto;
+padding:20px
+}
+.loginBox{
+background:#101010;
+border:1px solid #292929;
+border-radius:24px;
+padding:28px;
+box-shadow:0 20px 60px #000
+}
+.loginBox h1{
+margin-top:0
+}
+input{
+width:100%;
+padding:14px;
+margin:7px 0 14px;
+border-radius:12px;
+border:1px solid #333;
+background:#080808;
+color:#fff;
+outline:none
+}
+input:focus{border-color:#a855f7}
+button{
+font-family:inherit
+}
+.loginBtn{
+width:100%;
+padding:14px;
+border:0;
+border-radius:12px;
+background:#fff;
+color:#000;
+font-weight:900;
+cursor:pointer
+}
+.logout{
+background:#1b1b1b;
+color:#fff;
+border:1px solid #333;
+padding:10px 14px;
+border-radius:10px;
+cursor:pointer
+}
+.empty{
+color:#777;
+padding:20px 0
+}
+.error{
+color:#ef4444;
+line-height:1.5
+}
+.hidden{display:none}
+@media(max-width:900px){
+.layout{grid-template-columns:1fr}
+nav{
+display:flex;
+overflow:auto;
+border-right:0;
+border-bottom:1px solid #222
+}
+.navBtn{min-width:110px;text-align:center}
 .stats{grid-template-columns:1fr 1fr}
 .grid{grid-template-columns:1fr}
+}
+@media(max-width:550px){
+.content{padding:15px}
+.stats{grid-template-columns:1fr}
+.hero h1{font-size:26px}
 }
 </style>
 </head>
 
 <body>
 
-<header>
-<div class="logo">HOMORA 👑</div>
-<div class="ceo">CEO DASHBOARD</div>
-</header>
+<div id="loginScreen" class="loginWrap">
+<div class="loginBox">
 
-<main>
-
-<div id="loginBox" class="login">
-
-<h2>Welcome Back, CEO 👑</h2>
-<p>Manage your HOMORA business from one place.</p>
+<h1>HOMORA <span class="purple">CEO</span> 👑</h1>
+<p class="muted">Command Center</p>
 
 <input id="email" type="email" placeholder="CEO Email">
 <input id="password" type="password" placeholder="Password">
 
-<button class="primary" onclick="login()">Enter Dashboard</button>
+<button class="loginBtn" onclick="login()">
+ENTER COMMAND CENTER
+</button>
 
-<p id="msg"></p>
+<p id="loginMsg"></p>
 
+</div>
 </div>
 
 
-<div id="dashboard" class="hidden">
+<div id="app" class="hidden">
+
+<header>
+<div class="logo">HOMORA<span>.</span></div>
+<div class="ceoTag">CEO COMMAND CENTER</div>
+</header>
+
+<div class="layout">
+
+<nav>
+
+<button class="navBtn active">⌂ Overview</button>
+<button class="navBtn">▣ Orders</button>
+<button class="navBtn">♙ Workers</button>
+<button class="navBtn">♙ Customers</button>
+<button class="navBtn">₹ Revenue</button>
+<button class="navBtn">⌁ Analytics</button>
+
+</nav>
+
+<section class="content">
 
 <div class="hero">
-<h1>Good Day, CEO 👑</h1>
-<p>Start building. Keep growing. Make HOMORA bigger every day.</p>
+<h1>Welcome, CEO 👑</h1>
+<p>Your HOMORA business at a glance.</p>
 </div>
 
 
 <div class="stats">
 
 <div class="stat">
-<span>👤 Customers</span>
-<b id="customers">0</b>
+<small>TOTAL CUSTOMERS</small>
+<h2 id="customerCount">—</h2>
 </div>
 
 <div class="stat">
-<span>👷 Workers</span>
-<b id="workers">0</b>
+<small>TOTAL WORKERS</small>
+<h2 id="workerCount">—</h2>
 </div>
 
 <div class="stat">
-<span>📋 Bookings</span>
-<b id="bookings">0</b>
+<small>TOTAL ORDERS</small>
+<h2 id="bookingCount">—</h2>
 </div>
 
 <div class="stat">
-<span>💰 Revenue</span>
-<b>₹<span id="revenue">0</span></b>
+<small>TOTAL REVENUE</small>
+<h2>₹<span id="revenue">—</span></h2>
 </div>
 
 </div>
@@ -158,50 +302,46 @@ background:#fff
 
 <div class="grid">
 
-<div class="card">
-
-<h2>📋 Recent Bookings</h2>
-
+<div class="panel">
+<h2>▣ Recent Orders</h2>
 <div id="bookingList">
-Loading...
+<div class="empty">Loading orders...</div>
+</div>
 </div>
 
-</div>
 
-
-<div class="card">
-
-<h2>👷 Workers</h2>
-
+<div class="panel">
+<h2>♙ Worker Network</h2>
 <div id="workerList">
-Loading...
+<div class="empty">Loading workers...</div>
+</div>
 </div>
 
 </div>
 
-</div>
 
+<div class="panel">
 
-<div class="card" style="margin-top:18px">
-
-<h2>👤 Customers</h2>
+<h2>♙ Customer Network</h2>
 
 <div id="customerList">
-Loading...
+<div class="empty">Loading customers...</div>
 </div>
 
 </div>
 
 
-<div class="card" style="margin-top:18px">
+<div class="panel">
 
 <button class="logout" onclick="logout()">Logout</button>
 
 </div>
 
+</section>
+
 </div>
 
-</main>
+</div>
 
 
 <script type="module">
@@ -234,6 +374,7 @@ messagingSenderId:"252376803932",
 appId:"1:252376803932:web:595c23360a014a0cfc9499"
 };
 
+
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
@@ -244,13 +385,22 @@ window.login=async function(){
 const email=document.getElementById("email").value.trim();
 const password=document.getElementById("password").value;
 
+if(!email||!password){
+document.getElementById("loginMsg").innerText=
+"Enter CEO email and password.";
+return;
+}
+
 try{
 
-await signInWithEmailAndPassword(auth,email,password);
+await signInWithEmailAndPassword(
+auth,email,password
+);
 
 }catch(e){
 
-document.getElementById("msg").innerText="❌ "+e.message;
+document.getElementById("loginMsg").innerText=
+"❌ "+e.message;
 
 }
 
@@ -259,43 +409,44 @@ document.getElementById("msg").innerText="❌ "+e.message;
 
 onAuthStateChanged(auth,user=>{
 
-if(user){
+if(!user)return;
 
-document.getElementById("loginBox").classList.add("hidden");
-document.getElementById("dashboard").classList.remove("hidden");
+document.getElementById("loginScreen")
+.classList.add("hidden");
+
+document.getElementById("app")
+.classList.remove("hidden");
 
 loadDashboard();
-
-}
 
 });
 
 
 async function loadDashboard(){
 
+const customerEl=document.getElementById("customerCount");
+const workerEl=document.getElementById("workerCount");
+const bookingEl=document.getElementById("bookingCount");
+const revenueEl=document.getElementById("revenue");
+
 try{
 
-const customerSnap=await getDocs(
-collection(db,"customers")
-);
+const [
+customerSnap,
+workerSnap,
+bookingSnap
+]=await Promise.all([
 
-const workerSnap=await getDocs(
-collection(db,"workers")
-);
+getDocs(collection(db,"customers")),
+getDocs(collection(db,"workers")),
+getDocs(collection(db,"bookings"))
 
-const bookingSnap=await getDocs(
-collection(db,"bookings")
-);
+]);
 
 
-document.getElementById("customers").innerText=
-customerSnap.size;
-
-document.getElementById("workers").innerText=
-workerSnap.size;
-
-document.getElementById("bookings").innerText=
-bookingSnap.size;
+customerEl.innerText=customerSnap.size;
+workerEl.innerText=workerSnap.size;
+bookingEl.innerText=bookingSnap.size;
 
 
 let revenue=0;
@@ -305,12 +456,14 @@ bookingSnap.forEach(x=>{
 const b=x.data();
 
 if(b.status==="completed"){
-revenue += Number(b.amount||0);
+revenue += Number(
+b.amount || b.price || b.total || 0
+);
 }
 
 });
 
-document.getElementById("revenue").innerText=
+revenueEl.innerText=
 revenue.toLocaleString("en-IN");
 
 
@@ -321,19 +474,30 @@ workerSnap.forEach(x=>{
 const w=x.data();
 
 workers+=`
+
 <div class="item">
+
+<div class="itemTop">
 <b>👷 ${w.name||"Worker"}</b>
-<br>
-${w.phone||""}
-<br>
-<span class="green">${w.status||"active"}</span>
+<span class="${
+w.status==="active"?"green":"yellow"
+}">
+${w.status||"pending"}
+</span>
 </div>
+
+<div class="muted">
+${w.phone||w.email||""}
+</div>
+
+</div>
+
 `;
 
 });
 
 document.getElementById("workerList").innerHTML=
-workers||"No workers yet.";
+workers||'<div class="empty">No workers yet.</div>';
 
 
 let customers="";
@@ -343,17 +507,23 @@ customerSnap.forEach(x=>{
 const c=x.data();
 
 customers+=`
+
 <div class="item">
+
 <b>👤 ${c.name||"Customer"}</b>
-<br>
-${c.phone||""}
+
+<div class="muted">
+${c.phone||c.email||""}
 </div>
+
+</div>
+
 `;
 
 });
 
 document.getElementById("customerList").innerHTML=
-customers||"No customers yet.";
+customers||'<div class="empty">No customers yet.</div>';
 
 
 let bookings="";
@@ -362,31 +532,62 @@ bookingSnap.forEach(x=>{
 
 const b=x.data();
 
+let cls="yellow";
+
+if(b.status==="accepted")cls="green";
+if(b.status==="completed")cls="green";
+if(b.status==="rejected")cls="red";
+
 bookings+=`
+
 <div class="item">
+
+<div class="itemTop">
+
 <b>🏠 ${b.service||"Home Service"}</b>
-<br>
-📍 ${b.address||"-"}
-<br>
-Status:
-<span class="${
-b.status==="accepted"?"green":
-b.status==="rejected"?"red":"orange"
-}">
+
+<span class="${cls}">
 ${b.status||"pending"}
 </span>
+
 </div>
+
+<div class="muted">
+📍 ${b.address||"No address"}
+</div>
+
+<div class="muted">
+⏱️ ${b.hours||"-"} hours
+</div>
+
+</div>
+
 `;
 
 });
 
 document.getElementById("bookingList").innerHTML=
-bookings||"No bookings yet.";
+bookings||'<div class="empty">No bookings yet.</div>';
 
 
 }catch(e){
 
-console.log(e);
+customerEl.innerText="!";
+workerEl.innerText="!";
+bookingEl.innerText="!";
+revenueEl.innerText="!";
+
+document.getElementById("bookingList").innerHTML=
+`<div class="error">
+❌ ${e.message}<br><br>
+Firebase Rules are blocking CEO data access.
+</div>`;
+
+document.getElementById("workerList").innerHTML=
+'<div class="error">Permission required.</div>';
+
+document.getElementById("customerList").innerHTML=
+'<div class="error">Permission required.</div>';
 
 }
 
