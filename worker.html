@@ -2,79 +2,200 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>HOMORA Worker</title>
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
-header{background:#111827;color:#fff;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:27px;font-weight:800}
-main{max-width:700px;margin:auto;padding:20px}
-.card{background:#fff;padding:22px;border-radius:18px;margin:16px 0;box-shadow:0 4px 15px #0001}
-input{width:100%;padding:13px;margin:7px 0 13px;border:1px solid #ddd;border-radius:10px;font-size:16px}
-button{padding:12px;border:0;border-radius:10px;background:#111827;color:#fff;font-weight:bold;cursor:pointer}
-.full{width:100%;margin-top:5px}
-.forgot{background:#7c3aed;width:100%;margin-top:10px}
-.logout{background:#dc2626}
-.accept{background:#16a34a}
-.reject{background:#dc2626;margin-left:8px}
+body{
+margin:0;
+font-family:Inter,Arial,sans-serif;
+background:linear-gradient(135deg,#f7f4ff,#eef5ff);
+color:#15151f
+}
+header{
+padding:18px 6%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(12px);
+border-bottom:1px solid #ffffff
+}
+.logo{font-size:28px;font-weight:900;color:#6d28d9}
+.pill{
+padding:9px 14px;border-radius:30px;
+background:#ede9fe;color:#6d28d9;font-weight:bold
+}
+main{max-width:850px;margin:auto;padding:25px 18px}
+.hero{
+padding:35px 25px;
+border-radius:28px;
+background:linear-gradient(135deg,#7c3aed,#4f46e5);
+color:white;
+margin-bottom:22px;
+box-shadow:0 15px 35px #6d28d933
+}
+.hero h1{font-size:34px;margin:0 0 10px}
+.hero p{font-size:17px;line-height:1.5;margin:0}
+.auth{
+background:rgba(255,255,255,.72);
+backdrop-filter:blur(15px);
+border:1px solid #ffffff;
+padding:25px;
+border-radius:24px;
+box-shadow:0 12px 35px #00000012
+}
+.tabs{display:flex;gap:8px;margin-bottom:20px}
+.tabs button{
+flex:1;padding:12px;border:0;border-radius:12px;
+background:#eee9ff;color:#6d28d9;font-weight:bold
+}
+.tabs button.active{background:#6d28d9;color:white}
+input{
+width:100%;padding:14px;margin:7px 0 12px;
+border:1px solid #ddd;border-radius:12px;
+background:#fff;font-size:15px
+}
+button{
+cursor:pointer;border:0;border-radius:12px;
+padding:13px;font-weight:bold
+}
+.primary{width:100%;background:#6d28d9;color:white}
+.forgot{
+width:100%;margin-top:10px;
+background:transparent;color:#6d28d9
+}
 .hidden{display:none}
-.booking{border:1px solid #ddd;border-radius:12px;padding:15px;margin:12px 0}
+.dashboard{display:grid;gap:18px}
+.card{
+background:rgba(255,255,255,.82);
+border:1px solid #fff;
+border-radius:22px;
+padding:22px;
+box-shadow:0 8px 25px #0000000d
+}
+.stats{
+display:grid;grid-template-columns:repeat(3,1fr);gap:12px
+}
+.stat{
+padding:18px;border-radius:18px;
+background:#f4f1ff
+}
+.stat b{font-size:25px;display:block;margin-top:5px}
+.booking{
+border:1px solid #e5e7eb;
+border-radius:17px;
+padding:17px;margin-top:12px;background:#fff
+}
+.actions{display:flex;gap:8px;margin-top:12px}
+.accept{background:#16a34a;color:white;flex:1}
+.reject{background:#fee2e2;color:#dc2626;flex:1}
+.logout{background:#111827;color:white}
 .message{font-weight:bold}
+@media(max-width:600px){
+.stats{grid-template-columns:1fr}
+.hero h1{font-size:28px}
+}
 </style>
 </head>
 
 <body>
 
 <header>
-<div class="logo">HOMORA 👷</div>
-<button class="logout" onclick="logout()">Logout</button>
+<div class="logo">HOMORA</div>
+<div class="pill">WORKER APP</div>
 </header>
 
 <main>
 
-<div class="card" id="loginBox">
+<!-- LOGIN / SIGNUP -->
+<div id="authScreen">
 
-<h2>👷 Worker Login</h2>
+<div class="hero">
+<h1>Start Today. Build Your Future.</h1>
+<p>Join HOMORA, grow your skills, earn with every service and settle into success.</p>
+</div>
 
-<input id="email" type="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
+<div class="auth">
 
-<button class="full" onclick="login()">Login</button>
+<div class="tabs">
+<button id="loginTab" class="active" onclick="showLogin()">Login</button>
+<button id="signupTab" onclick="showSignup()">Create Account</button>
+</div>
+
+<div id="loginForm">
+
+<input id="loginEmail" type="email" placeholder="Email">
+<input id="loginPassword" type="password" placeholder="Password">
+
+<button class="primary" onclick="login()">Login to HOMORA</button>
 
 <button class="forgot" onclick="forgotPassword()">
 Forgot Password?
 </button>
 
-<p id="loginMsg" class="message"></p>
+</div>
+
+<div id="signupForm" class="hidden">
+
+<input id="signupName" placeholder="Full Name">
+<input id="signupPhone" placeholder="Mobile Number">
+<input id="signupEmail" type="email" placeholder="Email">
+<input id="signupPassword" type="password" placeholder="Create Password">
+
+<button class="primary" onclick="registerWorker()">
+Start With HOMORA
+</button>
 
 </div>
 
+<p id="authMsg" class="message"></p>
 
-<div id="dashboard" class="hidden">
-
-<div class="card">
-<h2>Welcome, <span id="workerName"></span> 👋</h2>
-<p>🟢 HOMORA Worker Dashboard</p>
+</div>
 </div>
 
 
-<div class="card">
+<!-- DASHBOARD -->
 
-<h2>📋 New Customer Bookings</h2>
+<div id="dashboard" class="dashboard hidden">
 
-<div id="bookings">Loading...</div>
+<div class="hero">
+<h1>Welcome, <span id="workerName">Worker</span> 👋</h1>
+<p>Your HOMORA journey starts here. Stay active and grow your earnings.</p>
+</div>
+
+<div class="stats">
+
+<div class="stat">
+Today
+<b>₹<span id="todayEarn">0</span></b>
+</div>
+
+<div class="stat">
+Jobs
+<b id="jobCount">0</b>
+</div>
+
+<div class="stat">
+Rating
+<b>⭐ 5.0</b>
+</div>
 
 </div>
 
-
 <div class="card">
 
-<h2>💰 My Earnings</h2>
+<h2>New Bookings</h2>
 
-<h1>₹<span id="earnings">0</span></h1>
+<div id="bookings">
+Loading bookings...
+</div>
 
+</div>
+
+<div class="card">
+<button class="logout" onclick="logout()">Logout</button>
 </div>
 
 </div>
@@ -89,6 +210,7 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
 getAuth,
+createUserWithEmailAndPassword,
 signInWithEmailAndPassword,
 sendPasswordResetEmail,
 onAuthStateChanged,
@@ -98,18 +220,19 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
 getFirestore,
+doc,
+setDoc,
+getDoc,
 collection,
 query,
 where,
 getDocs,
-doc,
-getDoc,
 updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-const firebaseConfig = {
+const firebaseConfig={
 apiKey:"AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
 authDomain:"homora-41400.firebaseapp.com",
 projectId:"homora-41400",
@@ -118,122 +241,140 @@ messagingSenderId:"252376803932",
 appId:"1:252376803932:web:595c23360a014a0cfc9499"
 };
 
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+
+window.showLogin=function(){
+
+document.getElementById("loginForm").classList.remove("hidden");
+document.getElementById("signupForm").classList.add("hidden");
+
+document.getElementById("loginTab").classList.add("active");
+document.getElementById("signupTab").classList.remove("active");
+
+};
 
 
-window.login = async function(){
+window.showSignup=function(){
 
-const email =
-document.getElementById("email").value.trim();
+document.getElementById("signupForm").classList.remove("hidden");
+document.getElementById("loginForm").classList.add("hidden");
 
-const password =
-document.getElementById("password").value;
+document.getElementById("signupTab").classList.add("active");
+document.getElementById("loginTab").classList.remove("active");
 
-if(!email || !password){
+};
 
-document.getElementById("loginMsg").innerText =
-"Please enter email and password.";
 
+window.registerWorker=async function(){
+
+const name=document.getElementById("signupName").value.trim();
+const phone=document.getElementById("signupPhone").value.trim();
+const email=document.getElementById("signupEmail").value.trim();
+const password=document.getElementById("signupPassword").value;
+
+if(!name||!phone||!email||!password){
+document.getElementById("authMsg").innerText="Please fill all details.";
 return;
-
 }
 
 try{
 
-await signInWithEmailAndPassword(
-auth,
-email,
-password
+const result=await createUserWithEmailAndPassword(
+auth,email,password
 );
 
-}catch(error){
+await setDoc(doc(db,"workers",result.user.uid),{
+name,
+phone,
+email,
+role:"worker",
+status:"pending",
+createdAt:new Date().toISOString()
+});
 
-document.getElementById("loginMsg").innerText =
-"❌ "+error.message;
+document.getElementById("authMsg").innerText=
+"✅ Account created successfully!";
+
+}catch(e){
+
+document.getElementById("authMsg").innerText=
+"❌ "+e.message;
 
 }
 
 };
 
 
-window.forgotPassword = async function(){
+window.login=async function(){
 
-const email =
-document.getElementById("email").value.trim();
+const email=document.getElementById("loginEmail").value.trim();
+const password=document.getElementById("loginPassword").value;
+
+try{
+
+await signInWithEmailAndPassword(auth,email,password);
+
+}catch(e){
+
+document.getElementById("authMsg").innerText=
+"❌ "+e.message;
+
+}
+
+};
+
+
+window.forgotPassword=async function(){
+
+const email=document.getElementById("loginEmail").value.trim();
 
 if(!email){
-
-document.getElementById("loginMsg").innerText =
-"Please enter your email first.";
-
+document.getElementById("authMsg").innerText=
+"Enter your email first.";
 return;
-
 }
 
 try{
 
-await sendPasswordResetEmail(
-auth,
-email
-);
+await sendPasswordResetEmail(auth,email);
 
-document.getElementById("loginMsg").innerText =
-"✅ Password reset link sent to your email.";
+document.getElementById("authMsg").innerText=
+"✅ Reset link sent to your email.";
 
-}catch(error){
+}catch(e){
 
-document.getElementById("loginMsg").innerText =
-"❌ "+error.message;
+document.getElementById("authMsg").innerText=
+"❌ "+e.message;
 
 }
 
 };
 
 
-onAuthStateChanged(auth, async user =>{
+onAuthStateChanged(auth,async user=>{
 
 if(!user)return;
 
 try{
 
-const workerSnap =
-await getDoc(
-doc(db,"workers",user.uid)
-);
+const snap=await getDoc(doc(db,"workers",user.uid));
 
-if(!workerSnap.exists()){
+if(!snap.exists())return;
 
-document.getElementById("loginMsg").innerText =
-"❌ Worker profile not found.";
+document.getElementById("authScreen").classList.add("hidden");
+document.getElementById("dashboard").classList.remove("hidden");
 
-await signOut(auth);
-
-return;
-
-}
-
-const worker =
-workerSnap.data();
-
-document.getElementById("loginBox")
-.classList.add("hidden");
-
-document.getElementById("dashboard")
-.classList.remove("hidden");
-
-document.getElementById("workerName")
-.innerText =
-worker.name || "Worker";
+document.getElementById("workerName").innerText=
+snap.data().name;
 
 loadBookings();
 
-}catch(error){
+}catch(e){
 
-document.getElementById("loginMsg").innerText =
-"❌ "+error.message;
+console.log(e);
 
 }
 
@@ -244,44 +385,47 @@ async function loadBookings(){
 
 try{
 
-const q =
-query(
+const q=query(
 collection(db,"bookings"),
 where("status","==","pending")
 );
 
-const snap =
-await getDocs(q);
+const snap=await getDocs(q);
 
 let html="";
+let count=0;
 
-snap.forEach(item =>{
+snap.forEach(item=>{
+
+count++;
 
 const b=item.data();
 
-html += `
+html+=`
 
 <div class="booking">
 
-<b>🏠 ${b.service || "Home Service"}</b>
+<h3>${b.service||"Home Service"}</h3>
 
-<p>⏱️ ${b.hours || "-"} Hours</p>
+<p>⏱️ ${b.hours||"-"} Hours</p>
 
-<p>📍 ${b.address || "-"}</p>
+<p>📍 ${b.address||"-"}</p>
 
-<p>📅 ${b.createdAt || "-"}</p>
+<p>🟡 Pending</p>
 
-<p>Status: <b>${b.status}</b></p>
+<div class="actions">
 
 <button class="accept"
 onclick="acceptBooking('${item.id}')">
-✓ Accept
+Accept
 </button>
 
 <button class="reject"
 onclick="rejectBooking('${item.id}')">
-✕ Reject
+Reject
 </button>
+
+</div>
 
 </div>
 
@@ -289,73 +433,70 @@ onclick="rejectBooking('${item.id}')">
 
 });
 
-document.getElementById("bookings").innerHTML =
-html || "No new bookings right now.";
+document.getElementById("bookings").innerHTML=
+html||"No new bookings right now.";
 
-}catch(error){
+document.getElementById("jobCount").innerText=count;
 
-document.getElementById("bookings").innerText =
-"❌ "+error.message;
+}catch(e){
+
+document.getElementById("bookings").innerText=
+"❌ "+e.message;
 
 }
 
 }
 
 
-window.acceptBooking = async function(id){
+window.acceptBooking=async function(id){
 
 try{
-
-const user=auth.currentUser;
 
 await updateDoc(
 doc(db,"bookings",id),
 {
 status:"accepted",
-workerId:user.uid
+workerId:auth.currentUser.uid
 }
 );
 
-alert("✅ Booking accepted!");
-
+alert("Booking accepted ✅");
 loadBookings();
 
-}catch(error){
+}catch(e){
 
-alert("❌ "+error.message);
+alert("❌ "+e.message);
 
 }
 
 };
 
 
-window.rejectBooking = async function(id){
+window.rejectBooking=async function(id){
 
 try{
 
 await updateDoc(
 doc(db,"bookings",id),
-{
-status:"rejected"
-}
+{status:"rejected"}
 );
 
-alert("Booking rejected.");
-
+alert("Booking rejected");
 loadBookings();
 
-}catch(error){
+}catch(e){
 
-alert("❌ "+error.message);
+alert("❌ "+e.message);
 
 }
 
 };
 
 
-window.logout = function(){
+window.logout=function(){
 
 signOut(auth);
+location.reload();
 
 };
 
