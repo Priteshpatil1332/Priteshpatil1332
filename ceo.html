@@ -3,271 +3,754 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HOMORA CEO</title>
+<title>HOMORA | CEO Command Center</title>
+
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#080808;color:#fff;font-family:Arial,sans-serif}
-.wrap{max-width:430px;margin:70px auto;padding:20px}
-.box{background:#111;border:1px solid #333;border-radius:22px;padding:28px}
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#070707;
+color:#fff;
+min-height:100vh
+}
+.hidden{display:none!important}
+button,input{font-family:inherit}
+.wrap{
+max-width:450px;
+margin:60px auto;
+padding:20px
+}
+.box{
+background:#111;
+border:1px solid #333;
+border-radius:24px;
+padding:28px;
+box-shadow:0 20px 60px #000
+}
 h1{margin-top:0}
-input{width:100%;padding:14px;margin:8px 0 14px;background:#080808;color:#fff;border:1px solid #444;border-radius:10px}
-button{width:100%;padding:14px;border:0;border-radius:10px;background:#fff;color:#000;font-weight:bold;margin-top:5px}
-.msg{margin-top:15px;line-height:1.5}
-.green{color:#22c55e}.red{color:#ef4444}
-.hidden{display:none}
+input{
+width:100%;
+padding:14px;
+margin:8px 0 14px;
+background:#080808;
+color:#fff;
+border:1px solid #444;
+border-radius:11px;
+outline:none
+}
+input:focus{border-color:#a855f7}
+button{
+width:100%;
+padding:14px;
+border:0;
+border-radius:11px;
+font-weight:900;
+cursor:pointer
+}
+.login{
+background:#fff;
+color:#000
+}
+.secondary{
+margin-top:10px;
+background:#222;
+color:#fff;
+border:1px solid #444
+}
+.msg{
+margin-top:15px;
+line-height:1.5
+}
+.green{color:#22c55e}
+.red{color:#ef4444}
+.muted{color:#888}
+
+header{
+height:70px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 22px;
+background:#0d0d0d;
+border-bottom:1px solid #292929
+}
+.logo{
+font-size:25px;
+font-weight:900
+}
+.logo span{color:#a855f7}
+.ceo{
+background:#191919;
+padding:9px 14px;
+border-radius:20px;
+font-size:11px;
+font-weight:900
+}
+
+.dashboard{
+padding:25px;
+max-width:1400px;
+margin:auto
+}
+.hero{
+background:linear-gradient(135deg,#181818,#0d0d0d);
+border:1px solid #303030;
+border-radius:22px;
+padding:25px;
+margin-bottom:20px
+}
+.hero h1{margin:0 0 8px}
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px
+}
+.card{
+background:#111;
+border:1px solid #292929;
+border-radius:18px;
+padding:20px
+}
+.card small{
+color:#777;
+font-weight:900
+}
+.card h2{
+font-size:30px;
+margin:10px 0 0
+}
+.panel{
+background:#111;
+border:1px solid #292929;
+border-radius:20px;
+padding:20px;
+margin-top:20px
+}
+.item{
+background:#161616;
+border:1px solid #292929;
+border-radius:14px;
+padding:15px;
+margin:10px 0
+}
+.logout{
+width:auto;
+background:#222;
+color:#fff;
+border:1px solid #444
+}
+
+@media(max-width:800px){
+.stats{grid-template-columns:1fr 1fr}
+.dashboard{padding:15px}
+}
+@media(max-width:500px){
+.stats{grid-template-columns:1fr}
+header{padding:0 14px}
+.ceo{display:none}
+}
 </style>
 </head>
 
 <body>
 
-<div class="wrap" id="login">
+<!-- LOGIN -->
+
+<div id="loginScreen" class="wrap">
+
 <div class="box">
 
-<h1>HOMORA 👑 CEO</h1>
-<p>Secure CEO Login</p>
+<h1>HOMORA <span style="color:#a855f7">CEO</span> 👑</h1>
 
-<div id="phoneBox">
-<input id="phone" type="tel" inputmode="numeric"
-placeholder="8446060669" maxlength="10">
+<p class="muted">
+Secure CEO Command Center
+</p>
 
-<div id="recaptcha-container"></div>
+<input
+id="email"
+type="email"
+value="patilpritesh950@gmail.com"
+readonly
+>
 
-<button id="sendBtn">SEND OTP</button>
-</div>
+<input
+id="password"
+type="password"
+placeholder="Create / Enter CEO Password"
+autocomplete="current-password"
+>
 
-<div id="otpBox" class="hidden">
-<input id="otp" type="tel" inputmode="numeric"
-placeholder="Enter 6-digit OTP" maxlength="6">
+<button class="login" onclick="loginCEO()">
+LOGIN
+</button>
 
-<button id="verifyBtn">VERIFY OTP</button>
-</div>
+<button class="secondary" onclick="createCEO()">
+FIRST TIME? CREATE CEO ACCOUNT
+</button>
 
 <div id="msg" class="msg"></div>
 
 </div>
 </div>
 
-<div id="dashboard" class="wrap hidden">
-<div class="box">
-<h1>HOMORA 👑</h1>
-<h2>CEO Command Center</h2>
-<p class="green">✅ CEO Login Successful</p>
-<button id="logoutBtn">LOGOUT</button>
+
+<!-- DASHBOARD -->
+
+<div id="app" class="hidden">
+
+<header>
+
+<div class="logo">
+HOMORA<span>.</span>
+</div>
+
+<div class="ceo">
+👑 CEO COMMAND CENTER
+</div>
+
+</header>
+
+<div class="dashboard">
+
+<div class="hero">
+
+<h1>Welcome, CEO 👑</h1>
+
+<p class="muted">
+HOMORA Business Command Center
+</p>
+
+<p class="green">
+● SECURE CEO ACCESS
+</p>
+
+</div>
+
+
+<div class="stats">
+
+<div class="card">
+<small>TOTAL CUSTOMERS</small>
+<h2 id="customers">0</h2>
+</div>
+
+<div class="card">
+<small>TOTAL WORKERS</small>
+<h2 id="workers">0</h2>
+</div>
+
+<div class="card">
+<small>TOTAL ORDERS</small>
+<h2 id="orders">0</h2>
+</div>
+
+<div class="card">
+<small>COMPLETED REVENUE</small>
+<h2>₹<span id="revenue">0</span></h2>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>📦 Recent Orders</h2>
+
+<div id="orderList">
+<div class="muted">Loading...</div>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>👷 Worker Network</h2>
+
+<div id="workerList">
+<div class="muted">Loading...</div>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>🤝 Referral Center</h2>
+
+<p class="muted">
+₹1,000 referral reward after referred worker completes one month.
+</p>
+
+<div id="referralList">
+<div class="muted">Loading...</div>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<button class="logout" onclick="logoutCEO()">
+LOGOUT
+</button>
+
+</div>
+
 </div>
 </div>
+
 
 <script type="module">
 
-import { initializeApp }
+import {initializeApp}
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
 getAuth,
-RecaptchaVerifier,
-signInWithPhoneNumber,
+signInWithEmailAndPassword,
+createUserWithEmailAndPassword,
 onAuthStateChanged,
 signOut
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
 
 /* ================= FIREBASE ================= */
 
-const firebaseConfig = {
-apiKey: "AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
-authDomain: "homora-41400.firebaseapp.com",
-projectId: "homora-41400",
-storageBucket: "homora-41400.firebasestorage.app",
-messagingSenderId: "252376803932",
-appId: "1:252376803932:web:595c23360a014a0cfc9499"
+const firebaseConfig={
+
+apiKey:"AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
+
+authDomain:"homora-41400.firebaseapp.com",
+
+projectId:"homora-41400",
+
+storageBucket:"homora-41400.firebasestorage.app",
+
+messagingSenderId:"252376803932",
+
+appId:"1:252376803932:web:595c23360a014a0cfc9499"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const app=initializeApp(firebaseConfig);
+
+const auth=getAuth(app);
+
+const db=getFirestore(app);
 
 
-/* ================= CEO NUMBER ================= */
+/* ================= CEO ================= */
 
-const CEO_PHONE = "8446060669";
-const CEO_PHONE_FULL = "+91" + CEO_PHONE;
-
-let confirmationResult = null;
-let recaptchaVerifier = null;
+const CEO_EMAIL="patilpritesh950@gmail.com";
 
 
 /* ================= MESSAGE ================= */
 
-function message(text,type="red"){
+function showMessage(text,type){
+
 const msg=document.getElementById("msg");
+
 msg.className="msg "+type;
+
 msg.innerText=text;
+
 }
 
 
-/* ================= RECAPTCHA ================= */
+/* ================= CREATE CEO ================= */
 
-function setupRecaptcha(){
+window.createCEO=async function(){
 
-if(recaptchaVerifier)return;
+const password=
+document.getElementById("password").value.trim();
 
-recaptchaVerifier = new RecaptchaVerifier(
-auth,
-"recaptcha-container",
-{
-size:"normal",
-callback:function(){
-console.log("reCAPTCHA verified");
-},
-"expired-callback":function(){
-recaptchaVerifier=null;
-}
-}
+if(!password){
+
+showMessage(
+"❌ Pehle CEO password enter karo.",
+"red"
 );
 
-recaptchaVerifier.render();
-
-}
-
-
-/* ================= SEND OTP ================= */
-
-document.getElementById("sendBtn").onclick = async function(){
-
-let number=document.getElementById("phone").value.trim();
-
-number=number.replace(/\D/g,"");
-
-if(number.startsWith("91") && number.length===12){
-number=number.substring(2);
-}
-
-if(number!==CEO_PHONE){
-
-message("❌ This mobile number is not authorized for CEO access.");
 return;
+}
 
+if(password.length<6){
+
+showMessage(
+"❌ Password minimum 6 characters ka hona chahiye.",
+"red"
+);
+
+return;
 }
 
 try{
 
-setupRecaptcha();
-
-message("Sending OTP...","green");
-
-confirmationResult =
-await signInWithPhoneNumber(
-auth,
-CEO_PHONE_FULL,
-recaptchaVerifier
+showMessage(
+"Creating CEO account...",
+"green"
 );
 
-document.getElementById("phoneBox").classList.add("hidden");
-document.getElementById("otpBox").classList.remove("hidden");
+await createUserWithEmailAndPassword(
+auth,
+CEO_EMAIL,
+password
+);
 
-message("✅ OTP sent successfully.","green");
+showMessage(
+"✅ CEO account created. Opening dashboard...",
+"green"
+);
 
 }catch(error){
 
 console.error(error);
 
-message("❌ Firebase: "+error.message);
+if(error.code==="auth/email-already-in-use"){
+
+showMessage(
+"ℹ️ CEO account already exists. Ab LOGIN button dabao.",
+"red"
+);
+
+}else{
+
+showMessage(
+"❌ "+error.message,
+"red"
+);
+
+}
 
 }
 
 };
 
 
-/* ================= VERIFY OTP ================= */
+/* ================= LOGIN ================= */
 
-document.getElementById("verifyBtn").onclick = async function(){
+window.loginCEO=async function(){
 
-const otp=document.getElementById("otp").value.trim();
+const email=
+document.getElementById("email").value.trim();
 
-if(!confirmationResult){
+const password=
+document.getElementById("password").value;
 
-message("❌ Please request OTP first.");
+if(email.toLowerCase()!==CEO_EMAIL.toLowerCase()){
+
+showMessage(
+"❌ This email is not authorized for CEO access.",
+"red"
+);
+
 return;
-
 }
 
-if(!otp){
+if(!password){
 
-message("❌ Enter the OTP.");
+showMessage(
+"❌ Password enter karo.",
+"red"
+);
+
 return;
-
 }
 
 try{
 
-const result =
-await confirmationResult.confirm(otp);
+showMessage(
+"Logging in...",
+"green"
+);
 
-const user=result.user;
+await signInWithEmailAndPassword(
+auth,
+CEO_EMAIL,
+password
+);
+
+}catch(error){
+
+console.error(error);
+
+showMessage(
+"❌ Login failed: "+error.message,
+"red"
+);
+
+}
+
+};
+
+
+/* ================= AUTH STATE ================= */
+
+onAuthStateChanged(auth,async(user)=>{
+
+if(!user){
+
+document
+.getElementById("loginScreen")
+.classList.remove("hidden");
+
+document
+.getElementById("app")
+.classList.add("hidden");
+
+return;
+}
 
 if(
-!user.phoneNumber ||
-user.phoneNumber !== CEO_PHONE_FULL
+!user.email ||
+user.email.toLowerCase()!==CEO_EMAIL.toLowerCase()
 ){
 
 await signOut(auth);
 
-message("❌ Unauthorized CEO account.");
 return;
+}
+
+document
+.getElementById("loginScreen")
+.classList.add("hidden");
+
+document
+.getElementById("app")
+.classList.remove("hidden");
+
+loadDashboard();
+
+});
+
+
+/* ================= DASHBOARD ================= */
+
+async function loadDashboard(){
+
+try{
+
+const customersSnap=
+await getDocs(
+collection(db,"customers")
+);
+
+const workersSnap=
+await getDocs(
+collection(db,"workers")
+);
+
+const bookingsSnap=
+await getDocs(
+collection(db,"bookings")
+);
+
+const referralsSnap=
+await getDocs(
+collection(db,"referrals")
+);
+
+
+document.getElementById("customers")
+.innerText=
+customersSnap.size;
+
+document.getElementById("workers")
+.innerText=
+workersSnap.size;
+
+document.getElementById("orders")
+.innerText=
+bookingsSnap.size;
+
+
+/* REVENUE */
+
+let revenue=0;
+
+let ordersHTML="";
+
+bookingsSnap.forEach(docSnap=>{
+
+const b=docSnap.data();
+
+const status=
+String(b.status||"pending").toLowerCase();
+
+const amount=
+Number(
+b.amount||
+b.price||
+b.total||
+0
+);
+
+if(status==="completed"){
+
+revenue+=amount;
 
 }
 
-message("✅ Login successful!","green");
+ordersHTML+=`
 
-setTimeout(function(){
+<div class="item">
 
-document.getElementById("login")
-.classList.add("hidden");
+<b>
+🏠 ${b.service||"Home Service"}
+</b>
 
-document.getElementById("dashboard")
-.classList.remove("hidden");
+<p class="muted">
+Customer: ${b.customerName||b.name||"Customer"}
+</p>
 
-},500);
+<p class="muted">
+Worker: ${b.workerName||b.worker||"Not assigned"}
+</p>
+
+<p class="muted">
+Status: ${status}
+</p>
+
+<b>
+₹${amount.toLocaleString("en-IN")}
+</b>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("revenue")
+.innerText=
+revenue.toLocaleString("en-IN");
+
+
+document.getElementById("orderList")
+.innerHTML=
+ordersHTML||
+'<div class="muted">No orders yet.</div>';
+
+
+/* WORKERS */
+
+let workersHTML="";
+
+workersSnap.forEach(docSnap=>{
+
+const w=docSnap.data();
+
+workersHTML+=`
+
+<div class="item">
+
+<b>👷 ${w.name||"Worker"}</b>
+
+<p class="muted">
+${w.phone||w.email||"No contact"}
+</p>
+
+<p class="muted">
+Status: ${w.status||"offline"}
+</p>
+
+<p class="muted">
+KYC: ${w.kycStatus||"Not connected"}
+</p>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("workerList")
+.innerHTML=
+workersHTML||
+'<div class="muted">No workers yet.</div>';
+
+
+/* REFERRALS */
+
+let referralsHTML="";
+
+referralsSnap.forEach(docSnap=>{
+
+const r=docSnap.data();
+
+const successful=
+r.successful===true||
+String(r.status||"").toLowerCase()
+==="successful";
+
+referralsHTML+=`
+
+<div class="item">
+
+<b>
+🤝 ${r.referrerName||"Referring Worker"}
+</b>
+
+<p class="muted">
+Referred Worker:
+${r.referredWorkerName||r.referredWorker||"—"}
+</p>
+
+<p class="muted">
+One Month Complete:
+${r.oneMonthCompleted?"YES":"NO"}
+</p>
+
+<p class="${successful?"green":"muted"}">
+${successful?"SUCCESSFUL":"IN PROGRESS"}
+</p>
+
+<p class="muted">
+Reward ₹1,000:
+${r.rewardPaid?"PAID":"PENDING"}
+</p>
+
+</div>
+
+`;
+
+});
+
+
+document.getElementById("referralList")
+.innerHTML=
+referralsHTML||
+'<div class="muted">No referral records yet.</div>';
+
 
 }catch(error){
 
 console.error(error);
 
-message("❌ Invalid OTP. Try again.");
-
 }
 
-};
-
-
-/* ================= EXISTING LOGIN ================= */
-
-onAuthStateChanged(auth,function(user){
-
-if(!user)return;
-
-if(user.phoneNumber !== CEO_PHONE_FULL){
-
-signOut(auth);
-return;
-
 }
-
-document.getElementById("login")
-.classList.add("hidden");
-
-document.getElementById("dashboard")
-.classList.remove("hidden");
-
-});
 
 
 /* ================= LOGOUT ================= */
 
-document.getElementById("logoutBtn").onclick=function(){
+window.logoutCEO=async function(){
 
-signOut(auth).then(function(){
+await signOut(auth);
+
 location.reload();
-});
 
 };
 
