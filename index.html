@@ -2,114 +2,294 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HOMORA - Home Services</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>HOMORA | CEO Command Center</title>
 
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#111827}
-header{background:#111827;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:28px;font-weight:800}
-main{max-width:700px;margin:auto;padding:20px}
-.card{background:white;padding:24px;border-radius:18px;margin:18px 0;box-shadow:0 5px 20px #0001}
-input,select{width:100%;padding:14px;margin:8px 0 14px;border:1px solid #ddd;border-radius:10px;font-size:16px}
-button{width:100%;padding:14px;border:0;border-radius:10px;background:#111827;color:white;font-size:16px;font-weight:bold;margin-top:6px}
-.purple{background:#7c3aed}
-.green{background:#16a34a}
-.hidden{display:none}
-.service{border:1px solid #ddd;padding:14px;border-radius:12px;margin:8px 0;cursor:pointer}
-.service.selected{border:2px solid #7c3aed;background:#f5f3ff}
-#message{font-weight:bold}
+body{margin:0;font-family:Arial,sans-serif;background:#070707;color:#fff}
+button,input,select{font-family:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+header{height:70px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:#0d0d0d;border-bottom:1px solid #292929}
+.logo{font-size:25px;font-weight:900}.logo span{color:#a855f7}
+.ceoTag{background:#181818;border:1px solid #333;padding:9px 14px;border-radius:20px;font-size:11px;font-weight:bold}
+.layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - 70px)}
+nav{background:#0a0a0a;border-right:1px solid #242424;padding:12px}
+.navBtn{width:100%;background:none;border:0;color:#999;padding:12px;border-radius:10px;text-align:left;font-weight:bold;margin:2px 0}
+.navBtn:hover,.navBtn.active{background:#1d1d1d;color:#fff}
+.content{padding:22px;max-width:1500px;width:100%}
+.hero,.panel,.stat{background:#111;border:1px solid #292929;border-radius:18px}
+.hero{padding:25px;margin-bottom:18px;background:linear-gradient(135deg,#191919,#0b0b0b)}
+.hero h1{margin:0 0 7px}.hero p,.muted{color:#888}
+.badge{display:inline-block;margin-top:12px;padding:7px 11px;border-radius:20px;background:#251531;color:#c084fc;font-size:10px;font-weight:bold}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:18px}
+.stat{padding:18px}.stat small{color:#777;font-weight:bold;font-size:10px}.stat h2{margin:8px 0 0}
+.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}
+.panel{padding:18px;margin-bottom:16px}
+.panelTitle{display:flex;justify-content:space-between;align-items:center}
+.panel h2{margin:0 0 12px;font-size:18px}
+.item{background:#161616;border:1px solid #292929;border-radius:13px;padding:14px;margin:9px 0}
+.itemTop{display:flex;justify-content:space-between;gap:10px}
+.status{font-size:10px;font-weight:bold;text-transform:uppercase}
+.green{color:#22c55e}.red{color:#ef4444}.yellow{color:#f59e0b}.purple{color:#c084fc}
+.section{display:none}.section.active{display:block}
+.featureGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.feature{background:#161616;border:1px solid #292929;border-radius:13px;padding:15px}
+.feature b{display:block;margin-bottom:6px}.feature span{font-size:12px;color:#777}
+.action,.logout{background:#191919;color:#fff;border:1px solid #383838;border-radius:9px;padding:9px 12px}
+input,select,textarea{width:100%;padding:12px;margin:6px 0 12px;border-radius:10px;border:1px solid #353535;background:#080808;color:#fff}
+.formGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.loginWrap{max-width:430px;margin:70px auto;padding:20px}
+.loginBox{background:#101010;border:1px solid #303030;border-radius:22px;padding:28px}
+.loginBtn{width:100%;padding:14px;border:0;border-radius:10px;background:#fff;color:#000;font-weight:900}
+.success{color:#22c55e}.error{color:#ef4444}
+.toggle{width:52px;height:28px;border:0;border-radius:20px;background:#333;position:relative}
+.toggle:after{content:"";position:absolute;width:22px;height:22px;top:3px;left:4px;border-radius:50%;background:#777}
+.toggle.on{background:#22c55e}.toggle.on:after{left:26px;background:#fff}
+@media(max-width:900px){
+.layout{grid-template-columns:1fr}nav{display:flex;overflow:auto}.navBtn{min-width:105px;text-align:center}
+.stats{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.featureGrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:550px){
+.content{padding:12px}.stats{grid-template-columns:1fr}.featureGrid,.formGrid{grid-template-columns:1fr}
+}
 </style>
 </head>
 
 <body>
 
+<div id="loginScreen" class="loginWrap">
+<div class="loginBox">
+<h1>HOMORA <span class="purple">CEO</span> 👑</h1>
+<p class="muted">Secure CEO Mobile OTP Login</p>
+
+<div id="phoneStep">
+<input id="phone" type="tel" placeholder="+918446060669">
+<div id="recaptcha-container"></div>
+<button class="loginBtn" onclick="sendCEOOTP()">SEND OTP</button>
+</div>
+
+<div id="otpStep" class="hidden">
+<input id="otp" type="text" inputmode="numeric" maxlength="6" placeholder="Enter OTP">
+<button class="loginBtn" onclick="verifyCEOOTP()">VERIFY OTP & ENTER</button>
+<button onclick="backToPhone()" style="display:block;margin:12px auto;background:none;border:0;color:#c084fc">
+Change Number
+</button>
+</div>
+
+<p id="loginMsg"></p>
+</div>
+</div>
+
+<div id="app" class="hidden">
+
 <header>
-<div class="logo">HOMORA 🏠</div>
-<div>Home Services</div>
+<div class="logo">HOMORA<span>.</span></div>
+<div class="ceoTag">👑 CEO COMMAND CENTER</div>
 </header>
 
-<main>
+<div class="layout">
 
-<!-- LOGIN / REGISTER -->
-<div class="card" id="authBox">
+<nav>
+<button class="navBtn active" onclick="show('overview',this)">⌂ Overview</button>
+<button class="navBtn" onclick="show('orders',this)">▣ Orders</button>
+<button class="navBtn" onclick="show('workers',this)">👷 Workers</button>
+<button class="navBtn" onclick="show('customers',this)">👥 Customers</button>
+<button class="navBtn" onclick="show('services',this)">🛠 Services</button>
+<button class="navBtn" onclick="show('finance',this)">₹ Finance</button>
+<button class="navBtn" onclick="show('offers',this)">🎁 Offers</button>
+<button class="navBtn" onclick="show('referrals',this)">🤝 Referrals</button>
+<button class="navBtn" onclick="show('feedback',this)">⭐ Feedback</button>
+<button class="navBtn" onclick="show('support',this)">🆘 Support</button>
+<button class="navBtn" onclick="show('location',this)">📍 Location</button>
+<button class="navBtn" onclick="show('analytics',this)">📈 Analytics</button>
+<button class="navBtn" onclick="show('security',this)">🛡 Security</button>
+<button class="navBtn" onclick="show('settings',this)">⚙ Settings</button>
+</nav>
 
-<h2>👤 Customer Account</h2>
+<section class="content">
 
-<input id="name" placeholder="Full Name">
-<input id="phone" placeholder="Mobile Number">
-<input id="email" type="email" placeholder="Email">
-<input id="password" type="password" placeholder="Password">
-
-<button onclick="registerCustomer()">Create Account</button>
-<button class="purple" onclick="loginCustomer()">Login</button>
-
-<p id="message"></p>
-
+<div id="overview" class="section active">
+<div class="hero">
+<h1>Welcome, CEO 👑</h1>
+<p>HOMORA Business Command Center</p>
+<div class="badge">● SECURE OTP ACCESS</div>
 </div>
 
-<!-- CUSTOMER DASHBOARD -->
-<div id="dashboard" class="hidden">
-
-<div class="card">
-<h2>Welcome, <span id="customerName"></span> 👋</h2>
-<p>Book trusted HOMORA home services.</p>
+<div class="stats">
+<div class="stat"><small>TOTAL CUSTOMERS</small><h2 id="customerCount">0</h2></div>
+<div class="stat"><small>TOTAL WORKERS</small><h2 id="workerCount">0</h2></div>
+<div class="stat"><small>TOTAL ORDERS</small><h2 id="bookingCount">0</h2></div>
+<div class="stat"><small>COMPLETED REVENUE</small><h2>₹<span id="revenue">0</span></h2></div>
 </div>
 
-<div class="card">
+<div class="grid">
+<div class="panel">
+<div class="panelTitle"><h2>▣ Recent Orders</h2></div>
+<div id="bookingList">Loading...</div>
+</div>
 
-<h2>🏠 Choose Service</h2>
+<div class="panel">
+<div class="panelTitle"><h2>👷 Worker Network</h2></div>
+<div id="workerList">Loading...</div>
+</div>
+</div>
 
-<div class="service" onclick="selectService('Cleaning')">🧹 Cleaning</div>
-<div class="service" onclick="selectService('Cooking')">🍳 Cooking</div>
-<div class="service" onclick="selectService('Bartan')">🍽️ Bartan Cleaning</div>
-<div class="service" onclick="selectService('Laundry')">👕 Laundry</div>
-<div class="service" onclick="selectService('Home Help')">🏠 Home Help</div>
+<div class="panel">
+<h2>⚡ Business Control</h2>
+<div class="featureGrid">
+<div class="feature"><b>🛠 Services</b><span>Control booking services.</span></div>
+<div class="feature"><b>🎁 Promotions</b><span>Create offers.</span></div>
+<div class="feature"><b>🤝 Referrals</b><span>₹1,000 after one month.</span></div>
+<div class="feature"><b>💳 Finance</b><span>Payments and payouts.</span></div>
+<div class="feature"><b>🆘 Support</b><span>Manage complaints.</span></div>
+<div class="feature"><b>🔐 Security</b><span>CEO access control.</span></div>
+</div>
+</div>
+</div>
 
-<input id="address" placeholder="Your Full Address">
+<div id="orders" class="section">
+<div class="hero"><h1>Order Control 📦</h1><p>All HOMORA bookings.</p></div>
+<div class="panel" id="allOrders">Loading...</div>
+</div>
 
-<select id="hours">
-<option value="">Select Hours</option>
-<option value="2">2 Hours</option>
-<option value="4">4 Hours</option>
-<option value="6">6 Hours</option>
-<option value="8">8 Hours</option>
+<div id="workers" class="section">
+<div class="hero"><h1>Worker Network 👷</h1><p>Workers, status and KYC.</p></div>
+<div class="panel" id="allWorkers">Loading...</div>
+</div>
+
+<div id="customers" class="section">
+<div class="hero"><h1>Customer Network 👥</h1><p>Customer accounts and activity.</p></div>
+<div class="panel" id="allCustomers">Loading...</div>
+</div>
+
+<div id="services" class="section">
+<div class="hero"><h1>Service Control 🛠</h1><p>Turn HOMORA services ON/OFF.</p></div>
+<div class="panel" id="servicePanel">Loading...</div>
+</div>
+
+<div id="finance" class="section">
+<div class="hero"><h1>Finance Center 💰</h1><p>Revenue, worker payout and HOMORA margin.</p></div>
+<div class="stats">
+<div class="stat"><small>COMPLETED ORDERS</small><h2 id="completedCount">0</h2></div>
+<div class="stat"><small>REVENUE</small><h2>₹<span id="revenue2">0</span></h2></div>
+<div class="stat"><small>WORKER PAYOUT</small><h2>₹<span id="workerPayout">0</span></h2></div>
+<div class="stat"><small>HOMORA MARGIN</small><h2>₹<span id="homoraMargin">0</span></h2></div>
+</div>
+<div class="panel">
+<h2>💳 Payment History</h2>
+<div id="paymentHistory">Payment records will appear here.</div>
+</div>
+</div>
+
+<div id="offers" class="section">
+<div class="hero"><h1>Offers & Promotions 🎁</h1><p>Create customer/worker offers.</p></div>
+
+<div class="panel">
+<div class="formGrid">
+<div><label>Offer Name</label><input id="offerName" placeholder="Festival Offer"></div>
+<div><label>Coupon Code</label><input id="offerCode" placeholder="HOMORA20"></div>
+<div><label>Discount Type</label>
+<select id="offerType"><option value="percent">Percentage</option><option value="flat">Flat Amount</option></select></div>
+<div><label>Discount Value</label><input id="offerValue" type="number"></div>
+<div><label>Start Date</label><input id="offerStart" type="date"></div>
+<div><label>Expiry Date</label><input id="offerEnd" type="date"></div>
+</div>
+
+<label>Offer For</label>
+<select id="offerAudience">
+<option value="customers">Customers</option>
+<option value="workers">Workers</option>
+<option value="both">Customers + Workers</option>
 </select>
 
-<button class="green" onclick="createBooking()">📋 Book Service</button>
-
-<p id="bookingMessage"></p>
-
+<button class="action" onclick="createOffer()">+ CREATE OFFER</button>
+<p id="offerMsg"></p>
 </div>
 
-<div class="card">
-<h2>📋 My Bookings</h2>
-<div id="myBookings">No bookings yet.</div>
+<div class="panel">
+<h2>Offers</h2>
+<div id="offerList">Loading...</div>
+</div>
 </div>
 
-<div class="card">
-<h3>🎁 Joining Bonus</h3>
-<p>Eligible new customers can receive a <b>₹1,000 joining bonus</b> after completing the required qualifying activity.</p>
+<div id="referrals" class="section">
+<div class="hero"><h1>Referral Center 🤝</h1>
+<p>₹1,000 reward only after referred worker completes 1 month.</p></div>
+<div class="panel" id="referralList">Loading...</div>
 </div>
 
-<div class="card">
-<button onclick="logout()">Logout</button>
+<div id="feedback" class="section">
+<div class="hero"><h1>Customer Feedback ⭐</h1><p>Ratings and reviews.</p></div>
+<div class="panel" id="feedbackList">Loading...</div>
 </div>
 
+<div id="support" class="section">
+<div class="hero"><h1>Help Center 🆘</h1><p>Customer complaints and support.</p></div>
+<div class="panel" id="supportList">No support tickets yet.</div>
 </div>
 
-</main>
+<div id="location" class="section">
+<div class="hero"><h1>Worker Location 📍</h1><p>Only location data granted by workers.</p></div>
+<div class="panel" id="locationList">No location data.</div>
+</div>
+
+<div id="analytics" class="section">
+<div class="hero"><h1>Business Analytics 📈</h1><p>HOMORA operational performance.</p></div>
+<div class="featureGrid">
+<div class="feature"><b>📦 Orders</b><span id="analyticsOrders">0</span></div>
+<div class="feature"><b>✅ Completed</b><span id="analyticsCompleted">0</span></div>
+<div class="feature"><b>❌ Rejected</b><span id="analyticsRejected">0</span></div>
+<div class="feature"><b>⏳ Pending</b><span id="analyticsPending">0</span></div>
+<div class="feature"><b>👷 Workers</b><span id="analyticsWorkers">0</span></div>
+<div class="feature"><b>👥 Customers</b><span id="analyticsCustomers">0</span></div>
+</div>
+</div>
+
+<div id="security" class="section">
+<div class="hero"><h1>Security & Control 🛡</h1><p>CEO operational security.</p></div>
+<div class="featureGrid">
+<div class="feature"><b>🪪 KYC</b><span>Worker verification.</span></div>
+<div class="feature"><b>🚫 Account Control</b><span>Suspend/block controls.</span></div>
+<div class="feature"><b>🔐 CEO OTP</b><span>Authorized CEO mobile.</span></div>
+<div class="feature"><b>📋 Activity Log</b><span>Admin activity.</span></div>
+<div class="feature"><b>🚨 SOS</b><span>Emergency requests.</span></div>
+<div class="feature"><b>⚠️ Fraud Flags</b><span>Suspicious accounts.</span></div>
+</div>
+</div>
+
+<div id="settings" class="section">
+<div class="hero"><h1>Business Settings ⚙️</h1><p>HOMORA operating rules.</p></div>
+<div class="featureGrid">
+<div class="feature"><b>💰 Pricing</b><span>Service pricing.</span></div>
+<div class="feature"><b>📈 Margin</b><span>HOMORA margin.</span></div>
+<div class="feature"><b>👷 Worker Payout</b><span>Worker payment rules.</span></div>
+<div class="feature"><b>📅 15-Day Cycle</b><span>Payment cycle.</span></div>
+<div class="feature"><b>🎁 Referral</b><span>₹1,000 reward.</span></div>
+<div class="feature"><b>🌐 Languages</b><span>Hindi, Marathi, English.</span></div>
+<div class="feature"><b>📍 Service Area</b><span>Coverage control.</span></div>
+<div class="feature"><b>🧾 Invoice</b><span>Order receipts.</span></div>
+</div>
+</div>
+
+<div class="panel">
+<button class="logout" onclick="logout()">Logout</button>
+</div>
+
+</section>
+</div>
+</div>
 
 <script type="module">
 
-import { initializeApp }
+import {initializeApp}
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
 getAuth,
-createUserWithEmailAndPassword,
-signInWithEmailAndPassword,
+RecaptchaVerifier,
+signInWithPhoneNumber,
 onAuthStateChanged,
 signOut
 }
@@ -117,221 +297,637 @@ from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
 getFirestore,
-doc,
-setDoc,
-getDoc,
-addDoc,
 collection,
-query,
-where,
-getDocs
+getDocs,
+addDoc,
+setDoc,
+doc,
+getDoc,
+serverTimestamp
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
-  authDomain: "homora-41400.firebaseapp.com",
-  projectId: "homora-41400",
-  storageBucket: "homora-41400.firebasestorage.app",
-  messagingSenderId: "252376803932",
-  appId: "1:252376803932:web:595c23360a014a0cfc9499"
+/* FIREBASE CONFIG */
+
+const firebaseConfig={
+apiKey:"AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
+authDomain:"homora-41400.firebaseapp.com",
+projectId:"homora-41400",
+storageBucket:"homora-41400.firebasestorage.app",
+messagingSenderId:"252376803932",
+appId:"1:252376803932:web:595c23360a014a0cfc9499"
 };
 
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-let selectedService = "";
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
 
-window.selectService = function(service){
+/* CEO NUMBER — E.164 FORMAT */
 
-selectedService = service;
+const CEO_PHONE="+918446060669";
 
-document.querySelectorAll(".service").forEach(x=>{
-x.classList.remove("selected");
-});
-
-event.currentTarget.classList.add("selected");
-
-};
+let confirmationResult=null;
+let recaptchaVerifier=null;
 
 
-window.registerCustomer = async function(){
+/* RECAPTCHA */
 
-const name=document.getElementById("name").value.trim();
-const phone=document.getElementById("phone").value.trim();
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
+function setupRecaptcha(){
 
-if(!name || !phone || !email || !password){
-document.getElementById("message").innerText=
-"Please fill all details.";
-return;
+if(recaptchaVerifier)return;
+
+recaptchaVerifier=new RecaptchaVerifier(
+auth,
+"recaptcha-container",
+{
+size:"normal",
+callback:()=>{},
+"expired-callback":()=>{
+recaptchaVerifier=null;
 }
-
-try{
-
-const result=await createUserWithEmailAndPassword(
-auth,email,password
+}
 );
 
-await setDoc(doc(db,"customers",result.user.uid),{
-name:name,
-phone:phone,
-email:email,
-role:"customer",
-bonusEligible:true,
-bonusAmount:1000,
-bonusStatus:"pending",
-createdAt:new Date().toISOString()
-});
-
-document.getElementById("message").innerText=
-"✅ Customer account created successfully!";
-
-}catch(error){
-
-document.getElementById("message").innerText=
-"❌ "+error.message;
+recaptchaVerifier.render();
 
 }
 
-};
 
+/* SEND OTP */
 
-window.loginCustomer = async function(){
+window.sendCEOOTP=async function(){
 
-const email=document.getElementById("email").value.trim();
-const password=document.getElementById("password").value;
+const input=document.getElementById("phone");
+const msg=document.getElementById("loginMsg");
 
-try{
+let phone=input.value.trim().replace(/\s+/g,"");
 
-await signInWithEmailAndPassword(auth,email,password);
+if(phone==="8446060669")phone="+91"+phone;
 
-}catch(error){
-
-document.getElementById("message").innerText=
-"❌ "+error.message;
-
-}
-
-};
-
-
-window.createBooking = async function(){
-
-if(!selectedService){
-document.getElementById("bookingMessage").innerText=
-"Please select a service.";
+if(!phone){
+msg.className="error";
+msg.innerText="Enter CEO mobile number.";
 return;
 }
 
-const address=document.getElementById("address").value.trim();
-const hours=document.getElementById("hours").value;
-
-if(!address || !hours){
-document.getElementById("bookingMessage").innerText=
-"Please enter address and hours.";
-return;
-}
-
-const user=auth.currentUser;
-
-if(!user){
-document.getElementById("bookingMessage").innerText=
-"Please login first.";
+if(phone!==CEO_PHONE){
+msg.className="error";
+msg.innerText="❌ This mobile number is not authorized for CEO access.";
 return;
 }
 
 try{
 
-await addDoc(collection(db,"bookings"),{
+setupRecaptcha();
 
-customerId:user.uid,
-service:selectedService,
-address:address,
-hours:Number(hours),
-status:"pending",
-workerId:null,
-createdAt:new Date().toISOString()
+confirmationResult=await signInWithPhoneNumber(
+auth,
+phone,
+recaptchaVerifier
+);
 
-});
+document.getElementById("phoneStep").classList.add("hidden");
+document.getElementById("otpStep").classList.remove("hidden");
 
-document.getElementById("bookingMessage").innerText=
-"✅ Booking request created successfully!";
+msg.className="success";
+msg.innerText="✅ OTP sent.";
 
-loadBookings();
+}catch(e){
 
-}catch(error){
-
-document.getElementById("bookingMessage").innerText=
-"❌ "+error.message;
+console.error(e);
+msg.className="error";
+msg.innerText="❌ "+e.message;
 
 }
 
 };
 
 
-async function loadBookings(){
+/* VERIFY OTP */
 
-const user=auth.currentUser;
+window.verifyCEOOTP=async function(){
+
+const otp=document.getElementById("otp").value.trim();
+const msg=document.getElementById("loginMsg");
+
+if(!confirmationResult){
+msg.className="error";
+msg.innerText="❌ Send OTP first.";
+return;
+}
+
+try{
+
+const result=await confirmationResult.confirm(otp);
+const user=result.user;
+
+if(user.phoneNumber!==CEO_PHONE){
+await signOut(auth);
+msg.className="error";
+msg.innerText="❌ Unauthorized CEO account.";
+return;
+}
+
+msg.className="success";
+msg.innerText="✅ Login successful.";
+
+}catch(e){
+
+console.error(e);
+msg.className="error";
+msg.innerText="❌ Invalid OTP.";
+
+}
+
+};
+
+
+/* CHANGE NUMBER */
+
+window.backToPhone=function(){
+
+confirmationResult=null;
+
+document.getElementById("otpStep").classList.add("hidden");
+document.getElementById("phoneStep").classList.remove("hidden");
+document.getElementById("otp").value="";
+document.getElementById("loginMsg").innerText="";
+
+};
+
+
+/* AUTH STATE */
+
+onAuthStateChanged(auth,user=>{
 
 if(!user)return;
 
-const q=query(
-collection(db,"bookings"),
-where("customerId","==",user.uid)
-);
+if(user.phoneNumber!==CEO_PHONE){
 
-const snapshot=await getDocs(q);
+signOut(auth);
+return;
 
-let html="";
+}
 
-snapshot.forEach(doc=>{
-const b=doc.data();
+document.getElementById("loginScreen").classList.add("hidden");
+document.getElementById("app").classList.remove("hidden");
 
-html+=`
-<div style="border:1px solid #ddd;padding:12px;border-radius:10px;margin:8px 0">
-<b>${b.service}</b><br>
-${b.hours} Hours<br>
-Status: ${b.status}
-</div>
-`;
+loadDashboard();
+loadServices();
+loadOffers();
+loadReferrals();
+
 });
 
-document.getElementById("myBookings").innerHTML=
-html || "No bookings yet.";
+
+/* NAVIGATION */
+
+window.show=function(id,btn){
+
+document.querySelectorAll(".section")
+.forEach(x=>x.classList.remove("active"));
+
+document.getElementById(id).classList.add("active");
+
+document.querySelectorAll(".navBtn")
+.forEach(x=>x.classList.remove("active"));
+
+if(btn)btn.classList.add("active");
+
+};
+
+
+/* DASHBOARD */
+
+async function loadDashboard(){
+
+try{
+
+const customers=await getDocs(collection(db,"customers"));
+const workers=await getDocs(collection(db,"workers"));
+const bookings=await getDocs(collection(db,"bookings"));
+
+document.getElementById("customerCount").innerText=customers.size;
+document.getElementById("workerCount").innerText=workers.size;
+document.getElementById("bookingCount").innerText=bookings.size;
+
+let revenue=0;
+let payout=0;
+let completed=0;
+let rejected=0;
+let pending=0;
+
+let ordersHTML="";
+
+bookings.forEach(x=>{
+
+const b={id:x.id,...x.data()};
+const status=String(b.status||"pending").toLowerCase();
+
+const amount=Number(b.amount||b.price||b.total||0);
+const workerPay=Number(b.workerPayout||b.workerPayment||b.payout||0);
+
+if(status==="completed"){
+completed++;
+revenue+=amount;
+payout+=workerPay;
+}
+
+if(status==="rejected"||status==="cancelled")rejected++;
+if(status==="pending"||status==="new")pending++;
+
+let cls="yellow";
+if(status==="completed"||status==="accepted")cls="green";
+if(status==="rejected"||status==="cancelled")cls="red";
+
+ordersHTML+=`
+
+<div class="item">
+<div class="itemTop">
+<b>🏠 ${b.service||"Home Service"}</b>
+<span class="status ${cls}">${status}</span>
+</div>
+<div class="muted">👤 ${b.customerName||b.name||"Customer"}</div>
+<div class="muted">📍 ${b.address||"No address"}</div>
+<div class="muted">⏱ ${b.hours||"-"} hours</div>
+<div class="muted">👷 ${b.workerName||b.worker||"Not assigned"}</div>
+<div style="margin-top:8px;font-weight:bold">₹${amount.toLocaleString("en-IN")}</div>
+</div>`;
+
+});
+
+const empty='<div class="muted">No records yet.</div>';
+
+document.getElementById("bookingList").innerHTML=ordersHTML||empty;
+document.getElementById("allOrders").innerHTML=ordersHTML||empty;
+
+document.getElementById("revenue").innerText=revenue.toLocaleString("en-IN");
+document.getElementById("revenue2").innerText=revenue.toLocaleString("en-IN");
+document.getElementById("workerPayout").innerText=payout.toLocaleString("en-IN");
+document.getElementById("homoraMargin").innerText=
+Math.max(0,revenue-payout).toLocaleString("en-IN");
+document.getElementById("completedCount").innerText=completed;
+
+document.getElementById("analyticsOrders").innerText=bookings.size;
+document.getElementById("analyticsCompleted").innerText=completed;
+document.getElementById("analyticsRejected").innerText=rejected;
+document.getElementById("analyticsPending").innerText=pending;
+document.getElementById("analyticsWorkers").innerText=workers.size;
+document.getElementById("analyticsCustomers").innerText=customers.size;
+
+
+/* WORKERS */
+
+let workersHTML="";
+
+workers.forEach(x=>{
+
+const w=x.data();
+const status=String(w.status||"offline").toLowerCase();
+
+let cls="yellow";
+if(status==="active"||status==="available")cls="green";
+if(status==="offline"||status==="rejected")cls="red";
+
+workersHTML+=`
+
+<div class="item">
+<div class="itemTop">
+<b>👷 ${w.name||"Worker"}</b>
+<span class="status ${cls}">${status}</span>
+</div>
+<div class="muted">${w.phone||w.email||"No contact"}</div>
+<div class="muted">KYC: ${w.kycStatus||"Not connected"}</div>
+<div class="muted">Joined: ${w.joinedDate||w.joinDate||"—"}</div>
+</div>`;
+
+});
+
+document.getElementById("workerList").innerHTML=workersHTML||empty;
+document.getElementById("allWorkers").innerHTML=workersHTML||empty;
+
+
+/* CUSTOMERS */
+
+let customersHTML="";
+
+customers.forEach(x=>{
+
+const c=x.data();
+
+customersHTML+=`
+
+<div class="item">
+<div class="itemTop">
+<b>👤 ${c.name||"Customer"}</b>
+<span class="status purple">CUSTOMER</span>
+</div>
+<div class="muted">${c.phone||c.email||"No contact"}</div>
+<div class="muted">Customer ID: ${x.id}</div>
+</div>`;
+
+});
+
+document.getElementById("allCustomers").innerHTML=
+customersHTML||empty;
+
+
+/* FEEDBACK */
+
+let feedbackHTML="";
+
+bookings.forEach(x=>{
+
+const b=x.data();
+
+const rating=b.rating||b.customerRating||b.feedbackRating;
+const comment=b.feedback||b.review||b.comment;
+
+if(rating||comment){
+
+feedbackHTML+=`
+
+<div class="item">
+<div class="itemTop">
+<b>⭐ ${rating||"—"}/5</b>
+<span class="status purple">FEEDBACK</span>
+</div>
+<div>${comment||"No comment"}</div>
+<div class="muted">Customer: ${b.customerName||"Customer"}</div>
+<div class="muted">Worker: ${b.workerName||"Worker"}</div>
+</div>`;
+
+}
+
+});
+
+document.getElementById("feedbackList").innerHTML=feedbackHTML||empty;
+
+
+/* LOCATION */
+
+let locationHTML="";
+
+workers.forEach(x=>{
+
+const w=x.data();
+
+if(w.latitude!==undefined&&w.longitude!==undefined){
+
+locationHTML+=`
+
+<div class="item">
+<b>📍 ${w.name||"Worker"}</b>
+<div class="muted">Latitude: ${w.latitude}</div>
+<div class="muted">Longitude: ${w.longitude}</div>
+<div class="muted">Updated: ${w.locationUpdatedAt||"—"}</div>
+</div>`;
+
+}
+
+});
+
+document.getElementById("locationList").innerHTML=locationHTML||empty;
+
+}catch(e){
+
+console.error(e);
+document.getElementById("bookingList").innerHTML=
+`<div class="error">❌ ${e.message}</div>`;
+
+}
 
 }
 
 
-onAuthStateChanged(auth,async(user)=>{
+/* SERVICES */
 
-if(user){
+const SERVICES=[
+["cleaning","🧹 Cleaning"],
+["cooking","🍳 Cooking"],
+["laundry","👕 Laundry"],
+["utensils","🍽 Utensils"],
+["maid","🏠 Maid / Home Help"]
+];
 
-const snap=await getDoc(
-doc(db,"customers",user.uid)
-);
+async function loadServices(){
+
+const panel=document.getElementById("servicePanel");
+panel.innerHTML="";
+
+for(const [id,name] of SERVICES){
+
+let available=true;
+
+try{
+
+const snap=await getDoc(doc(db,"services",id));
 
 if(snap.exists()){
+available=snap.data().available!==false;
+}
 
-document.getElementById("authBox").classList.add("hidden");
-document.getElementById("dashboard").classList.remove("hidden");
+}catch(e){}
 
-document.getElementById("customerName").innerText=
-snap.data().name;
+panel.innerHTML+=`
 
-loadBookings();
+<div class="item">
+<div class="itemTop">
+<div>
+<b>${name}</b>
+<div class="muted">Customer booking availability</div>
+</div>
+
+<button id="service_${id}"
+class="toggle ${available?"on":""}"
+onclick="toggleService('${id}')"></button>
+
+</div>
+</div>`;
 
 }
 
 }
+
+window.toggleService=async function(service){
+
+const button=document.getElementById("service_"+service);
+const newState=!button.classList.contains("on");
+
+button.classList.toggle("on",newState);
+
+try{
+
+await setDoc(
+doc(db,"services",service),
+{
+name:service,
+available:newState,
+updatedAt:serverTimestamp()
+},
+{merge:true}
+);
+
+}catch(e){
+
+button.classList.toggle("on",!newState);
+alert("❌ Could not save:\n"+e.message);
+
+}
+
+};
+
+
+/* OFFERS */
+
+window.createOffer=async function(){
+
+const name=document.getElementById("offerName").value.trim();
+const code=document.getElementById("offerCode").value.trim();
+const type=document.getElementById("offerType").value;
+const value=Number(document.getElementById("offerValue").value);
+const start=document.getElementById("offerStart").value;
+const end=document.getElementById("offerEnd").value;
+const audience=document.getElementById("offerAudience").value;
+const msg=document.getElementById("offerMsg");
+
+if(!name||!value||!start||!end){
+
+msg.className="error";
+msg.innerText="Fill all required details.";
+return;
+
+}
+
+try{
+
+await addDoc(collection(db,"offers"),{
+name,code,type,value,start,end,audience,
+active:true,
+createdAt:serverTimestamp()
+});
+
+msg.className="success";
+msg.innerText="✅ Offer created.";
+
+document.getElementById("offerName").value="";
+document.getElementById("offerCode").value="";
+document.getElementById("offerValue").value="";
+
+loadOffers();
+
+}catch(e){
+
+msg.className="error";
+msg.innerText="❌ "+e.message;
+
+}
+
+};
+
+async function loadOffers(){
+
+const el=document.getElementById("offerList");
+
+try{
+
+const snap=await getDocs(collection(db,"offers"));
+let html="";
+
+snap.forEach(x=>{
+
+const o=x.data();
+
+html+=`
+
+<div class="item">
+<div class="itemTop">
+<b>🎁 ${o.name||"Offer"}</b>
+<span class="status ${o.active!==false?"green":"red"}">
+${o.active!==false?"ACTIVE":"OFF"}
+</span>
+</div>
+<div class="muted">Code: ${o.code||"No code"}</div>
+<div class="muted">
+Discount: ${o.type==="percent"?o.value+"%":"₹"+o.value}
+</div>
+<div class="muted">For: ${o.audience||"customers"}</div>
+</div>`;
 
 });
 
+el.innerHTML=html||'<div class="muted">No offers yet.</div>';
+
+}catch(e){
+
+el.innerHTML=`<div class="error">❌ ${e.message}</div>`;
+
+}
+
+}
+
+
+/* REFERRALS */
+
+async function loadReferrals(){
+
+const el=document.getElementById("referralList");
+
+try{
+
+const snap=await getDocs(collection(db,"referrals"));
+let html="";
+
+snap.forEach(x=>{
+
+const r=x.data();
+
+const successful=
+r.successful===true||r.status==="successful";
+
+html+=`
+
+<div class="item">
+<div class="itemTop">
+<b>🤝 ${r.referrerName||"Referring Worker"}</b>
+<span class="status ${successful?"green":"yellow"}">
+${successful?"SUCCESSFUL":"IN PROGRESS"}
+</span>
+</div>
+
+<div class="muted">
+Referred Worker: ${r.referredWorkerName||r.referredWorker||"—"}
+</div>
+
+<div class="muted">
+Join Date: ${r.joinDate||"—"}
+</div>
+
+<div class="muted">
+One Month Complete: ${r.oneMonthCompleted?"YES":"NO"}
+</div>
+
+<div class="muted">
+Reward: ₹1,000 — ${r.rewardPaid?"PAID":"PENDING"}
+</div>
+</div>`;
+
+});
+
+el.innerHTML=html||'<div class="muted">No referral records yet.</div>';
+
+}catch(e){
+
+el.innerHTML=`<div class="error">❌ ${e.message}</div>`;
+
+}
+
+}
+
+
+/* LOGOUT */
 
 window.logout=function(){
 signOut(auth);
