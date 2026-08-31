@@ -2,2553 +2,879 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#050505">
-<title>HOMORA CEO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HOMORA CEO Dashboard</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+}
+
 body{
-margin:0;
-background:#050505;
-color:#f5f5f5;
-font-family:Arial,Helvetica,sans-serif
-}
-button,input,select{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
-
-:root{
---card:#101010;
---card2:#151515;
---line:#292929;
---muted:#858585;
---green:#22c55e;
---red:#ef4444;
---yellow:#f59e0b;
---blue:#60a5fa;
---purple:#a855f7
+    background:#f4f6f9;
+    color:#111827;
 }
 
-header{
-height:70px;
-padding:0 22px;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:#090909;
-border-bottom:1px solid var(--line);
-position:sticky;
-top:0;
-z-index:100
+.header{
+    height:65px;
+    background:#111827;
+    color:white;
+    display:flex;
+    align-items:center;
+    padding:0 18px;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+}
+
+.menu-btn{
+    width:42px;
+    height:42px;
+    border:0;
+    background:transparent;
+    cursor:pointer;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:6px;
+}
+
+.menu-btn span{
+    display:block;
+    width:25px;
+    height:3px;
+    background:white;
+    border-radius:5px;
 }
 
 .logo{
-font-size:25px;
-font-weight:900;
-letter-spacing:1px
-}
-.logo span{color:var(--purple)}
-
-.ceo{
-padding:8px 13px;
-border:1px solid #333;
-border-radius:30px;
-font-size:11px;
-font-weight:900
+    margin-left:15px;
+    font-size:22px;
+    font-weight:bold;
 }
 
-.layout{
-display:grid;
-grid-template-columns:225px 1fr;
-min-height:calc(100vh - 70px)
+.logo small{
+    display:block;
+    font-size:10px;
+    color:#9ca3af;
+    letter-spacing:2px;
 }
 
-nav{
-background:#090909;
-border-right:1px solid var(--line);
-padding:12px 9px
+.sidebar{
+    position:fixed;
+    top:65px;
+    left:-280px;
+    width:280px;
+    height:calc(100vh - 65px);
+    background:#1f2937;
+    color:white;
+    z-index:999;
+    transition:.3s;
+    padding:20px 12px;
+    overflow-y:auto;
 }
 
-.nav{
-width:100%;
-background:transparent;
-border:0;
-color:#858585;
-text-align:left;
-padding:12px;
-margin:3px 0;
-border-radius:10px;
-font-weight:800
+.sidebar.active{
+    left:0;
 }
 
-.nav:hover,.nav.active{
-background:#1b1b1b;
-color:#fff
+.menu-title{
+    font-size:12px;
+    color:#9ca3af;
+    margin:5px 12px 12px;
+    text-transform:uppercase;
 }
 
-main{
-width:100%;
-max-width:1600px;
-margin:auto;
-padding:22px
+.menu-item{
+    padding:14px 15px;
+    margin:5px 0;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:15px;
 }
 
-.page{display:none}
-.page.active{display:block}
-
-.hero{
-background:linear-gradient(135deg,#181818,#0a0a0a);
-border:1px solid #303030;
-border-radius:20px;
-padding:23px;
-margin-bottom:16px
+.menu-item:hover{
+    background:#374151;
 }
 
-.hero h1{
-margin:0 0 6px;
-font-size:28px
+.menu-item.active{
+    background:#2563eb;
 }
 
-.hero p{
-margin:0;
-color:var(--muted)
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:none;
+    z-index:998;
 }
 
-.liveDot{
-display:inline-flex;
-align-items:center;
-gap:7px;
-margin-top:12px;
-padding:7px 11px;
-border-radius:20px;
-background:#102116;
-color:#5ee58a;
-font-size:10px;
-font-weight:900
+.overlay.active{
+    display:block;
 }
 
-.dot{
-width:7px;
-height:7px;
-border-radius:50%;
-background:var(--green)
+.main{
+    padding:90px 18px 30px;
+    max-width:1200px;
+    margin:auto;
 }
 
-.stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-bottom:16px
+.page{
+    display:none;
 }
 
-.stat{
-position:relative;
-background:var(--card);
-border:1px solid var(--line);
-border-radius:16px;
-padding:17px;
-min-height:92px
+.page.active{
+    display:block;
 }
 
-.stat small{
-color:#777;
-font-size:10px;
-font-weight:900
+.page-title{
+    font-size:27px;
+    font-weight:bold;
+    margin-bottom:6px;
 }
 
-.stat h2{
-margin:10px 0 0;
-font-size:26px
+.page-subtitle{
+    color:#6b7280;
+    margin-bottom:20px;
 }
 
-.icon{
-position:absolute;
-right:16px;
-top:15px;
-font-size:20px
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-bottom:22px;
 }
 
-.statusGrid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-bottom:16px
+.card{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
 }
 
-.statusCard{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:15px;
-padding:16px
+.card h4{
+    color:#6b7280;
+    font-size:13px;
+    margin-bottom:8px;
 }
 
-.statusCard b{
-display:block;
-margin-bottom:7px
+.card .number{
+    font-size:27px;
+    font-weight:bold;
 }
 
-.statusCard span{
-color:#aaa;
-font-size:13px
+.section{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
 }
 
-.green{color:var(--green)!important}
-.red{color:var(--red)!important}
-.yellow{color:var(--yellow)!important}
-.blue{color:var(--blue)!important}
-.purple{color:#c084fc!important}
-.muted{color:var(--muted)}
-
-.grid{
-display:grid;
-grid-template-columns:1.4fr 1fr;
-gap:15px
-}
-
-.panel{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:17px;
-padding:17px;
-margin-bottom:16px
-}
-
-.title{
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:10px;
-margin-bottom:12px
-}
-
-.title h2{
-margin:0;
-font-size:18px
+.section h3{
+    margin-bottom:15px;
 }
 
 .btn{
-background:#191919;
-color:#fff;
-border:1px solid #3a3a3a;
-border-radius:9px;
-padding:9px 12px;
-font-weight:800
+    border:0;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    background:#2563eb;
+    color:white;
+    font-weight:bold;
 }
 
-.btn:hover{background:#242424}
-
-.item{
-background:var(--card2);
-border:1px solid var(--line);
-border-radius:13px;
-padding:14px;
-margin:9px 0
+.btn.green{
+    background:#16a34a;
 }
 
-.itemTop{
-display:flex;
-justify-content:space-between;
-gap:10px;
-align-items:flex-start
+.btn.red{
+    background:#dc2626;
 }
 
-.name{font-weight:900}
-
-.line{
-color:#929292;
-font-size:12px;
-margin-top:6px;
-line-height:1.45
+.btn.gray{
+    background:#6b7280;
 }
 
-.badge{
-display:inline-block;
-padding:5px 8px;
-border-radius:20px;
-font-size:9px;
-font-weight:900;
-white-space:nowrap
+.table-wrap{
+    overflow-x:auto;
 }
 
-.badge.green{background:#0d2918}
-.badge.red{background:#2a1111}
-.badge.yellow{background:#2b210c}
-.badge.blue{background:#101e2e}
-
-.contactRow{
-display:flex;
-gap:7px;
-flex-wrap:wrap;
-margin-top:11px
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
 }
 
-.call{
-background:#12331e;
-border:1px solid #286a3a;
-color:#78e99a;
-border-radius:8px;
-padding:8px 11px;
-font-size:11px;
-font-weight:900;
-text-decoration:none
+th,td{
+    padding:13px;
+    border-bottom:1px solid #e5e7eb;
+    text-align:left;
+    font-size:14px;
 }
 
-.search{
-width:100%;
-background:#080808;
-color:#fff;
-border:1px solid #343434;
-border-radius:10px;
-padding:12px;
-margin-bottom:12px;
-outline:none
+th{
+    background:#f9fafb;
 }
 
-select{
-width:100%;
-background:#080808;
-color:#fff;
-border:1px solid #343434;
-border-radius:10px;
-padding:12px;
-margin-bottom:12px
+.status{
+    display:inline-block;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
 }
 
-.loginWrap{
-max-width:420px;
-margin:75px auto;
-padding:18px
+.pending{
+    background:#fef3c7;
+    color:#92400e;
 }
 
-.loginBox{
-background:#101010;
-border:1px solid #303030;
-border-radius:22px;
-padding:28px;
-box-shadow:0 20px 70px #000
+.success{
+    background:#dcfce7;
+    color:#166534;
 }
 
-.loginBox h1{margin-top:0}
-
-label{
-display:block;
-color:#aaa;
-font-size:12px;
-font-weight:800;
-margin:8px 0 5px
+.active-status{
+    background:#dbeafe;
+    color:#1d4ed8;
 }
 
-input{
-width:100%;
-background:#080808;
-color:#fff;
-border:1px solid #353535;
-border-radius:10px;
-padding:12px;
-outline:none
+.danger{
+    background:#fee2e2;
+    color:#991b1b;
 }
 
-.loginBtn{
-width:100%;
-border:0;
-background:#fff;
-color:#000;
-border-radius:10px;
-padding:14px;
-margin-top:12px;
-font-weight:900
+.profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
 }
 
-.msg{
-min-height:22px;
-margin-top:12px;
-font-size:13px;
-line-height:1.45
+.avatar{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:#2563eb;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:25px;
+    font-weight:bold;
 }
 
-@media(max-width:1000px){
-.layout{grid-template-columns:1fr}
-nav{
-display:flex;
-overflow-x:auto;
-border-right:0;
-border-bottom:1px solid var(--line)
-}
-.nav{
-min-width:115px;
-text-align:center
-}
-.stats{grid-template-columns:1fr 1fr}
-.statusGrid{grid-template-columns:1fr 1fr}
-.grid{grid-template-columns:1fr}
+.input{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    margin:7px 0 14px;
+    outline:none;
 }
 
-@media(max-width:550px){
-main{padding:12px}
-.stats{grid-template-columns:1fr}
-.statusGrid{grid-template-columns:1fr 1fr}
-.hero h1{font-size:23px}
-.ceo{display:none}
+.grid2{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+}
+
+.referral-box{
+    padding:18px;
+    border:2px dashed #2563eb;
+    border-radius:12px;
+    background:#eff6ff;
+}
+
+.money{
+    color:#16a34a;
+    font-weight:bold;
+}
+
+.empty{
+    text-align:center;
+    color:#9ca3af;
+    padding:30px;
+}
+
+@media(max-width:600px){
+    .main{
+        padding:85px 12px 25px;
+    }
+
+    .page-title{
+        font-size:23px;
+    }
+
+    .card{
+        padding:16px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div id="loginScreen" class="loginWrap">
-<div class="loginBox">
+<!-- HEADER -->
+<header class="header">
 
-<h1>HOMORA 👑</h1>
-<p class="muted">CEO Business Command Center</p>
+    <button class="menu-btn" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
-<label>CEO Email</label>
-<input
-id="email"
-type="email"
-value="patilpritesh950@gmail.com"
-readonly
->
+    <div class="logo">
+        HOMORA
+        <small>CEO PANEL</small>
+    </div>
 
-<label>Password</label>
-<input
-id="password"
-type="password"
-placeholder="Enter password"
->
-
-<button class="loginBtn" id="loginButton">
-LOGIN
-</button>
-
-<div id="loginMsg" class="msg"></div>
-
-</div>
-</div>
-
-
-<div id="app" class="hidden">
-
-<header>
-<div class="logo">HOMORA<span>.</span></div>
-<div class="ceo">👑 CEO ACCESS</div>
 </header>
 
-<div class="layout">
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-<nav>
+<!-- SIDE MENU -->
+<nav class="sidebar" id="sidebar">
 
-<button class="nav active" data-page="dashboard">
-⚡ LIVE BUSINESS
-</button>
+    <div class="menu-title">CEO MENU</div>
 
-<button class="nav" data-page="workers">
-👷 WORKERS
-</button>
+    <div class="menu-item active" onclick="openPage('dashboard',this)">
+        🏠 Dashboard
+    </div>
 
-<button class="nav" data-page="orders">
-📦 ORDERS
-</button>
+    <div class="menu-item" onclick="openPage('customers',this)">
+        👥 Customers
+    </div>
 
-<button class="nav" data-page="customers">
-👥 CUSTOMERS
-</button>
+    <div class="menu-item" onclick="openPage('workers',this)">
+        👷 Workers
+    </div>
 
-<button class="nav" data-page="finance">
-💰 FINANCE
-</button>
+    <div class="menu-item" onclick="openPage('bookings',this)">
+        📅 Bookings
+    </div>
 
-<button class="nav" data-page="referrals">
-🤝 REFERRALS
-</button>
+    <div class="menu-item" onclick="openPage('payments',this)">
+        💰 Payments
+    </div>
 
-<button class="nav" data-page="feedback">
-⭐ FEEDBACK
-</button>
+    <div class="menu-item" onclick="openPage('referrals',this)">
+        🎁 Referrals
+    </div>
 
-<button class="nav" data-page="support">
-🆘 SUPPORT
-</button>
+    <div class="menu-item" onclick="openPage('reports',this)">
+        📊 Reports
+    </div>
 
-<button class="nav" data-page="location">
-📍 LOCATION
-</button>
-
-<button class="nav" data-page="settings">
-⚙ SETTINGS
-</button>
+    <div class="menu-item" onclick="openPage('settings',this)">
+        ⚙️ Settings
+    </div>
 
 </nav>
 
 
-<main>
+<main class="main">
 
+<!-- DASHBOARD -->
 <section id="dashboard" class="page active">
 
-<div class="hero">
-<h1>Live Business Command Center</h1>
-<p>HOMORA real-time operational overview.</p>
+    <div class="page-title">CEO Dashboard</div>
+    <div class="page-subtitle">Welcome to HOMORA management panel</div>
 
-<div class="liveDot">
-<span class="dot"></span>
-LIVE DATA
-</div>
-</div>
+    <div class="cards">
 
+        <div class="card">
+            <h4>Total Customers</h4>
+            <div class="number">0</div>
+        </div>
 
-<div class="stats">
+        <div class="card">
+            <h4>Total Workers</h4>
+            <div class="number">0</div>
+        </div>
 
-<div class="stat">
-<small>TOTAL ORDERS</small>
-<div class="icon">📦</div>
-<h2 id="totalOrders">0</h2>
-</div>
+        <div class="card">
+            <h4>Today's Bookings</h4>
+            <div class="number">0</div>
+        </div>
 
-<div class="stat">
-<small>TOTAL WORKERS</small>
-<div class="icon">👷</div>
-<h2 id="totalWorkers">0</h2>
-</div>
+        <div class="card">
+            <h4>Total Revenue</h4>
+            <div class="number">₹0</div>
+        </div>
 
-<div class="stat">
-<small>TOTAL CUSTOMERS</small>
-<div class="icon">👥</div>
-<h2 id="totalCustomers">0</h2>
-</div>
+    </div>
 
-<div class="stat">
-<small>TODAY TURNOVER</small>
-<div class="icon">₹</div>
-<h2>₹<span id="todayTurnover">0</span></h2>
-</div>
+    <div class="section">
+        <h3>Recent Bookings</h3>
 
-</div>
+        <div class="table-wrap">
+            <table>
+                <tr>
+                    <th>Customer</th>
+                    <th>Service</th>
+                    <th>Worker</th>
+                    <th>Status</th>
+                </tr>
 
-
-<div class="statusGrid">
-
-<div class="statusCard">
-<b class="green">🟢 ONLINE</b>
-<span id="onlineWorkers">0 workers</span>
-</div>
-
-<div class="statusCard">
-<b class="green">🟢 FREE</b>
-<span id="freeWorkers">0 workers</span>
-</div>
-
-<div class="statusCard">
-<b class="yellow">🟡 BUSY / WORKING</b>
-<span id="busyWorkers">0 workers</span>
-</div>
-
-<div class="statusCard">
-<b class="red">🔴 OFFLINE</b>
-<span id="offlineWorkers">0 workers</span>
-</div>
-
-</div>
-
-
-<div class="grid">
-
-<div class="panel">
-
-<div class="title">
-<h2>👷 Live Workers</h2>
-<button class="btn" data-open="workers">
-All Workers
-</button>
-</div>
-
-<input
-class="search"
-id="workerSearchLive"
-placeholder="Search worker name / ID / mobile..."
->
-
-<div id="liveWorkers">
-<div class="muted">Loading...</div>
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<div class="title">
-<h2>📦 Live Orders</h2>
-<button class="btn" data-open="orders">
-All Orders
-</button>
-</div>
-
-<div id="liveOrders">
-<div class="muted">Loading...</div>
-</div>
-
-</div>
-
-</div>
-
-
-<div class="panel">
-
-<div class="title">
-<h2>📊 Business Status</h2>
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<small>PENDING</small>
-<h2 id="pendingOrders">0</h2>
-</div>
-
-<div class="stat">
-<small>ACTIVE</small>
-<h2 id="activeOrders">0</h2>
-</div>
-
-<div class="stat">
-<small>COMPLETED</small>
-<h2 id="completedOrders">0</h2>
-</div>
-
-<div class="stat">
-<small>REJECTED</small>
-<h2 id="rejectedOrders">0</h2>
-</div>
-
-</div>
-
-<div class="stats">
-
-<div class="stat">
-<small>CANCELLED</small>
-<h2 id="cancelledOrders">0</h2>
-</div>
-
-<div class="stat">
-<small>TOTAL TURNOVER</small>
-<h2>₹<span id="totalTurnover">0</span></h2>
-</div>
-
-<div class="stat">
-<small>WORKER PAYOUT</small>
-<h2>₹<span id="totalPayout">0</span></h2>
-</div>
-
-<div class="stat">
-<small>HOMORA MARGIN</small>
-<h2>₹<span id="totalMargin">0</span></h2>
-</div>
-
-</div>
-</div>
+                <tr>
+                    <td colspan="4" class="empty">
+                        No bookings yet
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 
 </section>
 
 
-<section id="workers" class="page">
-
-<div class="hero">
-<h1>Worker Network 👷</h1>
-<p>All worker profiles and live availability.</p>
-</div>
-
-<div class="panel">
-
-<input
-class="search"
-id="workerSearch"
-placeholder="Search name, worker ID or mobile..."
->
-
-<div id="allWorkers">
-<div class="muted">Loading...</div>
-</div>
-
-</div>
-
-</section>
-
-
-<section id="orders" class="page">
-
-<div class="hero">
-<h1>Order Management 📦</h1>
-<p>All HOMORA bookings.</p>
-</div>
-
-<div class="panel">
-
-<select id="orderFilter">
-<option value="all">All Orders</option>
-<option value="pending">Pending</option>
-<option value="accepted">Accepted</option>
-<option value="working">Working</option>
-<option value="completed">Completed</option>
-<option value="rejected">Rejected</option>
-<option value="cancelled">Cancelled</option>
-</select>
-
-<div id="allOrders">
-<div class="muted">Loading...</div>
-</div>
-
-</div>
-
-</section>
-
-
+<!-- CUSTOMERS -->
 <section id="customers" class="page">
 
-<div class="hero">
-<h1>Customers 👥</h1>
-<p>Customer accounts and activity.</p>
-</div>
+    <div class="page-title">Customers</div>
+    <div class="page-subtitle">Manage HOMORA customers</div>
 
-<div class="panel">
-<div id="allCustomers">
-<div class="muted">Loading...</div>
-</div>
-</div>
+    <div class="cards">
 
-</section>
+        <div class="card">
+            <h4>Total Customers</h4>
+            <div class="number">0</div>
+        </div>
 
+        <div class="card">
+            <h4>Active Customers</h4>
+            <div class="number">0</div>
+        </div>
 
-<section id="finance" class="page">
+    </div>
 
-<div class="hero">
-<h1>Finance Center 💰</h1>
-<p>Revenue, turnover, worker payouts and HOMORA margin.</p>
-</div>
+    <div class="section">
 
-<div class="stats">
+        <h3>Customer List</h3>
 
-<div class="stat">
-<small>TOTAL TURNOVER</small>
-<h2>₹<span id="financeTurnover">0</span></h2>
-</div>
+        <div class="table-wrap">
 
-<div class="stat">
-<small>WORKER PAYOUT</small>
-<h2>₹<span id="financePayout">0</span></h2>
-</div>
+            <table>
 
-<div class="stat">
-<small>HOMORA MARGIN</small>
-<h2>₹<span id="financeMargin">0</span></h2>
-</div>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Bookings</th>
+                    <th>Status</th>
+                </tr>
 
-<div class="stat">
-<small>COMPLETED ORDERS</small>
-<h2 id="financeCompleted">0</h2>
-</div>
+                <tr>
+                    <td colspan="4" class="empty">
+                        No customers registered
+                    </td>
+                </tr>
 
-</div>
+            </table>
 
-<div class="panel">
+        </div>
 
-<div class="title">
-<h2>💳 Payment History</h2>
-</div>
-
-<div id="paymentHistory">
-<div class="muted">Loading...</div>
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
+<!-- WORKERS -->
+<section id="workers" class="page">
+
+    <div class="page-title">Workers</div>
+    <div class="page-subtitle">Manage HOMORA workers</div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h4>Total Workers</h4>
+            <div class="number">0</div>
+        </div>
+
+        <div class="card">
+            <h4>Active Workers</h4>
+            <div class="number">0</div>
+        </div>
+
+        <div class="card">
+            <h4>Pending Verification</h4>
+            <div class="number">0</div>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h3>Worker Management</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Worker</th>
+                    <th>Service</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+                <tr>
+                    <td colspan="5" class="empty">
+                        No workers registered
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- BOOKINGS -->
+<section id="bookings" class="page">
+
+    <div class="page-title">Bookings</div>
+    <div class="page-subtitle">All HOMORA service bookings</div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h4>Today's Bookings</h4>
+            <div class="number">0</div>
+        </div>
+
+        <div class="card">
+            <h4>Pending</h4>
+            <div class="number">0</div>
+        </div>
+
+        <div class="card">
+            <h4>Completed</h4>
+            <div class="number">0</div>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h3>Booking List</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Customer</th>
+                    <th>Service</th>
+                    <th>Worker</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td colspan="5" class="empty">
+                        No bookings available
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PAYMENTS -->
+<section id="payments" class="page">
+
+    <div class="page-title">Payments</div>
+    <div class="page-subtitle">Manage payments and payment history</div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h4>Total Collection</h4>
+            <div class="number money">₹0</div>
+        </div>
+
+        <div class="card">
+            <h4>Worker Payments</h4>
+            <div class="number">₹0</div>
+        </div>
+
+        <div class="card">
+            <h4>Pending Payments</h4>
+            <div class="number">₹0</div>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h3>Payment History</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Date</th>
+                    <th>Booking</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td colspan="5" class="empty">
+                        No payment history
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- REFERRALS -->
 <section id="referrals" class="page">
 
-<div class="hero">
-<h1>Worker Referral Center 🤝</h1>
-<p>₹1,000 reward after referred worker completes 1 month.</p>
-</div>
+    <div class="page-title">Worker Referrals</div>
+    <div class="page-subtitle">
+        Track successful worker referrals and rewards
+    </div>
 
-<div class="panel">
-<div id="referralList">
-<div class="muted">Loading...</div>
-</div>
-</div>
+    <div class="cards">
+
+        <div class="card">
+            <h4>Total Referrals</h4>
+            <div class="number">0</div>
+        </div>
+
+        <div class="card">
+            <h4>Successful Referrals</h4>
+            <div class="number">0</div>
+        </div>
+
+        <div class="card">
+            <h4>Referral Rewards Paid</h4>
+            <div class="number money">₹0</div>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h3>Referral Rules</h3>
+
+        <div class="referral-box">
+
+            <p>
+                A referral becomes
+                <b>Successful</b>
+                only after the referred worker completes
+                <b>1 month of work</b>.
+            </p>
+
+            <br>
+
+            <p>
+                CEO can manually approve and pay the referral reward.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h3>Referral List</h3>
+
+        <div class="table-wrap">
+
+            <table>
+
+                <tr>
+                    <th>Referring Worker</th>
+                    <th>Referred Worker</th>
+                    <th>Joined</th>
+                    <th>1 Month Completed</th>
+                    <th>Status</th>
+                    <th>Reward</th>
+                </tr>
+
+                <tr>
+                    <td colspan="6" class="empty">
+                        No referrals yet
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<section id="feedback" class="page">
+<!-- REPORTS -->
+<section id="reports" class="page">
 
-<div class="hero">
-<h1>Customer Feedback ⭐</h1>
-<p>Ratings and reviews from completed services.</p>
-</div>
+    <div class="page-title">Reports</div>
+    <div class="page-subtitle">Business performance reports</div>
 
-<div class="panel">
-<div id="feedbackList">
-<div class="muted">Loading...</div>
-</div>
-</div>
+    <div class="cards">
+
+        <div class="card">
+            <h4>Monthly Revenue</h4>
+            <div class="number money">₹0</div>
+        </div>
+
+        <div class="card">
+            <h4>Monthly Bookings</h4>
+            <div class="number">0</div>
+        </div>
+
+        <div class="card">
+            <h4>Completed Jobs</h4>
+            <div class="number">0</div>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h3>Business Summary</h3>
+
+        <div class="grid2">
+
+            <div>
+                <p>Customers</p>
+                <h2>0</h2>
+            </div>
+
+            <div>
+                <p>Workers</p>
+                <h2>0</h2>
+            </div>
+
+            <div>
+                <p>Bookings</p>
+                <h2>0</h2>
+            </div>
+
+            <div>
+                <p>Revenue</p>
+                <h2>₹0</h2>
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<section id="support" class="page">
-
-<div class="hero">
-<h1>Support Center 🆘</h1>
-<p>Customer and worker support requests.</p>
-</div>
-
-<div class="panel">
-<div id="supportList">
-<div class="muted">Loading...</div>
-</div>
-</div>
-
-</section>
-
-
-<section id="location" class="page">
-
-<div class="hero">
-<h1>Worker Location 📍</h1>
-<p>Only location information permitted by workers.</p>
-</div>
-
-<div class="panel">
-<div id="locationList">
-<div class="muted">Loading...</div>
-</div>
-</div>
-
-</section>
-
-
+<!-- SETTINGS -->
 <section id="settings" class="page">
 
-<div class="hero">
-<h1>HOMORA Settings ⚙</h1>
-<p>Business rules and controls.</p>
-</div>
+    <div class="page-title">Settings</div>
+    <div class="page-subtitle">CEO account and HOMORA settings</div>
 
-<div class="panel">
+    <div class="section">
 
-<div class="statusGrid">
+        <h3>CEO Profile</h3>
 
-<div class="statusCard">
-<b>💰 Worker Payout</b>
-<span>15-day payment cycle</span>
-</div>
+        <div class="profile">
 
-<div class="statusCard">
-<b>🤝 Referral</b>
-<span>₹1,000 after 1 month completion</span>
-</div>
+            <div class="avatar">
+                C
+            </div>
 
-<div class="statusCard">
-<b>🌐 Languages</b>
-<span>Hindi, Marathi, English + more</span>
-</div>
+            <div>
+                <h3>HOMORA CEO</h3>
+                <p>CEO / Administrator</p>
+            </div>
 
-<div class="statusCard">
-<b>🛡 Security</b>
-<span>CEO-only management access</span>
-</div>
+        </div>
 
-</div>
+        <br>
 
-<button class="btn" id="logoutButton">
-Logout CEO
-</button>
+        <label>CEO Name</label>
+        <input class="input" type="text" placeholder="Enter CEO name">
 
-</div>
+        <label>Email</label>
+        <input class="input" type="email" placeholder="Enter email">
+
+        <button class="btn" onclick="saveSettings()">
+            Save Changes
+        </button>
+
+    </div>
 
 </section>
 
 </main>
-</div>
-</div>
 
 
-<script type="module">
+<script>
 
-import {
-initializeApp
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+function toggleMenu(){
 
-import {
-getAuth,
-signInWithEmailAndPassword,
-onAuthStateChanged,
-signOut
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
-
-import {
-getFirestore,
-collection,
-getDocs,
-onSnapshot
-}
-from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
-
-
-/* ================================
-   CORRECT HOMORA FIREBASE CONFIG
-================================ */
-
-const firebaseConfig = {
-apiKey: "AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
-authDomain: "homora-41400.firebaseapp.com",
-projectId: "homora-41400",
-storageBucket: "homora-41400.firebasestorage.app",
-messagingSenderId: "252376803932",
-appId: "1:252376803932:web:595c23360a014a0cfc9499"
-};
-
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-const CEO_EMAIL =
-"patilpritesh950@gmail.com";
-
-
-let workers=[];
-let customers=[];
-let bookings=[];
-let payments=[];
-let referrals=[];
-let support=[];
-
-
-function esc(v){
-
-if(v===null||v===undefined)
-return "";
-
-return String(v)
-.replaceAll("&","&amp;")
-.replaceAll("<","&lt;")
-.replaceAll(">","&gt;")
-.replaceAll('"',"&quot;")
-.replaceAll("'","&#039;");
+    document.getElementById("sidebar").classList.toggle("active");
+    document.getElementById("overlay").classList.toggle("active");
 
 }
 
 
-function money(v){
+function openPage(pageId, element){
 
-return Number(v||0)
-.toLocaleString("en-IN");
+    document.querySelectorAll(".page").forEach(function(page){
 
-}
+        page.classList.remove("active");
 
+    });
 
-function status(v){
-
-return String(v||"pending")
-.toLowerCase()
-.trim();
-
-}
+    document.getElementById(pageId).classList.add("active");
 
 
-function dateText(v){
+    document.querySelectorAll(".menu-item").forEach(function(item){
 
-if(!v)return "—";
+        item.classList.remove("active");
 
-try{
+    });
 
-if(typeof v==="object" && v.seconds){
+    element.classList.add("active");
 
-return new Date(
-v.seconds*1000
-).toLocaleString("en-IN");
 
-}
-
-return new Date(v)
-.toLocaleString("en-IN");
-
-}catch(e){
-
-return String(v);
-
-}
+    document.getElementById("sidebar").classList.remove("active");
+    document.getElementById("overlay").classList.remove("active");
 
 }
 
 
-function workerState(w){
+function saveSettings(){
 
-const s=status(
-w.status||
-w.availability||
-w.workStatus||
-"offline"
-);
-
-const online =
-w.online===true ||
-w.isOnline===true ||
-s==="online" ||
-s==="available" ||
-s==="free" ||
-s==="busy" ||
-s==="working";
-
-const busy =
-w.busy===true ||
-w.isBusy===true ||
-s==="busy" ||
-s==="working" ||
-s==="onjob" ||
-s==="on_job";
-
-if(!online)return "offline";
-
-if(busy)return "busy";
-
-return "free";
-
-}
-
-
-/* ================================
-LOGIN
-================================ */
-
-document
-.getElementById("loginButton")
-.addEventListener(
-"click",
-loginCEO
-);
-
-
-document
-.getElementById("password")
-.addEventListener(
-"keydown",
-e=>{
-if(e.key==="Enter")
-loginCEO();
-}
-);
-
-
-async function loginCEO(){
-
-const email=
-document.getElementById("email")
-.value
-.trim()
-.toLowerCase();
-
-const password=
-document.getElementById("password")
-.value;
-
-const msg=
-document.getElementById("loginMsg");
-
-
-if(!password){
-
-msg.className="msg red";
-msg.innerText=
-"❌ Password enter karo.";
-
-return;
-
-}
-
-
-msg.className="msg muted";
-msg.innerText=
-"Logging in...";
-
-
-try{
-
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
-
-}catch(e){
-
-console.error(e);
-
-msg.className="msg red";
-
-if(e.code==="auth/invalid-credential"){
-
-msg.innerText=
-"❌ Email/password incorrect.";
-
-}else{
-
-msg.innerText=
-"❌ Firebase: "+e.message;
-
-}
-
-}
-
-}
-
-
-/* ================================
-AUTH
-================================ */
-
-onAuthStateChanged(
-auth,
-async user=>{
-
-if(!user){
-
-document
-.getElementById("loginScreen")
-.classList
-.remove("hidden");
-
-document
-.getElementById("app")
-.classList
-.add("hidden");
-
-return;
-
-}
-
-if(
-!user.email ||
-user.email.toLowerCase()!==CEO_EMAIL
-){
-
-await signOut(auth);
-return;
-
-}
-
-
-document
-.getElementById("loginScreen")
-.classList
-.add("hidden");
-
-document
-.getElementById("app")
-.classList
-.remove("hidden");
-
-
-await loadData();
-
-startRealtime();
-
-}
-);
-
-
-/* ================================
-NAVIGATION
-================================ */
-
-document
-.querySelectorAll(".nav")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-const page=
-button.dataset.page;
-
-document
-.querySelectorAll(".page")
-.forEach(x=>
-x.classList.remove("active")
-);
-
-document
-.getElementById(page)
-.classList
-.add("active");
-
-document
-.querySelectorAll(".nav")
-.forEach(x=>
-x.classList.remove("active")
-);
-
-button.classList
-.add("active");
-
-}
-);
-
-});
-
-
-document
-.querySelectorAll("[data-open]")
-.forEach(button=>{
-
-button.addEventListener(
-"click",
-()=>{
-
-const page=
-button.dataset.open;
-
-document
-.querySelectorAll(".page")
-.forEach(x=>
-x.classList.remove("active")
-);
-
-document
-.getElementById(page)
-.classList
-.add("active");
-
-document
-.querySelectorAll(".nav")
-.forEach(x=>
-x.classList.remove("active")
-);
-
-const nav=
-document.querySelector(
-`.nav[data-page="${page}"]`
-);
-
-if(nav)
-nav.classList.add("active");
-
-}
-);
-
-});
-
-
-document
-.getElementById("logoutButton")
-.addEventListener(
-"click",
-async()=>{
-await signOut(auth);
-location.reload();
-}
-);
-
-
-/* ================================
-READ FIRESTORE
-================================ */
-
-async function read(name){
-
-try{
-
-const snap=
-await getDocs(
-collection(db,name)
-);
-
-return snap.docs.map(
-d=>({
-id:d.id,
-...d.data()
-})
-);
-
-}catch(e){
-
-console.error(
-"Collection error:",
-name,
-e
-);
-
-return [];
-
-}
-
-}
-
-
-/* ================================
-LOAD DATA
-================================ */
-
-async function loadData(){
-
-[
-workers,
-customers,
-bookings,
-payments,
-referrals,
-support
-]=await Promise.all([
-
-read("workers"),
-read("customers"),
-read("bookings"),
-read("payments"),
-read("referrals"),
-read("support")
-
-]);
-
-renderEverything();
-
-}
-
-
-/* ================================
-REALTIME
-================================ */
-
-function startRealtime(){
-
-try{
-
-onSnapshot(
-collection(db,"workers"),
-snap=>{
-
-workers=
-snap.docs.map(
-d=>({
-id:d.id,
-...d.data()
-})
-);
-
-renderEverything();
-
-}
-);
-
-}catch(e){
-console.error(e);
-}
-
-
-try{
-
-onSnapshot(
-collection(db,"bookings"),
-snap=>{
-
-bookings=
-snap.docs.map(
-d=>({
-id:d.id,
-...d.data()
-})
-);
-
-renderEverything();
-
-}
-);
-
-}catch(e){
-console.error(e);
-}
-
-}
-
-
-/* ================================
-ALL RENDER
-================================ */
-
-function renderEverything(){
-
-renderDashboard();
-renderLiveWorkers();
-renderLiveOrders();
-renderWorkers();
-renderOrders();
-renderCustomers();
-renderFinance();
-renderReferrals();
-renderFeedback();
-renderSupport();
-renderLocations();
-
-}
-
-
-/* ================================
-DASHBOARD
-================================ */
-
-function renderDashboard(){
-
-let online=0;
-let free=0;
-let busy=0;
-let offline=0;
-
-workers.forEach(w=>{
-
-const s=
-workerState(w);
-
-if(s==="online")
-online++;
-
-else if(s==="free")
-free++;
-
-else if(s==="busy")
-busy++;
-
-else
-offline++;
-
-});
-
-
-let totalTurnover=0;
-let todayTurnover=0;
-let payout=0;
-
-let pending=0;
-let active=0;
-let completed=0;
-let rejected=0;
-let cancelled=0;
-
-
-const today=
-new Date().toDateString();
-
-
-bookings.forEach(b=>{
-
-const s=status(b.status);
-
-const amount=
-Number(
-b.amount||
-b.price||
-b.total||
-0
-);
-
-const workerPay=
-Number(
-b.workerPayout||
-b.workerPayment||
-b.payout||
-0
-);
-
-
-if(s==="completed"){
-
-completed++;
-totalTurnover+=amount;
-payout+=workerPay;
-
-const d=
-b.createdAt||
-b.completedAt||
-b.date;
-
-if(d){
-
-try{
-
-const date=
-d.seconds
-?new Date(d.seconds*1000)
-:new Date(d);
-
-if(
-date.toDateString()===today
-){
-
-todayTurnover+=amount;
-
-}
-
-}catch(e){}
-
-}
-
-}
-
-
-if(
-s==="pending"||
-s==="new"
-)
-pending++;
-
-
-if(
-s==="accepted"||
-s==="working"||
-s==="active"||
-s==="in-progress"||
-s==="in_progress"
-)
-active++;
-
-
-if(s==="rejected")
-rejected++;
-
-
-if(
-s==="cancelled"||
-s==="canceled"
-)
-cancelled++;
-
-});
-
-
-const margin=
-Math.max(
-0,
-totalTurnover-payout
-);
-
-
-document.getElementById(
-"totalOrders"
-).innerText=
-bookings.length;
-
-
-document.getElementById(
-"totalWorkers"
-).innerText=
-workers.length;
-
-
-document.getElementById(
-"totalCustomers"
-).innerText=
-customers.length;
-
-
-document.getElementById(
-"onlineWorkers"
-).innerText=
-online+" workers";
-
-
-document.getElementById(
-"freeWorkers"
-).innerText=
-free+" workers";
-
-
-document.getElementById(
-"busyWorkers"
-).innerText=
-busy+" workers";
-
-
-document.getElementById(
-"offlineWorkers"
-).innerText=
-offline+" workers";
-
-
-document.getElementById(
-"todayTurnover"
-).innerText=
-money(todayTurnover);
-
-
-document.getElementById(
-"pendingOrders"
-).innerText=
-pending;
-
-
-document.getElementById(
-"activeOrders"
-).innerText=
-active;
-
-
-document.getElementById(
-"completedOrders"
-).innerText=
-completed;
-
-
-document.getElementById(
-"rejectedOrders"
-).innerText=
-rejected;
-
-
-document.getElementById(
-"cancelledOrders"
-).innerText=
-cancelled;
-
-
-document.getElementById(
-"totalTurnover"
-).innerText=
-money(totalTurnover);
-
-
-document.getElementById(
-"totalPayout"
-).innerText=
-money(payout);
-
-
-document.getElementById(
-"totalMargin"
-).innerText=
-money(margin);
-
-}
-
-
-/* ================================
-WORKERS
-================================ */
-
-function workerCard(w){
-
-const state=
-workerState(w);
-
-const name=
-w.name||
-w.fullName||
-"Worker";
-
-const id=
-w.workerId||
-w.id||
-"—";
-
-const phone=
-w.phone||
-w.mobile||
-"";
-
-
-let badge=
-"🔴 OFFLINE";
-
-let cls="red";
-
-
-if(state==="busy"){
-
-badge="🟡 BUSY / WORKING";
-cls="yellow";
-
-}
-else if(state==="free"){
-
-badge="🟢 FREE";
-cls="green";
-
-}
-else if(state==="online"){
-
-badge="🟢 ONLINE";
-cls="green";
-
-}
-
-
-return `
-
-<div class="item">
-
-<div class="itemTop">
-
-<div>
-
-<div class="name">
-${esc(name)}
-</div>
-
-<div class="line">
-Worker ID: ${esc(id)}
-</div>
-
-</div>
-
-<span class="badge ${cls}">
-${badge}
-</span>
-
-</div>
-
-<div class="line">
-📱 ${esc(
-phone||"Mobile not available"
-)}
-</div>
-
-<div class="line">
-Availability:
-${esc(
-w.availability||
-w.workStatus||
-state
-)}
-</div>
-
-<div class="line">
-Last active:
-${esc(
-dateText(
-w.lastActive||
-w.lastSeen||
-w.updatedAt
-)
-)}
-</div>
-
-<div class="contactRow">
-
-${
-phone
-?`
-<a
-class="call"
-href="tel:${esc(phone)}">
-📞 CONTACT
-</a>
-`
-:""
-}
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-function renderLiveWorkers(){
-
-const el=
-document.getElementById(
-"liveWorkers"
-);
-
-const search=
-(
-document.getElementById(
-"workerSearchLive"
-)?.value||""
-).toLowerCase();
-
-
-const data=
-workers.filter(w=>{
-
-const text=
-(
-w.name||
-w.fullName||
-""
-)+" "+
-(
-w.workerId||
-w.id||
-""
-)+" "+
-(
-w.phone||
-w.mobile||
-""
-);
-
-return text
-.toLowerCase()
-.includes(search);
-
-});
-
-
-el.innerHTML=
-data.map(workerCard).join("")||
-'<div class="muted">No workers found.</div>';
-
-}
-
-
-document
-.getElementById(
-"workerSearchLive"
-)
-.addEventListener(
-"input",
-renderLiveWorkers
-);
-
-
-function renderWorkers(){
-
-const el=
-document.getElementById(
-"allWorkers"
-);
-
-const search=
-(
-document.getElementById(
-"workerSearch"
-)?.value||""
-).toLowerCase();
-
-
-const data=
-workers.filter(w=>{
-
-const text=
-(
-w.name||
-w.fullName||
-""
-)+" "+
-(
-w.workerId||
-w.id||
-""
-)+" "+
-(
-w.phone||
-w.mobile||
-""
-);
-
-return text
-.toLowerCase()
-.includes(search);
-
-});
-
-
-el.innerHTML=
-data.map(workerCard).join("")||
-'<div class="muted">No workers registered.</div>';
-
-}
-
-
-document
-.getElementById("workerSearch")
-.addEventListener(
-"input",
-renderWorkers
-);
-
-
-/* ================================
-ORDERS
-================================ */
-
-function orderCard(b){
-
-const s=
-status(b.status);
-
-const amount=
-Number(
-b.amount||
-b.price||
-b.total||
-0
-);
-
-
-return `
-
-<div class="item">
-
-<div class="itemTop">
-
-<div class="name">
-🏠 ${esc(
-b.service||
-b.serviceName||
-"Home Service"
-)}
-</div>
-
-<span class="badge ${
-s==="pending"
-?"yellow"
-:"blue"
-}">
-${esc(
-s||"pending"
-).toUpperCase()}
-</span>
-
-</div>
-
-<div class="line">
-👤 ${esc(
-b.customerName||
-b.customer||
-"Customer"
-)}
-</div>
-
-<div class="line">
-👷 ${esc(
-b.workerName||
-b.worker||
-"Not assigned"
-)}
-</div>
-
-<div class="line">
-📍 ${esc(
-b.address||
-"Address unavailable"
-)}
-</div>
-
-<div class="line">
-💰 ₹${money(amount)}
-</div>
-
-</div>
-
-`;
-
-}
-
-
-function renderLiveOrders(){
-
-const el=
-document.getElementById(
-"liveOrders"
-);
-
-const live=
-bookings.filter(b=>{
-
-const s=
-status(b.status);
-
-return [
-"pending",
-"accepted",
-"working",
-"active",
-"in-progress",
-"in_progress"
-].includes(s);
-
-});
-
-
-el.innerHTML=
-live.slice(0,12)
-.map(orderCard)
-.join("")||
-'<div class="muted">No live orders.</div>';
-
-}
-
-
-function renderOrders(){
-
-const el=
-document.getElementById(
-"allOrders"
-);
-
-const filter=
-document.getElementById(
-"orderFilter"
-).value;
-
-let data=bookings;
-
-if(filter!=="all"){
-
-data=
-bookings.filter(b=>{
-
-const s=
-status(b.status);
-
-if(filter==="cancelled"){
-
-return s==="cancelled"||
-s==="canceled";
-
-}
-
-return s===filter;
-
-});
-
-}
-
-
-el.innerHTML=
-data.map(orderCard).join("")||
-'<div class="muted">No orders found.</div>';
-
-}
-
-
-document
-.getElementById("orderFilter")
-.addEventListener(
-"change",
-renderOrders
-);
-
-
-/* ================================
-CUSTOMERS
-================================ */
-
-function renderCustomers(){
-
-const el=
-document.getElementById(
-"allCustomers"
-);
-
-el.innerHTML=
-customers.map(c=>`
-
-<div class="item">
-
-<div class="itemTop">
-
-<div class="name">
-👤 ${esc(
-c.name||
-c.fullName||
-"Customer"
-)}
-</div>
-
-<span class="badge blue">
-CUSTOMER
-</span>
-
-</div>
-
-<div class="line">
-🆔 ${esc(c.id)}
-</div>
-
-<div class="line">
-📱 ${esc(
-c.phone||
-c.mobile||
-"Mobile unavailable"
-)}
-</div>
-
-<div class="line">
-✉️ ${esc(
-c.email||
-"Email unavailable"
-)}
-</div>
-
-</div>
-
-`).join("")||
-'<div class="muted">No customers registered.</div>';
-
-}
-
-
-/* ================================
-FINANCE
-================================ */
-
-function renderFinance(){
-
-let turnover=0;
-let payout=0;
-let completed=0;
-
-
-bookings.forEach(b=>{
-
-if(
-status(b.status)==="completed"
-){
-
-completed++;
-
-turnover+=Number(
-b.amount||
-b.price||
-b.total||
-0
-);
-
-payout+=Number(
-b.workerPayout||
-b.workerPayment||
-b.payout||
-0
-);
-
-}
-
-});
-
-
-const margin=
-Math.max(
-0,
-turnover-payout
-);
-
-
-document.getElementById(
-"financeTurnover"
-).innerText=
-money(turnover);
-
-
-document.getElementById(
-"financePayout"
-).innerText=
-money(payout);
-
-
-document.getElementById(
-"financeMargin"
-).innerText=
-money(margin);
-
-
-document.getElementById(
-"financeCompleted"
-).innerText=
-completed;
-
-
-document.getElementById(
-"paymentHistory"
-).innerHTML=
-payments.map(p=>`
-
-<div class="item">
-
-<div class="itemTop">
-
-<div class="name">
-💳 ${esc(
-p.workerName||
-p.name||
-"Payment"
-)}
-</div>
-
-<span class="badge ${
-status(p.status)==="paid"
-?"green"
-:"yellow"
-}">
-${esc(
-p.status||
-"PENDING"
-).toUpperCase()}
-</span>
-
-</div>
-
-<div class="line">
-Amount:
-₹${money(
-p.amount||
-p.value||
-0
-)}
-</div>
-
-<div class="line">
-Cycle:
-${esc(
-p.cycle||
-"15-Day"
-)}
-</div>
-
-<div class="line">
-Date:
-${dateText(
-p.createdAt||
-p.paidAt||
-p.date
-)}
-</div>
-
-</div>
-
-`).join("")||
-'<div class="muted">No payment records yet.</div>';
-
-}
-
-
-/* ================================
-REFERRALS
-================================ */
-
-function renderReferrals(){
-
-document.getElementById(
-"referralList"
-).innerHTML=
-referrals.map(r=>{
-
-const successful=
-r.successful===true||
-status(r.status)==="successful";
-
-const completed=
-r.oneMonthCompleted===true||
-r.monthCompleted===true;
-
-const paid=
-r.rewardPaid===true||
-status(r.rewardStatus)==="paid";
-
-
-return `
-
-<div class="item">
-
-<div class="itemTop">
-
-<div class="name">
-🤝 ${esc(
-r.referrerName||
-r.referrer||
-"Worker"
-)}
-</div>
-
-<span class="badge ${
-successful
-?"green"
-:"yellow"
-}">
-${
-successful
-?"SUCCESSFUL"
-:"IN PROGRESS"
-}
-</span>
-
-</div>
-
-<div class="line">
-Referred Worker:
-${esc(
-r.referredWorkerName||
-r.referredWorker||
-"—"
-)}
-</div>
-
-<div class="line">
-Referral Code:
-${esc(
-r.referralCode||
-r.code||
-"—"
-)}
-</div>
-
-<div class="line">
-1 Month Complete:
-<b class="${
-completed?"green":"yellow"
-}">
-${completed?"YES":"NO"}
-</b>
-</div>
-
-<div class="line">
-₹1,000 Reward:
-<b class="${
-paid?"green":"yellow"
-}">
-${paid?"PAID":"PENDING"}
-</b>
-</div>
-
-</div>
-
-`;
-
-}).join("")||
-'<div class="muted">No referral records.</div>';
-
-}
-
-
-/* ================================
-FEEDBACK
-================================ */
-
-function renderFeedback(){
-
-let html="";
-
-
-bookings.forEach(b=>{
-
-const rating=
-b.rating||
-b.customerRating||
-b.feedbackRating;
-
-const comment=
-b.feedback||
-b.review||
-b.comment;
-
-
-if(rating||comment){
-
-html+=`
-
-<div class="item">
-
-<div class="itemTop">
-
-<div class="name">
-⭐ ${esc(rating||"—")}/5
-</div>
-
-<span class="badge purple">
-FEEDBACK
-</span>
-
-</div>
-
-<div class="line">
-${esc(
-comment||
-"No comment"
-)}
-</div>
-
-<div class="line">
-Customer:
-${esc(
-b.customerName||
-"Customer"
-)}
-</div>
-
-<div class="line">
-Worker:
-${esc(
-b.workerName||
-b.worker||
-"Worker"
-)}
-</div>
-
-</div>
-
-`;
-
-}
-
-});
-
-
-document.getElementById(
-"feedbackList"
-).innerHTML=
-html||
-'<div class="muted">No feedback yet.</div>';
-
-}
-
-
-/* ================================
-SUPPORT
-================================ */
-
-function renderSupport(){
-
-document.getElementById(
-"supportList"
-).innerHTML=
-support.map(s=>`
-
-<div class="item">
-
-<div class="itemTop">
-
-<div class="name">
-🆘 ${esc(
-s.subject||
-s.type||
-"Support Request"
-)}
-</div>
-
-<span class="badge yellow">
-${esc(
-s.status||
-"PENDING"
-).toUpperCase()}
-</span>
-
-</div>
-
-<div class="line">
-Customer:
-${esc(
-s.customerName||
-s.name||
-"Customer"
-)}
-</div>
-
-<div class="line">
-${esc(
-s.message||
-s.description||
-"No description"
-)}
-</div>
-
-</div>
-
-`).join("")||
-'<div class="muted">No support tickets yet.</div>';
-
-}
-
-
-/* ================================
-LOCATION
-================================ */
-
-function renderLocations(){
-
-let html="";
-
-
-workers.forEach(w=>{
-
-const lat=
-w.latitude||
-w.location?.latitude;
-
-const lng=
-w.longitude||
-w.location?.longitude;
-
-
-if(
-lat!==undefined &&
-lng!==undefined
-){
-
-html+=`
-
-<div class="item">
-
-<div class="itemTop">
-
-<div class="name">
-📍 ${esc(
-w.name||
-"Worker"
-)}
-</div>
-
-<span class="badge green">
-LOCATION
-</span>
-
-</div>
-
-<div class="line">
-Worker ID:
-${esc(
-w.workerId||
-w.id
-)}
-</div>
-
-<div class="line">
-Latitude:
-${esc(lat)}
-</div>
-
-<div class="line">
-Longitude:
-${esc(lng)}
-</div>
-
-<div class="line">
-Updated:
-${dateText(
-w.locationUpdatedAt||
-w.updatedAt
-)}
-</div>
-
-</div>
-
-`;
-
-}
-
-});
-
-
-document.getElementById(
-"locationList"
-).innerHTML=
-html||
-'<div class="muted">No permitted worker location data available.</div>';
+    alert("Settings saved successfully!");
 
 }
 
