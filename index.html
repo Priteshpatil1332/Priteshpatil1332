@@ -3,780 +3,816 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="theme-color" content="#6d28d9">
 <title>HOMORA — Home Services</title>
 
 <style>
 *{box-sizing:border-box}
 body{
- margin:0;
- font-family:Arial,sans-serif;
- background:linear-gradient(145deg,#f7f2ff,#eef4ff);
- color:#171323;
+margin:0;
+font-family:Arial,sans-serif;
+background:linear-gradient(180deg,#faf9ff,#f1edff);
+color:#171528;
+padding-bottom:95px
 }
-button,input,select,textarea{font:inherit}
+button,input,select{font-family:inherit}
 button{cursor:pointer}
 
 .header{
- position:sticky;
- top:0;
- z-index:50;
- padding:14px 18px;
- display:flex;
- align-items:center;
- justify-content:space-between;
- background:rgba(255,255,255,.88);
- backdrop-filter:blur(18px);
- border-bottom:1px solid #ffffff;
+background:#fff;
+padding:16px 18px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+position:sticky;
+top:0;
+z-index:100;
+box-shadow:0 4px 20px #00000010
 }
 
 .brand{
- display:flex;
- align-items:center;
- gap:10px;
+display:flex;
+align-items:center;
+gap:12px
 }
 
 .logo{
- width:46px;
- height:46px;
- border-radius:15px;
- background:linear-gradient(135deg,#7c3aed,#2563eb);
- color:white;
- display:flex;
- align-items:center;
- justify-content:center;
- font-weight:900;
- font-size:20px;
- box-shadow:0 8px 20px #6d28d933;
+width:58px;
+height:58px;
+border-radius:18px;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 8px 20px #6d28d933
 }
 
-.brand h2{
- margin:0;
- font-size:22px;
- font-weight:900;
- letter-spacing:.5px;
- background:linear-gradient(90deg,#7c3aed,#2563eb);
- -webkit-background-clip:text;
- color:transparent;
+.logo svg{
+width:40px;
+height:40px
 }
 
-.brand small{
- display:block;
- color:#777;
- font-size:9px;
- letter-spacing:2px;
- margin-top:2px;
+.brand-name{
+font-size:28px;
+font-weight:900;
+letter-spacing:.5px;
+background:linear-gradient(90deg,#6d28d9,#2563eb);
+-webkit-background-clip:text;
+color:transparent
 }
 
-.profileBtn{
- width:42px;
- height:42px;
- border-radius:50%;
- border:2px solid #7c3aed;
- background:white;
- color:#6d28d9;
- font-weight:900;
- overflow:hidden;
+.brand-sub{
+font-size:10px;
+letter-spacing:4px;
+color:#777;
+margin-top:2px
 }
 
-.profileBtn img{
- width:100%;
- height:100%;
- object-fit:cover;
+.profile-btn{
+width:48px;
+height:48px;
+border-radius:50%;
+border:3px solid #7c3aed;
+background:white;
+font-size:20px;
+font-weight:bold;
+color:#6d28d9
 }
 
-main{
- max-width:900px;
- margin:auto;
- padding:18px 15px 40px;
+.container{
+max-width:900px;
+margin:auto;
+padding:18px
+}
+
+.welcome{
+border-radius:30px;
+padding:30px 24px;
+color:white;
+background:linear-gradient(135deg,#7137e8,#2563eb);
+box-shadow:0 18px 40px #4f46e14d;
+position:relative;
+overflow:hidden;
+margin-bottom:20px
+}
+
+.welcome:after{
+content:"";
+position:absolute;
+width:230px;
+height:230px;
+right:-80px;
+top:-80px;
+border-radius:50%;
+background:#ffffff16
+}
+
+.welcome h1{
+font-size:31px;
+margin:0 0 12px;
+position:relative;
+z-index:1
+}
+
+.welcome p{
+font-size:16px;
+line-height:1.5;
+margin:0;
+position:relative;
+z-index:1
+}
+
+.section{
+background:white;
+border-radius:26px;
+padding:22px;
+margin-bottom:20px;
+box-shadow:0 8px 30px #0000000b
+}
+
+.section-head{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px
+}
+
+.section h2{
+margin:0;
+font-size:24px
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:14px
+}
+
+.service{
+border:2px solid #eee9ff;
+border-radius:22px;
+padding:20px 10px;
+text-align:center;
+background:linear-gradient(180deg,#fff,#faf8ff);
+transition:.2s
+}
+
+.service:hover{
+transform:translateY(-3px);
+border-color:#8b5cf6
+}
+
+.service-icon{
+font-size:43px;
+margin-bottom:8px
+}
+
+.service-name{
+font-size:18px;
+font-weight:bold
+}
+
+.price{
+color:#777;
+margin-top:7px;
+font-size:16px
+}
+
+.promo{
+background:linear-gradient(135deg,#fff7d6,#f7eaff);
+border-radius:24px;
+padding:20px;
+display:flex;
+align-items:center;
+gap:16px
+}
+
+.promo-icon{font-size:45px}
+.promo h3{margin:0;color:#6d28d9}
+.promo p{margin:7px 0 0;color:#555}
+
+.field{
+margin-bottom:15px
+}
+
+.field label{
+display:block;
+font-weight:bold;
+margin-bottom:7px
+}
+
+.input,.select{
+width:100%;
+padding:14px;
+border:1px solid #ddd;
+border-radius:13px;
+font-size:15px;
+outline:none;
+background:white
+}
+
+.input:focus,.select:focus{
+border-color:#7c3aed;
+box-shadow:0 0 0 3px #7c3aed18
+}
+
+.primary{
+width:100%;
+padding:15px;
+border:0;
+border-radius:14px;
+background:linear-gradient(90deg,#7c3aed,#2563eb);
+color:white;
+font-weight:bold;
+font-size:16px
+}
+
+.secondary{
+width:100%;
+padding:14px;
+border:1px solid #7c3aed;
+border-radius:14px;
+background:white;
+color:#6d28d9;
+font-weight:bold;
+margin-top:9px
 }
 
 .hidden{display:none!important}
 
-.hero{
- padding:27px 22px;
- border-radius:28px;
- color:white;
- background:linear-gradient(135deg,#7c3aed,#4f46e5 55%,#2563eb);
- box-shadow:0 18px 40px #4f46e533;
- margin-bottom:18px;
+.auth-box{
+max-width:500px;
+margin:45px auto
 }
 
-.hero h1{
- margin:0 0 8px;
- font-size:30px;
+.auth-logo{
+text-align:center;
+margin-bottom:25px
 }
 
-.hero p{
- margin:0;
- line-height:1.5;
- opacity:.94;
+.auth-logo .logo{
+margin:auto
 }
 
-.card{
- background:rgba(255,255,255,.9);
- border:1px solid white;
- border-radius:22px;
- padding:20px;
- margin-bottom:16px;
- box-shadow:0 8px 28px #27124d12;
+.auth-logo h1{
+margin:12px 0 3px;
+font-size:32px
 }
 
-.sectionTitle{
- margin:0 0 14px;
- font-size:21px;
+.auth-logo p{
+color:#777;
+margin:0
 }
 
-.serviceGrid{
- display:grid;
- grid-template-columns:repeat(2,1fr);
- gap:12px;
+.radio-row{
+display:flex;
+gap:10px
 }
 
-.service{
- padding:17px 12px;
- border:2px solid #eee9ff;
- background:#faf9ff;
- border-radius:18px;
- text-align:center;
- transition:.2s;
+.radio{
+flex:1;
+padding:13px;
+border:1px solid #ddd;
+border-radius:12px;
+text-align:center
 }
 
-.service.active{
- border-color:#7c3aed;
- background:#f1eaff;
- transform:translateY(-2px);
+.booking-card{
+border:1px solid #eee;
+border-radius:18px;
+padding:17px;
+margin-bottom:12px
 }
 
-.service .icon{
- font-size:30px;
- display:block;
- margin-bottom:7px;
+.booking-card h3{
+margin:0 0 10px
 }
 
-.service b{font-size:15px}
-.service small{display:block;color:#777;margin-top:4px}
-
-.price{
- margin-top:18px;
- padding:17px;
- border-radius:18px;
- background:linear-gradient(135deg,#f3e8ff,#eff6ff);
- display:flex;
- justify-content:space-between;
- align-items:center;
+.status{
+display:inline-block;
+padding:6px 10px;
+border-radius:20px;
+font-size:12px;
+font-weight:bold;
+background:#fff3cd;
+color:#856404
 }
 
-.price strong{
- font-size:27px;
- color:#6d28d9;
+.payment-box{
+text-align:center
 }
 
-.inputGroup{margin-bottom:13px}
-
-label{
- display:block;
- font-size:13px;
- font-weight:bold;
- margin-bottom:6px;
- color:#4b4458;
+.qr{
+width:270px;
+height:270px;
+max-width:100%;
+object-fit:contain;
+border-radius:18px;
+padding:10px;
+background:white;
+box-shadow:0 8px 25px #00000018
 }
 
-input,select,textarea{
- width:100%;
- padding:13px 14px;
- border:1px solid #ddd6fe;
- border-radius:13px;
- outline:none;
- background:white;
- color:#171323;
+.amount{
+font-size:30px;
+font-weight:900;
+color:#16a34a;
+margin:15px
 }
 
-textarea{
- min-height:90px;
- resize:vertical;
+.upi{
+background:#f5f3ff;
+padding:12px;
+border-radius:12px;
+font-weight:bold;
+word-break:break-all
 }
 
-input:focus,select:focus,textarea:focus{
- border-color:#7c3aed;
- box-shadow:0 0 0 3px #7c3aed18;
+.location-btn{
+width:100%;
+padding:14px;
+border:0;
+border-radius:13px;
+background:#111827;
+color:white;
+font-weight:bold
 }
 
-.primary{
- width:100%;
- border:0;
- padding:14px;
- border-radius:14px;
- color:white;
- font-weight:800;
- background:linear-gradient(135deg,#7c3aed,#4f46e5);
- box-shadow:0 8px 18px #6d28d933;
+.bottom{
+position:fixed;
+bottom:12px;
+left:15px;
+right:15px;
+max-width:700px;
+margin:auto;
+height:72px;
+background:#171326;
+border-radius:25px;
+display:grid;
+grid-template-columns:repeat(3,1fr);
+padding:7px;
+z-index:200;
+box-shadow:0 12px 35px #0005
 }
 
-.secondary{
- width:100%;
- border:0;
- padding:13px;
- border-radius:14px;
- background:#eee9ff;
- color:#6d28d9;
- font-weight:bold;
+.bottom button{
+border:0;
+background:transparent;
+color:#bbb;
+border-radius:20px;
+font-size:14px
 }
 
-.locationBtn{
- width:100%;
- border:1px dashed #7c3aed;
- padding:13px;
- border-radius:14px;
- background:#faf7ff;
- color:#6d28d9;
- font-weight:bold;
- margin-bottom:12px;
+.bottom button.active{
+background:linear-gradient(135deg,#7c3aed,#5b21b6);
+color:white
 }
 
-.nav{
- position:fixed;
- left:12px;
- right:12px;
- bottom:12px;
- z-index:100;
- display:grid;
- grid-template-columns:repeat(3,1fr);
- gap:6px;
- padding:7px;
- border-radius:20px;
- background:rgba(20,15,35,.94);
- backdrop-filter:blur(15px);
- box-shadow:0 12px 35px #0005;
+.bottom span{
+display:block;
+font-size:23px;
+margin-bottom:3px
 }
 
-.nav button{
- border:0;
- background:transparent;
- color:#c9c3d6;
- padding:10px 5px;
- border-radius:14px;
- font-size:12px;
+.profile-card{
+text-align:center
 }
 
-.nav button.active{
- background:#7c3aed;
- color:white;
+.big-avatar{
+width:90px;
+height:90px;
+border-radius:50%;
+background:linear-gradient(135deg,#7c3aed,#2563eb);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:35px;
+font-weight:bold;
+margin:auto auto 15px
 }
 
-.page{display:none}
-.page.active{display:block}
-
-.booking{
- padding:17px;
- border:1px solid #e5e7eb;
- border-radius:18px;
- background:white;
- margin-bottom:12px;
+.notice{
+padding:13px;
+border-radius:12px;
+background:#eff6ff;
+color:#1d4ed8;
+margin-bottom:15px;
+font-size:14px
 }
 
-.booking h3{margin:0 0 10px}
-
-.badge{
- display:inline-block;
- padding:6px 10px;
- border-radius:20px;
- font-size:12px;
- font-weight:bold;
- background:#fef3c7;
- color:#92400e;
+.error{
+color:#dc2626;
+font-weight:bold;
+margin-top:10px
 }
 
-.badge.success{
- background:#dcfce7;
- color:#166534;
+.success{
+color:#16a34a;
+font-weight:bold;
+margin-top:10px
 }
 
-.badge.blue{
- background:#dbeafe;
- color:#1d4ed8;
+@media(max-width:600px){
+.container{padding:13px}
+.welcome h1{font-size:27px}
+.services{gap:10px}
+.service{padding:16px 7px}
+.service-icon{font-size:37px}
+.service-name{font-size:16px}
+.section{padding:18px}
 }
-
-.timeline{
- margin-top:18px;
- border-left:3px solid #ddd6fe;
- padding-left:18px;
-}
-
-.step{
- position:relative;
- padding-bottom:18px;
- color:#aaa;
-}
-
-.step:before{
- content:"";
- position:absolute;
- width:12px;
- height:12px;
- border-radius:50%;
- background:#ddd6fe;
- left:-25px;
- top:3px;
-}
-
-.step.done{
- color:#6d28d9;
- font-weight:bold;
-}
-
-.step.done:before{
- background:#7c3aed;
- box-shadow:0 0 0 5px #ede9fe;
-}
-
-.modal{
- position:fixed;
- inset:0;
- z-index:200;
- background:rgba(0,0,0,.65);
- display:flex;
- align-items:flex-end;
- justify-content:center;
-}
-
-.modalBox{
- width:100%;
- max-width:520px;
- max-height:92vh;
- overflow:auto;
- background:#fff;
- border-radius:28px 28px 0 0;
- padding:22px;
-}
-
-.close{
- float:right;
- width:38px;
- height:38px;
- border:0;
- border-radius:50%;
- background:#f3f4f6;
- font-size:20px;
-}
-
-.qrBox{
- text-align:center;
- padding:18px;
- background:#fafafa;
- border-radius:22px;
- margin:15px 0;
-}
-
-#qr{
- display:flex;
- justify-content:center;
- margin:12px auto;
-}
-
-#qr img,#qr canvas{
- max-width:260px;
- width:100%;
- height:auto;
-}
-
-.payAmount{
- text-align:center;
- font-size:30px;
- font-weight:900;
- color:#6d28d9;
-}
-
-.upiText{
- text-align:center;
- color:#555;
- font-size:13px;
- word-break:break-all;
-}
-
-.successBox{
- text-align:center;
- padding:25px 10px;
-}
-
-.successIcon{
- width:75px;
- height:75px;
- margin:auto;
- border-radius:50%;
- display:flex;
- align-items:center;
- justify-content:center;
- background:#dcfce7;
- font-size:40px;
-}
-
-.toast{
- position:fixed;
- top:75px;
- left:50%;
- transform:translateX(-50%);
- z-index:500;
- padding:13px 18px;
- background:#111827;
- color:white;
- border-radius:14px;
- box-shadow:0 8px 25px #0004;
- font-weight:bold;
-}
-
-@media(min-width:700px){
- .serviceGrid{grid-template-columns:repeat(4,1fr)}
- .modal{align-items:center}
- .modalBox{border-radius:28px}
-}
-
-body{padding-bottom:78px}
 </style>
 </head>
 
 <body>
 
 <header class="header">
- <div class="brand">
-   <div class="logo">H</div>
-   <div>
-     <h2>HOMORA</h2>
-     <small>HOME SERVICES</small>
-   </div>
- </div>
 
- <button class="profileBtn" onclick="showPage('profile')">
-   <span id="profileInitial">H</span>
-   <img id="profileImage" class="hidden">
- </button>
+<div class="brand">
+
+<div class="logo">
+<svg viewBox="0 0 100 100" fill="none">
+<path d="M18 47L50 20L82 47V82H18V47Z"
+stroke="white" stroke-width="7" stroke-linejoin="round"/>
+<path d="M37 82V55H63V82"
+stroke="white" stroke-width="7"/>
+<path d="M50 20L54 13"
+stroke="white" stroke-width="5" stroke-linecap="round"/>
+<path d="M69 30L76 23"
+stroke="white" stroke-width="5" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div>
+<div class="brand-name">HOMORA</div>
+<div class="brand-sub">HOME SERVICES</div>
+</div>
+
+</div>
+
+<button class="profile-btn" onclick="showPage('profile')">
+<span id="headerInitial">C</span>
+</button>
+
 </header>
 
-<main>
-
-<!-- LOGIN -->
-<section id="loginPage" class="page active">
-
- <div class="hero">
-   <h1>Home care, made simple. 🏠</h1>
-   <p>Book trusted home services from HOMORA whenever you need them.</p>
- </div>
-
- <div class="card">
-   <h2 class="sectionTitle">Customer Login</h2>
-
-   <div id="phoneStep">
-     <div class="inputGroup">
-       <label>Mobile Number</label>
-       <input id="phone" type="tel" placeholder="10 digit mobile number" maxlength="10">
-     </div>
-
-     <button class="primary" onclick="sendOTP()">Send OTP</button>
-   </div>
-
-   <div id="otpStep" class="hidden">
-     <div class="inputGroup">
-       <label>Enter OTP</label>
-       <input id="otp" type="number" placeholder="6 digit OTP">
-     </div>
-
-     <button class="primary" onclick="verifyOTP()">Verify & Continue</button>
-     <br><br>
-     <button class="secondary" onclick="location.reload()">Change Number</button>
-   </div>
-
-   <p id="loginMsg"></p>
-   <div id="recaptcha-container"></div>
- </div>
-
-</section>
-
-
-<!-- HOME -->
-<section id="homePage" class="page">
-
- <div class="hero">
-   <h1>Namaste, <span id="homeName">Customer</span> 👋</h1>
-   <p>What can HOMORA help you with today?</p>
- </div>
-
- <div class="card">
-   <h2 class="sectionTitle">Choose a Service</h2>
-
-   <div class="serviceGrid">
-
-    <div class="service active" data-service="Cleaning" onclick="selectService(this)">
-      <span class="icon">🧹</span>
-      <b>Cleaning</b>
-      <small>₹250 / booking</small>
-    </div>
-
-    <div class="service" data-service="Cooking" onclick="selectService(this)">
-      <span class="icon">👨‍🍳</span>
-      <b>Cooking</b>
-      <small>₹250 / booking</small>
-    </div>
-
-    <div class="service" data-service="Utensils" onclick="selectService(this)">
-      <span class="icon">🍽️</span>
-      <b>Utensils</b>
-      <small>₹250 / booking</small>
-    </div>
-
-    <div class="service" data-service="Laundry" onclick="selectService(this)">
-      <span class="icon">👕</span>
-      <b>Laundry</b>
-      <small>₹250 / booking</small>
-    </div>
-
-    <div class="service" data-service="Dusting" onclick="selectService(this)">
-      <span class="icon">✨</span>
-      <b>Dusting</b>
-      <small>₹250 / booking</small>
-    </div>
-
-    <div class="service" data-service="Mopping" onclick="selectService(this)">
-      <span class="icon">🧽</span>
-      <b>Mopping</b>
-      <small>₹250 / booking</small>
-    </div>
-
-    <div class="service" data-service="House Help" onclick="selectService(this)">
-      <span class="icon">🏠</span>
-      <b>House Help</b>
-      <small>₹250 / booking</small>
-    </div>
-
-    <div class="service" data-service="Other Home Work" onclick="selectService(this)">
-      <span class="icon">🛠️</span>
-      <b>Other Work</b>
-      <small>₹250 / booking</small>
-    </div>
-
-   </div>
 
-   <div class="price">
-     <span>HOMORA Service</span>
-     <strong>₹250</strong>
-   </div>
- </div>
+<div id="authPage" class="container">
 
- <div class="card">
-
-   <h2 class="sectionTitle">Booking Details</h2>
+<div class="auth-box">
 
-   <div class="inputGroup">
-     <label>Date</label>
-     <input id="bookingDate" type="date">
-   </div>
-
-   <div class="inputGroup">
-     <label>Time</label>
-     <input id="bookingTime" type="time">
-   </div>
+<div class="auth-logo">
 
-   <div class="inputGroup">
-     <label>Required Hours</label>
-     <select id="hours">
-       <option value="1">1 Hour</option>
-       <option value="2" selected>2 Hours</option>
-       <option value="3">3 Hours</option>
-       <option value="4">4 Hours</option>
-       <option value="5">5 Hours</option>
-       <option value="6">6 Hours</option>
-       <option value="8">8 Hours</option>
-     </select>
-   </div>
+<div class="logo">
+<svg viewBox="0 0 100 100" fill="none">
+<path d="M18 47L50 20L82 47V82H18V47Z"
+stroke="white" stroke-width="7" stroke-linejoin="round"/>
+<path d="M37 82V55H63V82"
+stroke="white" stroke-width="7"/>
+</svg>
+</div>
 
-   <div class="inputGroup">
-     <label>Apartment / Building Name</label>
-     <input id="apartment" placeholder="Example: Shree Apartment">
-   </div>
+<h1>HOMORA</h1>
+<p>Home services made simple.</p>
 
-   <div class="inputGroup">
-     <label>Room / Flat Number</label>
-     <input id="room" placeholder="Example: 002">
-   </div>
+</div>
 
-   <div class="inputGroup">
-     <label>Floor</label>
-     <input id="floor" placeholder="Example: 2nd Floor">
-   </div>
+<div class="section">
 
-   <div class="inputGroup">
-     <label>Extra Instructions</label>
-     <textarea id="instructions" placeholder="Anything the worker should know..."></textarea>
-   </div>
+<h2>Customer Login</h2>
+<br>
 
-   <button class="locationBtn" onclick="getLocation()">
-     📍 Use My Live Location
-   </button>
+<div class="field">
+<label>Mobile Number</label>
+<input id="phone" class="input" type="tel" maxlength="10"
+placeholder="Enter 10 digit mobile number">
+</div>
 
-   <p id="locationText" style="font-size:13px;color:#666">
-     Location not added yet
-   </p>
+<button class="primary" onclick="sendOTP()">Send OTP</button>
 
-   <button class="primary" onclick="openPayment()">
-     Continue to Payment — ₹250
-   </button>
+<div id="otpBox" class="hidden">
 
- </div>
+<br>
 
-</section>
+<div class="field">
+<label>Enter OTP</label>
+<input id="otp" class="input" type="number"
+placeholder="6 digit OTP">
+</div>
 
+<button class="primary" onclick="verifyOTP()">Verify & Continue</button>
 
-<!-- BOOKINGS -->
-<section id="bookingsPage" class="page">
+</div>
 
- <div class="hero">
-   <h1>My Bookings 📅</h1>
-   <p>Track your HOMORA services from booking to completion.</p>
- </div>
+<div id="authMsg"></div>
 
- <div class="card">
-   <div id="bookingList">
-     Loading bookings...
-   </div>
- </div>
+</div>
 
-</section>
+<div class="section hidden" id="newCustomerBox">
 
+<h2>Create Profile</h2>
+<br>
 
-<!-- PROFILE -->
-<section id="profilePage" class="page">
+<div class="field">
+<label>Full Name</label>
+<input id="newName" class="input" placeholder="Your full name">
+</div>
 
- <div class="hero">
-   <h1>My HOMORA Profile 👤</h1>
-   <p>Your customer details and account information.</p>
- </div>
+<div class="field">
+<label>Gender</label>
 
- <div class="card">
+<div class="radio-row">
 
-   <div style="text-align:center;margin-bottom:20px">
-     <div class="logo" style="margin:auto;width:80px;height:80px;font-size:32px">
-       <span id="bigInitial">H</span>
-       <img id="bigProfileImage" class="hidden" style="width:100%;height:100%;object-fit:cover;border-radius:15px">
-     </div>
-   </div>
+<label class="radio">
+<input type="radio" name="gender" value="female">
+ Female
+</label>
 
-   <div class="inputGroup">
-     <label>Full Name</label>
-     <input id="profileName" placeholder="Your name">
-   </div>
+<label class="radio">
+<input type="radio" name="gender" value="male">
+ Male
+</label>
 
-   <div class="inputGroup">
-     <label>Mobile Number</label>
-     <input id="profilePhone" readonly>
-   </div>
+</div>
 
-   <button class="primary" onclick="saveProfile()">Save Profile</button>
+</div>
 
-   <br><br>
+<button class="primary" onclick="createCustomer()">
+Create HOMORA Account
+</button>
 
-   <button class="secondary" onclick="logout()">Logout</button>
+</div>
 
- </div>
-
-</section>
-
-</main>
-
-
-<!-- BOTTOM NAV -->
-<nav id="bottomNav" class="nav hidden">
- <button class="active" onclick="showPage('home')">🏠<br>Home</button>
- <button onclick="showPage('bookings')">📅<br>Bookings</button>
- <button onclick="showPage('profile')">👤<br>Profile</button>
-</nav>
-
-
-<!-- PAYMENT MODAL -->
-<div id="paymentModal" class="modal hidden">
-
- <div class="modalBox">
-
-   <button class="close" onclick="closePayment()">×</button>
-
-   <h2 style="margin-top:5px">Secure Payment 💳</h2>
-
-   <p style="color:#666">
-     Pay the HOMORA booking amount using UPI.
-   </p>
-
-   <div class="payAmount">₹250</div>
-
-   <div class="qrBox">
-
-     <b>Scan HOMORA QR</b>
-
-     <div id="qr"></div>
-
-     <div class="upiText">
-       UPI: 8446060669@ptyes
-     </div>
-
-   </div>
-
-   <button class="secondary" onclick="openUPI()">
-     📱 Pay using UPI App
-   </button>
-
-   <br><br>
-
-   <div class="inputGroup">
-     <label>UPI Transaction / UTR ID</label>
-     <input id="transactionId" placeholder="Enter transaction ID after payment">
-   </div>
-
-   <p style="font-size:12px;color:#777">
-     Payment ke baad Transaction/UTR ID enter karke booking submit karein.
-   </p>
-
-   <button class="primary" onclick="submitBooking()">
-     ✓ I Have Paid — Confirm Booking
-   </button>
-
-   <p id="paymentMsg"></p>
-
- </div>
+</div>
 </div>
 
 
-<!-- SUCCESS MODAL -->
-<div id="successModal" class="modal hidden">
+<div id="homePage" class="container hidden">
 
- <div class="modalBox">
+<div class="welcome">
 
-   <div class="successBox">
+<h1 id="welcomeText">Welcome, Customer 👋</h1>
 
-     <div class="successIcon">✓</div>
+<p>
+We're here to make your home life easier and better.
+</p>
 
-     <h2>Booking Received!</h2>
-
-     <p style="color:#666">
-       Your HOMORA booking has been successfully submitted.
-     </p>
-
-     <div class="card" style="text-align:left;background:#f8fafc">
-
-       <p><b>Booking ID:</b> <span id="successBookingId"></span></p>
-       <p><b>Service:</b> <span id="successService"></span></p>
-       <p><b>Amount:</b> ₹250</p>
-       <p><b>Status:</b> <span class="badge">Payment Submitted</span></p>
-
-     </div>
-
-     <button class="primary" onclick="closeSuccess()">
-       View My Booking
-     </button>
-
-   </div>
-
- </div>
 </div>
 
 
-<div id="toast" class="toast hidden"></div>
+<div class="section">
+
+<div class="section-head">
+<h2>Choose a Service</h2>
+</div>
+
+<div class="services">
+
+<div class="service" onclick="startBooking('Cleaning')">
+<div class="service-icon">🧹</div>
+<div class="service-name">Cleaning</div>
+<div class="price">₹250 / booking</div>
+</div>
+
+<div class="service" onclick="startBooking('Cooking')">
+<div class="service-icon">👨‍🍳</div>
+<div class="service-name">Cooking</div>
+<div class="price">₹250 / booking</div>
+</div>
+
+<div class="service" onclick="startBooking('Utensils')">
+<div class="service-icon">🍽️</div>
+<div class="service-name">Utensils</div>
+<div class="price">₹250 / booking</div>
+</div>
+
+<div class="service" onclick="startBooking('Laundry')">
+<div class="service-icon">🧺</div>
+<div class="service-name">Laundry</div>
+<div class="price">₹250 / booking</div>
+</div>
+
+<div class="service" onclick="startBooking('Dusting')">
+<div class="service-icon">🧽</div>
+<div class="service-name">Dusting</div>
+<div class="price">₹250 / booking</div>
+</div>
+
+<div class="service" onclick="startBooking('Mopping')">
+<div class="service-icon">🧹</div>
+<div class="service-name">Mopping</div>
+<div class="price">₹250 / booking</div>
+</div>
+
+<div class="service" onclick="startBooking('House Help')">
+<div class="service-icon">🏠</div>
+<div class="service-name">House Help</div>
+<div class="price">₹250 / booking</div>
+</div>
+
+<div class="service" onclick="startBooking('Other Work')">
+<div class="service-icon">💬</div>
+<div class="service-name">Other Work</div>
+<div class="price">₹250 / booking</div>
+</div>
+
+</div>
+</div>
+
+
+<div class="promo">
+
+<div class="promo-icon">🎁</div>
+
+<div>
+<h3>New to HOMORA?</h3>
+<p>Special welcome benefits on your first booking.</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div id="bookingPage" class="container hidden">
+
+<div class="section">
+
+<h2>Book <span id="bookingService"></span></h2>
+<br>
+
+<div class="notice">
+Booking price: <b>₹250</b>. Please enter your service location.
+</div>
+
+<div class="field">
+<label>Apartment / Building Name</label>
+<input id="apartment" class="input"
+placeholder="Example: Bhumika Darshan Apartment">
+</div>
+
+<div class="field">
+<label>Room / Flat Number</label>
+<input id="room" class="input"
+placeholder="Example: 002">
+</div>
+
+<div class="field">
+<label>Floor</label>
+<input id="floor" class="input"
+placeholder="Example: Ground Floor / 2nd Floor">
+</div>
+
+<div class="field">
+<label>Full Address</label>
+<input id="address" class="input"
+placeholder="Complete address">
+</div>
+
+<div class="field">
+<label>Booking Date</label>
+<input id="date" class="input" type="date">
+</div>
+
+<div class="field">
+<label>Preferred Time</label>
+<input id="time" class="input" type="time">
+</div>
+
+<div class="field">
+<label>Hours</label>
+<select id="hours" class="select">
+<option value="1">1 Hour</option>
+<option value="2" selected>2 Hours</option>
+<option value="3">3 Hours</option>
+<option value="4">4 Hours</option>
+<option value="5">5 Hours</option>
+</select>
+</div>
+
+<button class="location-btn" onclick="getLocation()">
+📍 Add My Live Location
+</button>
+
+<p id="locationStatus"></p>
+
+<br>
+
+<button class="primary" onclick="goToPayment()">
+Continue to Payment — ₹250
+</button>
+
+<button class="secondary" onclick="showPage('home')">
+Back
+</button>
+
+</div>
+</div>
+
+
+<div id="paymentPage" class="container hidden">
+
+<div class="section payment-box">
+
+<h2>Secure Payment</h2>
+
+<p>Pay ₹250 to confirm your HOMORA booking.</p>
+
+<div class="amount">₹250</div>
+
+<img id="qrImage" class="qr" alt="HOMORA UPI QR">
+
+<br><br>
+
+<div class="upi">
+UPI ID: 8446060669@ptyes
+</div>
+
+<br>
+
+<button class="primary"
+onclick="openUPI()">
+📱 Pay ₹250 using UPI App
+</button>
+
+<br>
+
+<p>
+After completing payment, return here and confirm.
+</p>
+
+<button class="primary"
+onclick="confirmPaymentAndBooking()">
+✅ I Have Paid ₹250 — Confirm Booking
+</button>
+
+<button class="secondary" onclick="showPage('booking')">
+Back to Booking
+</button>
+
+<p id="paymentMsg"></p>
+
+</div>
+</div>
+
+
+<div id="bookingsPage" class="container hidden">
+
+<div class="section">
+
+<h2>My Bookings</h2>
+<br>
+
+<div id="myBookings">
+Loading...
+</div>
+
+</div>
+
+</div>
+
+
+<div id="profilePage" class="container hidden">
+
+<div class="section profile-card">
+
+<div class="big-avatar" id="profileAvatar">C</div>
+
+<h2 id="profileName">Customer</h2>
+
+<p id="profilePhone"></p>
+
+<p id="profileEmail"></p>
+
+<hr>
+
+<button class="primary" onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</div>
+
+
+<div class="bottom hidden" id="bottomNav">
+
+<button id="homeBtn" class="active" onclick="showPage('home')">
+<span>🏠</span>
+Home
+</button>
+
+<button id="bookingsBtn" onclick="showPage('bookings')">
+<span>📅</span>
+Bookings
+</button>
+
+<button id="profileBtn" onclick="showPage('profile')">
+<span>👤</span>
+Profile
+</button>
+
+</div>
 
 
 <script type="module">
@@ -785,762 +821,686 @@ import {initializeApp}
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
 import {
- getAuth,
- RecaptchaVerifier,
- signInWithPhoneNumber,
- onAuthStateChanged,
- signOut
+getAuth,
+RecaptchaVerifier,
+signInWithPhoneNumber,
+onAuthStateChanged,
+signOut
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
 
 import {
- getFirestore,
- doc,
- setDoc,
- getDoc,
- collection,
- addDoc,
- query,
- where,
- getDocs,
- orderBy
+getFirestore,
+doc,
+setDoc,
+getDoc,
+collection,
+addDoc,
+query,
+where,
+getDocs,
+orderBy
 }
 from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-/* ================= FIREBASE ================= */
-
 const firebaseConfig={
- apiKey:"AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
- authDomain:"homora-41400.firebaseapp.com",
- projectId:"homora-41400",
- storageBucket:"homora-41400.firebasestorage.app",
- messagingSenderId:"252376803932",
- appId:"1:252376803932:web:595c23360a014a0cfc9499"
+apiKey:"AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6fFRec",
+authDomain:"homora-41400.firebaseapp.com",
+projectId:"homora-41400",
+storageBucket:"homora-41400.firebasestorage.app",
+messagingSenderId:"252376803932",
+appId:"1:252376803932:web:595c23360a014a0cfc9499"
 };
 
 const app=initializeApp(firebaseConfig);
 const auth=getAuth(app);
 const db=getFirestore(app);
 
-
-/* ================= GLOBAL ================= */
-
 let confirmationResult=null;
-let recaptchaVerifier=null;
-let currentUser=null;
-let selectedService="Cleaning";
+let currentCustomer=null;
+let selectedService="";
 let latitude=null;
 let longitude=null;
 
-const PRICE=250;
-const UPI_ID="8446060669@ptyes";
+
+/* UPI QR */
+
+const upiString=
+"upi://pay?pa=8446060669@ptyes&pn=HOMORA&am=250&cu=INR";
+
+document.getElementById("qrImage").src=
+"https://api.qrserver.com/v1/create-qr-code/?size=400x400&data="
++encodeURIComponent(upiString);
 
 
-/* ================= UI ================= */
+/* DATE */
 
-window.showPage=function(page){
-
- if(!currentUser){
-   if(page!=="login"){
-     page="login";
-   }
- }
-
- document.querySelectorAll(".page").forEach(p=>{
-   p.classList.remove("active");
- });
-
- if(page==="home")
-   document.getElementById("homePage").classList.add("active");
-
- if(page==="bookings"){
-   document.getElementById("bookingsPage").classList.add("active");
-   loadBookings();
- }
-
- if(page==="profile")
-   document.getElementById("profilePage").classList.add("active");
-
- if(page==="login")
-   document.getElementById("loginPage").classList.add("active");
-
- document.querySelectorAll(".nav button").forEach(b=>{
-   b.classList.remove("active");
- });
-
- if(page==="home")
-   document.querySelectorAll(".nav button")[0].classList.add("active");
-
- if(page==="bookings")
-   document.querySelectorAll(".nav button")[1].classList.add("active");
-
- if(page==="profile")
-   document.querySelectorAll(".nav button")[2].classList.add("active");
-};
+document.getElementById("date").min=
+new Date().toISOString().split("T")[0];
 
 
-/* ================= LOGIN ================= */
+/* OTP */
 
 window.sendOTP=async function(){
 
- const phone=document.getElementById("phone").value.trim();
+const phone=document.getElementById("phone").value.trim();
 
- if(!/^[0-9]{10}$/.test(phone)){
-   showMsg("Enter a valid 10 digit mobile number.");
-   return;
- }
+if(!/^[0-9]{10}$/.test(phone)){
+showAuthMsg("Enter valid 10 digit mobile number.","error");
+return;
+}
 
- try{
+try{
 
-   if(!recaptchaVerifier){
-     recaptchaVerifier=new RecaptchaVerifier(
-       auth,
-       "recaptcha-container",
-       {
-         size:"invisible"
-       }
-     );
-   }
+if(!window.recaptchaVerifier){
 
-   confirmationResult=await signInWithPhoneNumber(
-     auth,
-     "+91"+phone,
-     recaptchaVerifier
-   );
-
-   document.getElementById("phoneStep").classList.add("hidden");
-   document.getElementById("otpStep").classList.remove("hidden");
-
-   showMsg("OTP sent successfully ✅");
-
- }catch(e){
-
-   showMsg("❌ "+e.message);
-
- }
-};
-
-
-window.verifyOTP=async function(){
-
- const otp=document.getElementById("otp").value.trim();
-
- if(otp.length<6){
-   showMsg("Enter the 6 digit OTP.");
-   return;
- }
-
- try{
-
-   await confirmationResult.confirm(otp);
-
- }catch(e){
-
-   showMsg("❌ Invalid OTP. Please try again.");
-
- }
-
-};
-
-
-function showMsg(text){
-
- document.getElementById("loginMsg").innerText=text;
+window.recaptchaVerifier=new RecaptchaVerifier(
+auth,
+"authPage",
+{
+size:"invisible"
+}
+);
 
 }
 
+confirmationResult=
+await signInWithPhoneNumber(
+auth,
+"+91"+phone,
+window.recaptchaVerifier
+);
 
-/* ================= AUTH STATE ================= */
+document.getElementById("otpBox")
+.classList.remove("hidden");
+
+showAuthMsg(
+"OTP sent successfully to your mobile.",
+"success"
+);
+
+}catch(e){
+
+showAuthMsg(
+"OTP error: "+e.message,
+"error"
+);
+
+}
+
+};
+
+
+/* VERIFY */
+
+window.verifyOTP=async function(){
+
+const code=document.getElementById("otp").value.trim();
+
+if(code.length!==6){
+showAuthMsg("Enter 6 digit OTP.","error");
+return;
+}
+
+try{
+
+const result=
+await confirmationResult.confirm(code);
+
+const user=result.user;
+
+const snap=
+await getDoc(doc(db,"customers",user.uid));
+
+if(!snap.exists()){
+
+document.getElementById("newCustomerBox")
+.classList.remove("hidden");
+
+}else{
+
+currentCustomer=snap.data();
+showHome();
+
+}
+
+}catch(e){
+
+showAuthMsg(
+"Invalid OTP: "+e.message,
+"error"
+);
+
+}
+
+};
+
+
+/* CREATE CUSTOMER */
+
+window.createCustomer=async function(){
+
+const name=
+document.getElementById("newName").value.trim();
+
+const gender=
+document.querySelector(
+'input[name="gender"]:checked'
+)?.value;
+
+if(!name||!gender){
+
+alert("Please enter name and gender.");
+return;
+
+}
+
+const user=auth.currentUser;
+
+const data={
+name:name,
+phone:user.phoneNumber||"",
+gender:gender,
+role:"customer",
+status:"active",
+createdAt:new Date().toISOString()
+};
+
+await setDoc(
+doc(db,"customers",user.uid),
+data
+);
+
+currentCustomer=data;
+
+document.getElementById("newCustomerBox")
+.classList.add("hidden");
+
+showHome();
+
+};
+
+
+/* AUTH STATE */
 
 onAuthStateChanged(auth,async user=>{
 
- if(!user){
-   currentUser=null;
-   return;
- }
+if(!user)return;
 
- currentUser=user;
+const snap=
+await getDoc(doc(db,"customers",user.uid));
 
- const ref=doc(db,"customers",user.uid);
- const snap=await getDoc(ref);
+if(snap.exists()){
 
- if(!snap.exists()){
+currentCustomer=snap.data();
+showHome();
 
-   await setDoc(ref,{
-     customerId:user.uid,
-     name:"",
-     phone:user.phoneNumber||"",
-     role:"customer",
-     status:"active",
-     createdAt:new Date().toISOString()
-   });
-
- }
-
- await loadCustomer();
-
- document.getElementById("loginPage").classList.remove("active");
- document.getElementById("homePage").classList.add("active");
-
- document.getElementById("bottomNav").classList.remove("hidden");
+}
 
 });
 
 
-/* ================= CUSTOMER ================= */
+/* WELCOME */
 
-async function loadCustomer(){
+function getGreeting(){
 
- if(!currentUser)return;
+if(!currentCustomer)return "Welcome, Customer 👋";
 
- const snap=await getDoc(
-   doc(db,"customers",currentUser.uid)
- );
+const name=currentCustomer.name||"Customer";
 
- if(!snap.exists())return;
+if(currentCustomer.gender==="male"){
+return "Welcome, Mr. "+name+" 👋";
+}
 
- const c=snap.data();
+if(currentCustomer.gender==="female"){
+return "Welcome, Miss "+name+" 👋";
+}
 
- const name=c.name||"Customer";
-
- document.getElementById("homeName").innerText=name;
-
- document.getElementById("profileName").value=c.name||"";
- document.getElementById("profilePhone").value=
-   c.phone||currentUser.phoneNumber||"";
-
- const initial=(name[0]||"C").toUpperCase();
-
- document.getElementById("profileInitial").innerText=initial;
- document.getElementById("bigInitial").innerText=initial;
+return "Welcome, "+name+" 👋";
 
 }
 
 
-window.saveProfile=async function(){
+/* HOME */
 
- if(!currentUser)return;
+function showHome(){
 
- const name=document.getElementById("profileName").value.trim();
+document.getElementById("authPage")
+.classList.add("hidden");
 
- if(!name){
-   alert("Enter your name.");
-   return;
- }
+document.getElementById("bottomNav")
+.classList.remove("hidden");
 
- try{
+document.getElementById("welcomeText")
+.innerText=getGreeting();
 
-   await setDoc(
-     doc(db,"customers",currentUser.uid),
-     {
-       name:name,
-       phone:currentUser.phoneNumber||"",
-       customerId:currentUser.uid,
-       role:"customer",
-       updatedAt:new Date().toISOString()
-     },
-     {merge:true}
-   );
+const initial=
+(currentCustomer?.name||"C")
+.charAt(0).toUpperCase();
 
-   await loadCustomer();
+document.getElementById("headerInitial")
+.innerText=initial;
 
-   toast("Profile saved successfully ✅");
+document.getElementById("profileAvatar")
+.innerText=initial;
 
- }catch(e){
+document.getElementById("profileName")
+.innerText=
+currentCustomer?.name||"Customer";
 
-   alert("❌ "+e.message);
+document.getElementById("profilePhone")
+.innerText=
+currentCustomer?.phone||auth.currentUser?.phoneNumber||"";
 
- }
+showPage("home");
+
+}
+
+
+/* PAGE */
+
+window.showPage=function(page){
+
+[
+"homePage",
+"bookingPage",
+"paymentPage",
+"bookingsPage",
+"profilePage"
+].forEach(id=>{
+document.getElementById(id).classList.add("hidden");
+});
+
+if(page==="home"){
+document.getElementById("homePage").classList.remove("hidden");
+}
+
+if(page==="booking"){
+document.getElementById("bookingPage").classList.remove("hidden");
+}
+
+if(page==="payment"){
+document.getElementById("paymentPage").classList.remove("hidden");
+}
+
+if(page==="bookings"){
+document.getElementById("bookingsPage").classList.remove("hidden");
+loadBookings();
+}
+
+if(page==="profile"){
+document.getElementById("profilePage").classList.remove("hidden");
+}
+
+document.querySelectorAll(".bottom button")
+.forEach(b=>b.classList.remove("active"));
+
+if(page==="home")
+document.getElementById("homeBtn").classList.add("active");
+
+if(page==="bookings")
+document.getElementById("bookingsBtn").classList.add("active");
+
+if(page==="profile")
+document.getElementById("profileBtn").classList.add("active");
 
 };
 
 
-/* ================= SERVICE ================= */
+/* START BOOKING */
 
-window.selectService=function(element){
+window.startBooking=function(service){
 
- document.querySelectorAll(".service").forEach(s=>{
-   s.classList.remove("active");
- });
+selectedService=service;
 
- element.classList.add("active");
+document.getElementById("bookingService")
+.innerText=service;
 
- selectedService=element.dataset.service;
+showPage("booking");
 
 };
 
 
-/* ================= LOCATION ================= */
+/* LOCATION */
 
 window.getLocation=function(){
 
- if(!navigator.geolocation){
-   alert("Location is not supported on this device.");
-   return;
- }
+if(!navigator.geolocation){
 
- document.getElementById("locationText").innerText=
-   "Getting your location...";
+document.getElementById("locationStatus")
+.innerText=
+"❌ Location is not supported.";
 
- navigator.geolocation.getCurrentPosition(
-   pos=>{
-
-     latitude=pos.coords.latitude;
-     longitude=pos.coords.longitude;
-
-     document.getElementById("locationText").innerText=
-       "📍 Live location added successfully";
-
-     toast("Location added 📍");
-
-   },
-   err=>{
-
-     document.getElementById("locationText").innerText=
-       "Location permission denied.";
-
-     alert("Please allow location permission.");
-
-   },
-   {
-     enableHighAccuracy:true,
-     timeout:15000
-   }
- );
-
-};
-
-
-/* ================= PAYMENT ================= */
-
-window.openPayment=function(){
-
- if(!currentUser){
-   alert("Please login first.");
-   return;
- }
-
- const date=document.getElementById("bookingDate").value;
- const time=document.getElementById("bookingTime").value;
- const apartment=document.getElementById("apartment").value.trim();
- const room=document.getElementById("room").value.trim();
-
- if(!date||!time||!apartment||!room){
-
-   alert(
-     "Please fill date, time, apartment/building and room number."
-   );
-
-   return;
- }
-
- document.getElementById("paymentMsg").innerText="";
- document.getElementById("transactionId").value="";
-
- document.getElementById("paymentModal")
-   .classList.remove("hidden");
-
- createQR();
-
-};
-
-
-window.closePayment=function(){
-
- document.getElementById("paymentModal")
-   .classList.add("hidden");
-
-};
-
-
-/* QR generated from HOMORA UPI ID */
-
-function createQR(){
-
- const qr=document.getElementById("qr");
-
- qr.innerHTML="";
-
- const upi=
-   "upi://pay?pa="+
-   encodeURIComponent(UPI_ID)+
-   "&pn="+
-   encodeURIComponent("HOMORA")+
-   "&am=250&cu=INR&tn="+
-   encodeURIComponent("HOMORA Home Service");
-
- const img=document.createElement("img");
-
- img.alt="HOMORA UPI QR";
- img.src=
- "https://api.qrserver.com/v1/create-qr-code/?size=320x320&margin=10&data="+
- encodeURIComponent(upi);
-
- qr.appendChild(img);
+return;
 
 }
 
+document.getElementById("locationStatus")
+.innerText=
+"📍 Getting your location...";
+
+navigator.geolocation.getCurrentPosition(
+position=>{
+
+latitude=position.coords.latitude;
+longitude=position.coords.longitude;
+
+document.getElementById("locationStatus")
+.innerText=
+"✅ Live location added successfully.";
+
+},
+error=>{
+
+document.getElementById("locationStatus")
+.innerText=
+"❌ Please allow location permission.";
+
+},
+{
+enableHighAccuracy:true,
+timeout:10000
+}
+);
+
+};
+
+
+/* PAYMENT */
+
+window.goToPayment=function(){
+
+const apartment=
+document.getElementById("apartment").value.trim();
+
+const room=
+document.getElementById("room").value.trim();
+
+const floor=
+document.getElementById("floor").value.trim();
+
+const address=
+document.getElementById("address").value.trim();
+
+const date=
+document.getElementById("date").value;
+
+const time=
+document.getElementById("time").value;
+
+if(!apartment||!room||!floor||!address||!date||!time){
+
+alert("Please fill all booking details.");
+return;
+
+}
+
+if(latitude===null||longitude===null){
+
+alert("Please add your live location first.");
+return;
+
+}
+
+document.getElementById("paymentMsg").innerText="";
+
+showPage("payment");
+
+};
+
+
+/* OPEN UPI */
 
 window.openUPI=function(){
 
- const upi=
-   "upi://pay?pa="+
-   encodeURIComponent(UPI_ID)+
-   "&pn="+
-   encodeURIComponent("HOMORA")+
-   "&am=250&cu=INR&tn="+
-   encodeURIComponent("HOMORA Home Service");
-
- window.location.href=upi;
+window.location.href=upiString;
 
 };
 
 
-/* ================= BOOKING ================= */
+/* CONFIRM BOOKING */
 
-window.submitBooking=async function(){
+window.confirmPaymentAndBooking=async function(){
 
- if(!currentUser)return;
+const user=auth.currentUser;
 
- const transactionId=
-   document.getElementById("transactionId")
-   .value.trim();
+if(!user){
 
- if(!transactionId){
+alert("Please login first.");
+return;
 
-   document.getElementById("paymentMsg").innerText=
-     "Please enter your UPI Transaction / UTR ID.";
+}
 
-   return;
- }
+const btn=event?.target;
 
- const apartment=
-   document.getElementById("apartment").value.trim();
+try{
 
- const room=
-   document.getElementById("room").value.trim();
+if(btn)btn.disabled=true;
 
- const floor=
-   document.getElementById("floor").value.trim();
+document.getElementById("paymentMsg")
+.innerText="Creating your booking...";
 
- const date=
-   document.getElementById("bookingDate").value;
+const apartment=
+document.getElementById("apartment").value.trim();
 
- const time=
-   document.getElementById("bookingTime").value;
+const room=
+document.getElementById("room").value.trim();
 
- const hours=
-   Number(document.getElementById("hours").value);
+const floor=
+document.getElementById("floor").value.trim();
 
- const instructions=
-   document.getElementById("instructions").value.trim();
+const address=
+document.getElementById("address").value.trim();
 
+const date=
+document.getElementById("date").value;
 
- try{
+const time=
+document.getElementById("time").value;
 
-   const customerSnap=
-     await getDoc(
-       doc(db,"customers",currentUser.uid)
-     );
+const hours=
+Number(document.getElementById("hours").value);
 
-   const customer=
-     customerSnap.exists()
-     ? customerSnap.data()
-     : {};
+const bookingData={
 
-   const booking={
-     customerId:currentUser.uid,
+customerId:user.uid,
 
-     customerName:
-       customer.name||"Customer",
+customerName:
+currentCustomer?.name||"Customer",
 
-     customerPhone:
-       customer.phone||currentUser.phoneNumber||"",
+customerPhone:
+currentCustomer?.phone||user.phoneNumber||"",
 
-     service:selectedService,
+service:selectedService,
 
-     price:PRICE,
+amount:250,
 
-     hours:hours,
+paymentStatus:"customer_confirmed",
 
-     date:date,
+paymentMethod:"UPI",
 
-     time:time,
+apartment:apartment,
 
-     apartment:apartment,
+roomNumber:room,
 
-     room:room,
+floor:floor,
 
-     floor:floor,
+address:address,
 
-     address:
-       apartment+
-       ", Room "+room+
-       (floor ? ", "+floor : ""),
+latitude:latitude,
 
-     instructions:instructions,
+longitude:longitude,
 
-     latitude:latitude,
-     longitude:longitude,
+locationText:
+`${apartment}, Room ${room}, ${floor}, ${address}`,
 
-     locationAvailable:
-       latitude!==null&&longitude!==null,
+bookingDate:date,
 
-     paymentMethod:"UPI",
+bookingTime:time,
 
-     paymentAmount:PRICE,
+hours:hours,
 
-     transactionId:transactionId,
+workerId:"",
 
-     paymentStatus:"submitted",
+workerName:"",
 
-     status:"pending",
+status:"pending",
 
-     workerId:"",
+createdAt:new Date().toISOString(),
 
-     workerName:"",
+paymentConfirmedAt:new Date().toISOString()
 
-     createdAt:new Date().toISOString()
+};
 
-   };
+const ref=
+await addDoc(
+collection(db,"bookings"),
+bookingData
+);
 
+document.getElementById("paymentMsg")
+.innerHTML=
+"✅ Booking confirmed!<br>Booking ID: "+ref.id;
 
-   const ref=
-     await addDoc(
-       collection(db,"bookings"),
-       booking
-     );
+setTimeout(()=>{
+showPage("bookings");
+},1200);
 
+}catch(e){
 
-   closePayment();
+document.getElementById("paymentMsg")
+.innerText="❌ "+e.message;
 
-   document.getElementById("successBookingId")
-     .innerText=ref.id.substring(0,10);
+if(btn)btn.disabled=false;
 
-   document.getElementById("successService")
-     .innerText=selectedService;
-
-   document.getElementById("successModal")
-     .classList.remove("hidden");
-
- }catch(e){
-
-   document.getElementById("paymentMsg").innerText=
-     "❌ "+e.message;
-
- }
+}
 
 };
 
 
-window.closeSuccess=function(){
-
- document.getElementById("successModal")
-   .classList.add("hidden");
-
- showPage("bookings");
-
-};
-
-
-/* ================= BOOKING HISTORY ================= */
+/* BOOKINGS */
 
 async function loadBookings(){
 
- if(!currentUser)return;
+const box=
+document.getElementById("myBookings");
 
- const box=document.getElementById("bookingList");
+box.innerHTML="Loading bookings...";
 
- box.innerHTML="Loading bookings...";
+try{
 
- try{
+const user=auth.currentUser;
 
-   const q=query(
-     collection(db,"bookings"),
-     where("customerId","==",currentUser.uid)
-   );
+if(!user)return;
 
-   const snap=await getDocs(q);
+const q=query(
+collection(db,"bookings"),
+where("customerId","==",user.uid)
+);
 
-   if(snap.empty){
+const snap=await getDocs(q);
 
-     box.innerHTML=
-       '<div style="text-align:center;padding:30px;color:#999">No bookings yet.<br><br>Book your first HOMORA service.</div>';
+if(snap.empty){
 
-     return;
-   }
+box.innerHTML=
+"<div class='notice'>No bookings yet.</div>";
 
-   let arr=[];
+return;
 
-   snap.forEach(d=>{
-     arr.push({
-       id:d.id,
-       ...d.data()
-     });
-   });
+}
 
-   arr.sort((a,b)=>
-     String(b.createdAt||"")
-     .localeCompare(String(a.createdAt||""))
-   );
+let html="";
 
-   let html="";
+snap.forEach(item=>{
 
-   arr.forEach(b=>{
+const b=item.data();
 
-     const status=
-       String(b.status||"pending").toLowerCase();
+html+=`
 
-     const step=
-       status==="completed" ? 5 :
-       status==="work_started" ? 4 :
-       status==="on_the_way" ? 3 :
-       status==="accepted" ? 2 : 1;
+<div class="booking-card">
 
-     html+=`
+<h3>${escapeHtml(b.service||"Home Service")}</h3>
 
-     <div class="booking">
+<p>📅 ${escapeHtml(b.bookingDate||"-")}
+ ${escapeHtml(b.bookingTime||"")}</p>
 
-       <h3>
-         ${serviceIcon(b.service)}
-         ${escapeHTML(b.service||"Home Service")}
-       </h3>
+<p>⏱️ ${b.hours||"-"} Hours</p>
 
-       <p>📅 ${escapeHTML(b.date||"-")}
-       at ${escapeHTML(b.time||"-")}</p>
+<p>🏢 ${escapeHtml(b.apartment||"-")}</p>
 
-       <p>⏱️ ${b.hours||"-"} Hours</p>
+<p>🚪 Room: ${escapeHtml(b.roomNumber||"-")}</p>
 
-       <p>🏢 ${escapeHTML(b.apartment||"-")}</p>
+<p>📍 ${escapeHtml(b.floor||"")}</p>
 
-       <p>🚪 Room ${escapeHTML(b.room||"-")}
-       ${b.floor ? " • "+escapeHTML(b.floor):""}</p>
+<p>💰 ₹${b.amount||250}</p>
 
-       <p>💰 ₹${b.price||250}</p>
+<p>
+<span class="status">
+${escapeHtml(b.status||"pending")}
+</span>
+</p>
 
-       <p>
-         👷 Worker:
-         <b>${escapeHTML(b.workerName||"Not assigned yet")}</b>
-       </p>
+<p>
+👷 Worker:
+<b>${escapeHtml(b.workerName||"Not assigned yet")}</b>
+</p>
 
-       <p>
-         Status:
-         <span class="badge ${status==="completed"?"success":status==="accepted"?"blue":""}">
-           ${escapeHTML(status)}
-         </span>
-       </p>
+</div>
 
-       <div class="timeline">
+`;
 
-         <div class="step ${step>=1?"done":""}">
-           1. Booking Received
-         </div>
+});
 
-         <div class="step ${step>=2?"done":""}">
-           2. Worker Assigned
-         </div>
+box.innerHTML=html;
 
-         <div class="step ${step>=3?"done":""}">
-           3. Worker On The Way
-         </div>
+}catch(e){
 
-         <div class="step ${step>=4?"done":""}">
-           4. Work Started
-         </div>
+box.innerHTML=
+"❌ "+e.message;
 
-         <div class="step ${step>=5?"done":""}">
-           5. Completed
-         </div>
-
-       </div>
-
-     </div>
-
-     `;
-
-   });
-
-   box.innerHTML=html;
-
- }catch(e){
-
-   box.innerHTML="❌ "+e.message;
-
- }
+}
 
 }
 
 
-function serviceIcon(service){
-
- const icons={
-   Cleaning:"🧹",
-   Cooking:"👨‍🍳",
-   Utensils:"🍽️",
-   Laundry:"👕",
-   Dusting:"✨",
-   Mopping:"🧽",
-   "House Help":"🏠",
-   "Other Home Work":"🛠️"
- };
-
- return icons[service]||"🏠";
-
-}
-
-
-function escapeHTML(value){
-
- return String(value||"")
- .replace(/&/g,"&amp;")
- .replace(/</g,"&lt;")
- .replace(/>/g,"&gt;")
- .replace(/"/g,"&quot;")
- .replace(/'/g,"&#039;");
-
-}
-
-
-/* ================= LOGOUT ================= */
+/* LOGOUT */
 
 window.logout=async function(){
 
- await signOut(auth);
- location.reload();
+await signOut(auth);
+
+location.reload();
 
 };
 
 
-/* ================= HELPERS ================= */
+/* MESSAGE */
 
-function toast(text){
+function showAuthMsg(text,type){
 
- const el=document.getElementById("toast");
+const el=document.getElementById("authMsg");
 
- el.innerText=text;
- el.classList.remove("hidden");
+el.innerText=text;
 
- setTimeout(()=>{
-   el.classList.add("hidden");
- },3000);
+el.className=
+type==="success"?"success":"error";
 
 }
 
 
-/* ================= DEFAULT DATE ================= */
+/* SECURITY DISPLAY */
 
-const today=
- new Date().toISOString().split("T")[0];
+function escapeHtml(value){
 
-document.getElementById("bookingDate").min=today;
-document.getElementById("bookingDate").value=today;
+return String(value)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
 
-
-/* ================= INITIAL PROFILE ================= */
-
-document.getElementById("profilePhone").value="";
-
+}
 
 </script>
 
