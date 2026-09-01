@@ -2,883 +2,2029 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HOMORA CEO Dashboard</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#111827">
+<title>HOMORA — Home Services</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial, sans-serif;
-}
-
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
-    background:#f4f6f9;
-    color:#111827;
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:#f7f8fc;
+  color:#111827;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+:root{
+  --dark:#111827;
+  --purple:#6d28d9;
+  --purple2:#8b5cf6;
+  --light:#f3efff;
+  --green:#16a34a;
+  --red:#dc2626;
+  --muted:#6b7280;
 }
 
+/* HEADER */
 .header{
-    height:65px;
-    background:#111827;
-    color:white;
-    display:flex;
-    align-items:center;
-    padding:0 18px;
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:1000;
+  position:sticky;
+  top:0;
+  z-index:100;
+  height:68px;
+  background:rgba(255,255,255,.94);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid #eee;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
 }
 
-.menu-btn{
-    width:42px;
-    height:42px;
-    border:0;
-    background:transparent;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:6px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
 
-.menu-btn span{
-    display:block;
-    width:25px;
-    height:3px;
-    background:white;
-    border-radius:5px;
+.logo-art{
+  width:42px;
+  height:42px;
+  border-radius:14px;
+  background:linear-gradient(135deg,#111827,#6d28d9);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:21px;
+  font-weight:900;
+  box-shadow:0 8px 20px #6d28d933;
 }
 
-.logo{
-    margin-left:15px;
-    font-size:22px;
-    font-weight:bold;
+.brand-name{
+  font-size:21px;
+  font-weight:900;
+  letter-spacing:.5px;
 }
 
-.logo small{
-    display:block;
-    font-size:10px;
-    color:#9ca3af;
-    letter-spacing:2px;
+.brand-sub{
+  display:block;
+  font-size:9px;
+  color:#8b5cf6;
+  letter-spacing:2px;
+  margin-top:1px;
 }
 
-.sidebar{
-    position:fixed;
-    top:65px;
-    left:-280px;
-    width:280px;
-    height:calc(100vh - 65px);
-    background:#1f2937;
-    color:white;
-    z-index:999;
-    transition:.3s;
-    padding:20px 12px;
-    overflow-y:auto;
+.profile-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:0;
+  background:#ede9fe;
+  color:#6d28d9;
+  font-weight:900;
 }
 
-.sidebar.active{
-    left:0;
+/* AUTH */
+.auth-wrap{
+  min-height:calc(100vh - 68px);
+  padding:25px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 
-.menu-title{
-    font-size:12px;
-    color:#9ca3af;
-    margin:5px 12px 12px;
-    text-transform:uppercase;
+.auth-box{
+  width:100%;
+  max-width:450px;
+  background:white;
+  border-radius:28px;
+  padding:25px;
+  box-shadow:0 15px 45px #00000012;
 }
 
-.menu-item{
-    padding:14px 15px;
-    margin:5px 0;
-    border-radius:10px;
-    cursor:pointer;
-    font-size:15px;
+.auth-logo{
+  text-align:center;
+  margin-bottom:22px;
 }
 
-.menu-item:hover{
-    background:#374151;
+.auth-logo .big{
+  width:72px;
+  height:72px;
+  margin:auto;
+  border-radius:24px;
+  background:linear-gradient(135deg,#111827,#7c3aed);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+  font-weight:900;
 }
 
-.menu-item.active{
-    background:#2563eb;
+.auth-logo h1{
+  margin:12px 0 4px;
+  font-size:28px;
 }
 
-.overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.45);
-    display:none;
-    z-index:998;
-}
-
-.overlay.active{
-    display:block;
-}
-
-.main{
-    padding:90px 18px 30px;
-    max-width:1200px;
-    margin:auto;
-}
-
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-.page-title{
-    font-size:27px;
-    font-weight:bold;
-    margin-bottom:6px;
-}
-
-.page-subtitle{
-    color:#6b7280;
-    margin-bottom:20px;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:15px;
-    margin-bottom:22px;
-}
-
-.card{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 3px 12px rgba(0,0,0,.06);
-}
-
-.card h4{
-    color:#6b7280;
-    font-size:13px;
-    margin-bottom:8px;
-}
-
-.card .number{
-    font-size:27px;
-    font-weight:bold;
-}
-
-.section{
-    background:white;
-    padding:20px;
-    border-radius:15px;
-    margin-bottom:20px;
-    box-shadow:0 3px 12px rgba(0,0,0,.05);
-}
-
-.section h3{
-    margin-bottom:15px;
-}
-
-.btn{
-    border:0;
-    padding:10px 15px;
-    border-radius:8px;
-    cursor:pointer;
-    background:#2563eb;
-    color:white;
-    font-weight:bold;
-}
-
-.btn.green{
-    background:#16a34a;
-}
-
-.btn.red{
-    background:#dc2626;
-}
-
-.btn.gray{
-    background:#6b7280;
-}
-
-.table-wrap{
-    overflow-x:auto;
-}
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:600px;
-}
-
-th,td{
-    padding:13px;
-    border-bottom:1px solid #e5e7eb;
-    text-align:left;
-    font-size:14px;
-}
-
-th{
-    background:#f9fafb;
-}
-
-.status{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-.pending{
-    background:#fef3c7;
-    color:#92400e;
-}
-
-.success{
-    background:#dcfce7;
-    color:#166534;
-}
-
-.active-status{
-    background:#dbeafe;
-    color:#1d4ed8;
-}
-
-.danger{
-    background:#fee2e2;
-    color:#991b1b;
-}
-
-.profile{
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.avatar{
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    background:#2563eb;
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:25px;
-    font-weight:bold;
+.auth-logo p{
+  margin:0;
+  color:var(--muted);
 }
 
 .input{
-    width:100%;
-    padding:12px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    margin:7px 0 14px;
-    outline:none;
+  width:100%;
+  padding:14px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  outline:none;
+  margin:6px 0 12px;
+  background:#fff;
 }
 
-.grid2{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:15px;
+.input:focus{
+  border-color:#8b5cf6;
+  box-shadow:0 0 0 3px #8b5cf622;
 }
 
-.referral-box{
-    padding:18px;
-    border:2px dashed #2563eb;
-    border-radius:12px;
-    background:#eff6ff;
+.primary{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:14px;
+  background:linear-gradient(135deg,#6d28d9,#4f46e5);
+  color:white;
+  font-weight:800;
 }
 
-.money{
-    color:#16a34a;
-    font-weight:bold;
+.secondary{
+  width:100%;
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:14px;
+  background:white;
+  color:#111827;
+  font-weight:700;
 }
 
-.empty{
-    text-align:center;
-    color:#9ca3af;
-    padding:30px;
+.msg{
+  margin-top:12px;
+  font-weight:700;
+  text-align:center;
+  min-height:20px;
 }
 
-@media(max-width:600px){
-    .main{
-        padding:85px 12px 25px;
-    }
+/* APP */
+.app{
+  max-width:760px;
+  margin:auto;
+  padding:18px 15px 100px;
+}
 
-    .page-title{
-        font-size:23px;
-    }
+.hero{
+  background:linear-gradient(135deg,#111827,#5b21b6,#7c3aed);
+  color:white;
+  padding:25px 21px;
+  border-radius:26px;
+  box-shadow:0 15px 35px #4c1d9540;
+  margin-bottom:18px;
+}
 
-    .card{
-        padding:16px;
-    }
+.hero h1{
+  margin:0 0 8px;
+  font-size:28px;
+}
+
+.hero p{
+  margin:0;
+  opacity:.88;
+  line-height:1.45;
+}
+
+.section-title{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin:20px 3px 12px;
+}
+
+.section-title h2{
+  font-size:20px;
+  margin:0;
+}
+
+.section-title button{
+  border:0;
+  background:transparent;
+  color:#6d28d9;
+  font-weight:800;
+}
+
+/* SERVICES */
+.services{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.service{
+  background:white;
+  border:1px solid #eee;
+  border-radius:20px;
+  padding:18px 14px;
+  box-shadow:0 6px 20px #00000008;
+  transition:.2s;
+}
+
+.service:active{
+  transform:scale(.97);
+}
+
+.service-icon{
+  width:52px;
+  height:52px;
+  border-radius:17px;
+  background:#f1edff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  margin-bottom:10px;
+}
+
+.service h3{
+  margin:0 0 5px;
+  font-size:16px;
+}
+
+.service p{
+  margin:0;
+  color:#6b7280;
+  font-size:12px;
+  line-height:1.4;
+}
+
+/* CARDS */
+.card{
+  background:white;
+  border-radius:22px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:0 6px 22px #00000009;
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.badge{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:800;
+  background:#ede9fe;
+  color:#6d28d9;
+}
+
+.booking-card{
+  border:1px solid #eee;
+  border-radius:18px;
+  padding:15px;
+  background:white;
+  margin-bottom:11px;
+}
+
+.booking-card h3{
+  margin:0 0 8px;
+}
+
+.booking-card p{
+  margin:6px 0;
+  font-size:14px;
+}
+
+/* BOOKING */
+.stepbar{
+  display:flex;
+  gap:6px;
+  margin-bottom:17px;
+}
+
+.step{
+  height:5px;
+  flex:1;
+  border-radius:10px;
+  background:#e5e7eb;
+}
+
+.step.active{
+  background:#6d28d9;
+}
+
+.booking-panel{
+  background:white;
+  border-radius:24px;
+  padding:20px;
+  box-shadow:0 8px 28px #0000000b;
+}
+
+.booking-panel h2{
+  margin-top:0;
+}
+
+.field-label{
+  font-size:13px;
+  font-weight:800;
+  margin-top:12px;
+  display:block;
+}
+
+textarea.input{
+  min-height:90px;
+  resize:vertical;
+}
+
+.location-box{
+  background:#f5f3ff;
+  border:1px dashed #8b5cf6;
+  padding:14px;
+  border-radius:15px;
+  margin:10px 0;
+}
+
+.location-btn{
+  border:0;
+  padding:11px 13px;
+  border-radius:12px;
+  background:#6d28d9;
+  color:white;
+  font-weight:800;
+}
+
+.choice-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+
+.choice{
+  padding:13px;
+  border:1px solid #ddd;
+  border-radius:13px;
+  background:white;
+  text-align:left;
+}
+
+.choice.selected{
+  border:2px solid #6d28d9;
+  background:#f5f3ff;
+}
+
+.total-box{
+  background:#111827;
+  color:white;
+  border-radius:17px;
+  padding:17px;
+  margin:17px 0;
+}
+
+.total-box .amount{
+  font-size:25px;
+  font-weight:900;
+}
+
+/* STATUS */
+.status-track{
+  margin:20px 0;
+}
+
+.status-line{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.status-dot{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#e5e7eb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:none;
+}
+
+.status-line.active .status-dot{
+  background:#6d28d9;
+  color:white;
+}
+
+.status-line.done .status-dot{
+  background:#16a34a;
+  color:white;
+}
+
+/* NAV */
+.bottom-nav{
+  position:fixed;
+  left:50%;
+  bottom:12px;
+  transform:translateX(-50%);
+  width:min(94%,600px);
+  background:rgba(17,24,39,.96);
+  border-radius:22px;
+  padding:8px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:5px;
+  z-index:200;
+  box-shadow:0 15px 35px #0004;
+}
+
+.nav-btn{
+  border:0;
+  background:transparent;
+  color:#9ca3af;
+  padding:9px 3px;
+  border-radius:15px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.nav-btn.active{
+  background:#6d28d9;
+  color:white;
+}
+
+/* PROFILE */
+.profile-top{
+  text-align:center;
+  padding:15px;
+}
+
+.profile-avatar{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#6d28d9,#4f46e5);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:900;
+  margin:0 auto 12px;
+}
+
+.info-row{
+  display:flex;
+  justify-content:space-between;
+  padding:13px 0;
+  border-bottom:1px solid #eee;
+  gap:15px;
+}
+
+.info-row:last-child{border-bottom:0}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:500;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+}
+
+.modal-box{
+  width:min(760px,100%);
+  background:white;
+  border-radius:25px 25px 0 0;
+  padding:22px;
+  max-height:90vh;
+  overflow:auto;
+}
+
+.close{
+  float:right;
+  border:0;
+  background:#f3f4f6;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  top:80px;
+  left:50%;
+  transform:translateX(-50%);
+  background:#111827;
+  color:white;
+  padding:13px 18px;
+  border-radius:14px;
+  z-index:1000;
+  box-shadow:0 10px 25px #0004;
+  font-weight:700;
+}
+
+@media(max-width:430px){
+  .hero h1{font-size:24px}
+  .services{gap:9px}
+  .service{padding:14px 11px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- AUTH SCREEN -->
+<div id="authScreen" class="auth-wrap">
+
+  <div class="auth-box">
+
+    <div class="auth-logo">
+      <div class="big">H</div>
+      <h1>HOMORA</h1>
+      <p>Your home. Our care.</p>
+    </div>
+
+    <div id="phoneStep">
+
+      <label class="field-label">Mobile Number</label>
+
+      <input
+        id="phoneInput"
+        class="input"
+        type="tel"
+        inputmode="numeric"
+        placeholder="+91 9876543210"
+      >
+
+      <button class="primary" onclick="sendOTP()">
+        Continue with Mobile
+      </button>
+
+      <p class="muted" style="font-size:12px;text-align:center;margin-top:13px">
+        We'll send a secure OTP to your mobile number.
+      </p>
+
+    </div>
+
+    <div id="otpStep" class="hidden">
+
+      <label class="field-label">Enter OTP</label>
+
+      <input
+        id="otpInput"
+        class="input"
+        type="tel"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="6 digit OTP"
+      >
+
+      <button class="primary" onclick="verifyOTP()">
+        Verify & Continue
+      </button>
+
+      <button class="secondary" style="margin-top:9px" onclick="backToPhone()">
+        Change Number
+      </button>
+
+    </div>
+
+    <p id="authMsg" class="msg"></p>
+
+  </div>
+</div>
+
+
+<!-- MAIN APP -->
+<div id="app" class="hidden">
+
 <header class="header">
 
-    <button class="menu-btn" onclick="toggleMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
+  <div class="brand">
+    <div class="logo-art">H</div>
 
-    <div class="logo">
-        HOMORA
-        <small>CEO PANEL</small>
+    <div>
+      <div class="brand-name">HOMORA</div>
+      <span class="brand-sub">HOME SERVICES</span>
     </div>
+  </div>
+
+  <button class="profile-btn" onclick="openPage('profile')">
+    <span id="headerInitial">H</span>
+  </button>
 
 </header>
 
-<!-- OVERLAY -->
-<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-<!-- SIDE MENU -->
-<nav class="sidebar" id="sidebar">
+<main class="app">
 
-    <div class="menu-title">CEO MENU</div>
+<!-- HOME -->
+<section id="homePage">
 
-    <div class="menu-item active" onclick="openPage('dashboard',this)">
-        🏠 Dashboard
+  <div class="hero">
+    <h1>Hi, <span id="homeName">there</span> 👋</h1>
+    <p>
+      Book trusted help for your everyday home needs.
+      Fast, simple and made for your home.
+    </p>
+  </div>
+
+  <div class="section-title">
+    <h2>What do you need?</h2>
+  </div>
+
+  <div class="services">
+
+    <div class="service" onclick="startBooking('Home Cleaning')">
+      <div class="service-icon">🧹</div>
+      <h3>Home Cleaning</h3>
+      <p>Complete home cleaning service</p>
     </div>
 
-    <div class="menu-item" onclick="openPage('customers',this)">
-        👥 Customers
+    <div class="service" onclick="startBooking('Cooking')">
+      <div class="service-icon">👩‍🍳</div>
+      <h3>Cooking</h3>
+      <p>Daily cooking & meal preparation</p>
     </div>
 
-    <div class="menu-item" onclick="openPage('workers',this)">
-        👷 Workers
+    <div class="service" onclick="startBooking('Utensil Washing')">
+      <div class="service-icon">🍽️</div>
+      <h3>Utensil Washing</h3>
+      <p>Kitchen utensil cleaning</p>
     </div>
 
-    <div class="menu-item" onclick="openPage('bookings',this)">
-        📅 Bookings
+    <div class="service" onclick="startBooking('Laundry')">
+      <div class="service-icon">👕</div>
+      <h3>Laundry</h3>
+      <p>Clothes washing & care</p>
     </div>
 
-    <div class="menu-item" onclick="openPage('payments',this)">
-        💰 Payments
+    <div class="service" onclick="startBooking('Dusting & Sweeping')">
+      <div class="service-icon">🧽</div>
+      <h3>Dusting & Sweeping</h3>
+      <p>Everyday home cleaning</p>
     </div>
 
-    <div class="menu-item" onclick="openPage('referrals',this)">
-        🎁 Referrals
+    <div class="service" onclick="startBooking('Full Home Care')">
+      <div class="service-icon">🏠</div>
+      <h3>Full Home Care</h3>
+      <p>Multiple household tasks</p>
     </div>
 
-    <div class="menu-item" onclick="openPage('reports',this)">
-        📊 Reports
-    </div>
+  </div>
 
-    <div class="menu-item" onclick="openPage('settings',this)">
-        ⚙️ Settings
-    </div>
+  <div class="section-title">
+    <h2>Latest Booking</h2>
+    <button onclick="openPage('bookingsPage')">View all</button>
+  </div>
 
-</nav>
-
-
-<main class="main">
-
-<!-- DASHBOARD -->
-<section id="dashboard" class="page active">
-
-    <div class="page-title">CEO Dashboard</div>
-    <div class="page-subtitle">Welcome to HOMORA management panel</div>
-
-    <div class="cards">
-
-        <div class="card">
-            <h4>Total Customers</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Total Workers</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Today's Bookings</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Total Revenue</h4>
-            <div class="number">₹0</div>
-        </div>
-
-    </div>
-
-    <div class="section">
-        <h3>Recent Bookings</h3>
-
-        <div class="table-wrap">
-            <table>
-                <tr>
-                    <th>Customer</th>
-                    <th>Service</th>
-                    <th>Worker</th>
-                    <th>Status</th>
-                </tr>
-
-                <tr>
-                    <td colspan="4" class="empty">
-                        No bookings yet
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+  <div id="latestBooking">
+    <div class="card muted">No bookings yet.</div>
+  </div>
 
 </section>
 
 
-<!-- CUSTOMERS -->
-<section id="customers" class="page">
+<!-- BOOKING -->
+<section id="bookingPage" class="hidden">
 
-    <div class="page-title">Customers</div>
-    <div class="page-subtitle">Manage HOMORA customers</div>
+  <div class="section-title">
+    <h2>Book Service</h2>
+    <button onclick="openPage('homePage')">Cancel</button>
+  </div>
 
-    <div class="cards">
+  <div class="stepbar">
+    <div class="step active" id="step1"></div>
+    <div class="step" id="step2"></div>
+    <div class="step" id="step3"></div>
+  </div>
 
-        <div class="card">
-            <h4>Total Customers</h4>
-            <div class="number">0</div>
-        </div>
+  <div class="booking-panel">
 
-        <div class="card">
-            <h4>Active Customers</h4>
-            <div class="number">0</div>
-        </div>
+    <h2 id="bookingServiceTitle">Service</h2>
+    <p class="muted">Tell us where and when you need help.</p>
 
-    </div>
+    <label class="field-label">Service duration</label>
 
-    <div class="section">
+    <div class="choice-grid">
 
-        <h3>Customer List</h3>
+      <button class="choice selected" id="hours2" onclick="selectHours(2)">
+        2 Hours
+      </button>
 
-        <div class="table-wrap">
+      <button class="choice" id="hours4" onclick="selectHours(4)">
+        4 Hours
+      </button>
 
-            <table>
+      <button class="choice" id="hours6" onclick="selectHours(6)">
+        6 Hours
+      </button>
 
-                <tr>
-                    <th>Name</th>
-                    <th>Phone</th>
-                    <th>Bookings</th>
-                    <th>Status</th>
-                </tr>
-
-                <tr>
-                    <td colspan="4" class="empty">
-                        No customers registered
-                    </td>
-                </tr>
-
-            </table>
-
-        </div>
+      <button class="choice" id="hours8" onclick="selectHours(8)">
+        8 Hours
+      </button>
 
     </div>
+
+    <label class="field-label">Apartment / Building Name</label>
+    <input id="apartment" class="input" placeholder="e.g. Green Valley Apartment">
+
+    <label class="field-label">Flat / Room Number</label>
+    <input id="roomNo" class="input" placeholder="e.g. A-203">
+
+    <label class="field-label">Full Address</label>
+    <textarea id="address" class="input" placeholder="Enter complete address"></textarea>
+
+    <div class="location-box">
+      <b>📍 Your live location</b>
+      <p id="locationText" class="muted" style="font-size:13px">
+        Location not added yet.
+      </p>
+
+      <button class="location-btn" onclick="getLocation()">
+        Use My Current Location
+      </button>
+    </div>
+
+    <label class="field-label">Date</label>
+    <input id="bookingDate" class="input" type="date">
+
+    <label class="field-label">Preferred Time</label>
+    <input id="bookingTime" class="input" type="time">
+
+    <label class="field-label">Special Instructions</label>
+    <textarea
+      id="instructions"
+      class="input"
+      placeholder="Anything the worker should know?"
+    ></textarea>
+
+    <div class="total-box">
+      <div>Total estimated price</div>
+      <div class="amount">₹<span id="totalPrice">0</span></div>
+      <small>Final price can depend on selected service/details.</small>
+    </div>
+
+    <button class="primary" onclick="reviewBooking()">
+      Review Booking →
+    </button>
+
+  </div>
 
 </section>
 
 
-<!-- WORKERS -->
-<section id="workers" class="page">
+<!-- REVIEW -->
+<section id="reviewPage" class="hidden">
 
-    <div class="page-title">Workers</div>
-    <div class="page-subtitle">Manage HOMORA workers</div>
+  <div class="section-title">
+    <h2>Confirm Booking</h2>
+    <button onclick="openPage('bookingPage')">Edit</button>
+  </div>
 
-    <div class="cards">
+  <div class="card">
 
-        <div class="card">
-            <h4>Total Workers</h4>
-            <div class="number">0</div>
-        </div>
+    <h3 id="reviewService"></h3>
 
-        <div class="card">
-            <h4>Active Workers</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Pending Verification</h4>
-            <div class="number">0</div>
-        </div>
-
+    <div class="info-row">
+      <span class="muted">Duration</span>
+      <b id="reviewHours"></b>
     </div>
 
-    <div class="section">
-
-        <h3>Worker Management</h3>
-
-        <div class="table-wrap">
-
-            <table>
-
-                <tr>
-                    <th>Worker</th>
-                    <th>Service</th>
-                    <th>Phone</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-
-                <tr>
-                    <td colspan="5" class="empty">
-                        No workers registered
-                    </td>
-                </tr>
-
-            </table>
-
-        </div>
-
+    <div class="info-row">
+      <span class="muted">Apartment</span>
+      <b id="reviewApartment"></b>
     </div>
+
+    <div class="info-row">
+      <span class="muted">Room / Flat</span>
+      <b id="reviewRoom"></b>
+    </div>
+
+    <div class="info-row">
+      <span class="muted">Address</span>
+      <b id="reviewAddress"></b>
+    </div>
+
+    <div class="info-row">
+      <span class="muted">Date</span>
+      <b id="reviewDate"></b>
+    </div>
+
+    <div class="info-row">
+      <span class="muted">Time</span>
+      <b id="reviewTime"></b>
+    </div>
+
+    <div class="info-row">
+      <span class="muted">Location</span>
+      <b id="reviewLocation">Not added</b>
+    </div>
+
+    <div class="total-box">
+      <div>Total</div>
+      <div class="amount">₹<span id="reviewTotal">0</span></div>
+    </div>
+
+    <button class="primary" onclick="confirmBooking()">
+      Confirm Booking
+    </button>
+
+  </div>
 
 </section>
 
 
 <!-- BOOKINGS -->
-<section id="bookings" class="page">
+<section id="bookingsPage" class="hidden">
 
-    <div class="page-title">Bookings</div>
-    <div class="page-subtitle">All HOMORA service bookings</div>
+  <div class="section-title">
+    <h2>My Bookings</h2>
+  </div>
 
-    <div class="cards">
-
-        <div class="card">
-            <h4>Today's Bookings</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Pending</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Completed</h4>
-            <div class="number">0</div>
-        </div>
-
-    </div>
-
-    <div class="section">
-
-        <h3>Booking List</h3>
-
-        <div class="table-wrap">
-
-            <table>
-
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Customer</th>
-                    <th>Service</th>
-                    <th>Worker</th>
-                    <th>Status</th>
-                </tr>
-
-                <tr>
-                    <td colspan="5" class="empty">
-                        No bookings available
-                    </td>
-                </tr>
-
-            </table>
-
-        </div>
-
-    </div>
+  <div id="bookingList">
+    <div class="card muted">Loading...</div>
+  </div>
 
 </section>
 
 
-<!-- PAYMENTS -->
-<section id="payments" class="page">
+<!-- PROFILE -->
+<section id="profilePage" class="hidden">
 
-    <div class="page-title">Payments</div>
-    <div class="page-subtitle">Manage payments and payment history</div>
+  <div class="section-title">
+    <h2>My Profile</h2>
+  </div>
 
-    <div class="cards">
+  <div class="card">
 
-        <div class="card">
-            <h4>Total Collection</h4>
-            <div class="number money">₹0</div>
-        </div>
+    <div class="profile-top">
+      <div class="profile-avatar" id="profileAvatar">H</div>
 
-        <div class="card">
-            <h4>Worker Payments</h4>
-            <div class="number">₹0</div>
-        </div>
+      <h2 id="profileName">Customer</h2>
 
-        <div class="card">
-            <h4>Pending Payments</h4>
-            <div class="number">₹0</div>
-        </div>
-
+      <p class="muted">
+        Customer ID:
+        <b id="customerId">—</b>
+      </p>
     </div>
 
-    <div class="section">
-
-        <h3>Payment History</h3>
-
-        <div class="table-wrap">
-
-            <table>
-
-                <tr>
-                    <th>Date</th>
-                    <th>Booking</th>
-                    <th>Customer</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                </tr>
-
-                <tr>
-                    <td colspan="5" class="empty">
-                        No payment history
-                    </td>
-                </tr>
-
-            </table>
-
-        </div>
-
+    <div class="info-row">
+      <span class="muted">Mobile</span>
+      <b id="profilePhone">—</b>
     </div>
 
-</section>
-
-
-<!-- REFERRALS -->
-<section id="referrals" class="page">
-
-    <div class="page-title">Worker Referrals</div>
-    <div class="page-subtitle">
-        Track successful worker referrals and rewards
+    <div class="info-row">
+      <span class="muted">Apartment</span>
+      <b id="profileApartment">—</b>
     </div>
 
-    <div class="cards">
-
-        <div class="card">
-            <h4>Total Referrals</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Successful Referrals</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Referral Rewards Paid</h4>
-            <div class="number money">₹0</div>
-        </div>
-
+    <div class="info-row">
+      <span class="muted">Room / Flat</span>
+      <b id="profileRoom">—</b>
     </div>
 
-    <div class="section">
+  </div>
 
-        <h3>Referral Rules</h3>
+  <div class="card">
 
-        <div class="referral-box">
+    <h3>Update Profile</h3>
 
-            <p>
-                A referral becomes
-                <b>Successful</b>
-                only after the referred worker completes
-                <b>1 month of work</b>.
-            </p>
+    <label class="field-label">Your Name</label>
+    <input id="profileNameInput" class="input" placeholder="Full Name">
 
-            <br>
+    <label class="field-label">Apartment / Building</label>
+    <input id="profileApartmentInput" class="input" placeholder="Apartment name">
 
-            <p>
-                CEO can manually approve and pay the referral reward.
-            </p>
+    <label class="field-label">Room / Flat No.</label>
+    <input id="profileRoomInput" class="input" placeholder="Flat / Room number">
 
-        </div>
+    <button class="primary" onclick="saveProfile()">
+      Save Profile
+    </button>
 
-    </div>
+  </div>
 
-    <div class="section">
-
-        <h3>Referral List</h3>
-
-        <div class="table-wrap">
-
-            <table>
-
-                <tr>
-                    <th>Referring Worker</th>
-                    <th>Referred Worker</th>
-                    <th>Joined</th>
-                    <th>1 Month Completed</th>
-                    <th>Status</th>
-                    <th>Reward</th>
-                </tr>
-
-                <tr>
-                    <td colspan="6" class="empty">
-                        No referrals yet
-                    </td>
-                </tr>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- REPORTS -->
-<section id="reports" class="page">
-
-    <div class="page-title">Reports</div>
-    <div class="page-subtitle">Business performance reports</div>
-
-    <div class="cards">
-
-        <div class="card">
-            <h4>Monthly Revenue</h4>
-            <div class="number money">₹0</div>
-        </div>
-
-        <div class="card">
-            <h4>Monthly Bookings</h4>
-            <div class="number">0</div>
-        </div>
-
-        <div class="card">
-            <h4>Completed Jobs</h4>
-            <div class="number">0</div>
-        </div>
-
-    </div>
-
-    <div class="section">
-
-        <h3>Business Summary</h3>
-
-        <div class="grid2">
-
-            <div>
-                <p>Customers</p>
-                <h2>0</h2>
-            </div>
-
-            <div>
-                <p>Workers</p>
-                <h2>0</h2>
-            </div>
-
-            <div>
-                <p>Bookings</p>
-                <h2>0</h2>
-            </div>
-
-            <div>
-                <p>Revenue</p>
-                <h2>₹0</h2>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- SETTINGS -->
-<section id="settings" class="page">
-
-    <div class="page-title">Settings</div>
-    <div class="page-subtitle">CEO account and HOMORA settings</div>
-
-    <div class="section">
-
-        <h3>CEO Profile</h3>
-
-        <div class="profile">
-
-            <div class="avatar">
-                C
-            </div>
-
-            <div>
-                <h3>HOMORA CEO</h3>
-                <p>CEO / Administrator</p>
-            </div>
-
-        </div>
-
-        <br>
-
-        <label>CEO Name</label>
-        <input class="input" type="text" placeholder="Enter CEO name">
-
-        <label>Email</label>
-        <input class="input" type="email" placeholder="Enter email">
-
-        <button class="btn" onclick="saveSettings()">
-            Save Changes
-        </button>
-
-    </div>
+  <div class="card">
+    <button
+      class="secondary"
+      onclick="logoutCustomer()"
+      style="color:#dc2626"
+    >
+      Logout
+    </button>
+  </div>
 
 </section>
 
 </main>
 
 
-<script>
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
 
-function toggleMenu(){
+  <button class="nav-btn active" id="navHome" onclick="openPage('homePage',this)">
+    🏠<br>Home
+  </button>
 
-    document.getElementById("sidebar").classList.toggle("active");
-    document.getElementById("overlay").classList.toggle("active");
+  <button class="nav-btn" id="navBookings" onclick="openPage('bookingsPage',this)">
+    📅<br>Bookings
+  </button>
 
+  <button class="nav-btn" onclick="startBooking('Full Home Care')">
+    ➕<br>Book
+  </button>
+
+  <button class="nav-btn" id="navProfile" onclick="openPage('profilePage',this)">
+    👤<br>Profile
+  </button>
+
+</nav>
+
+</div>
+
+
+<!-- BOOKING DETAILS MODAL -->
+<div id="bookingModal" class="modal hidden">
+
+  <div class="modal-box">
+
+    <button class="close" onclick="closeModal()">×</button>
+
+    <h2>Booking Details</h2>
+
+    <div id="modalContent"></div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+
+import {initializeApp}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  onAuthStateChanged,
+  signOut
 }
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  addDoc,
+  query,
+  where,
+  orderBy,
+  getDocs,
+  updateDoc
+}
+from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-function openPage(pageId, element){
+/* FIREBASE */
 
-    document.querySelectorAll(".page").forEach(function(page){
+const firebaseConfig={
+  apiKey:"AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
+  authDomain:"homora-41400.firebaseapp.com",
+  projectId:"homora-41400",
+  storageBucket:"homora-41400.firebasestorage.app",
+  messagingSenderId:"252376803932",
+  appId:"1:376803932:web:595c23360a014a0cfc9499"
+};
 
-        page.classList.remove("active");
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 
+
+/* STATE */
+
+let confirmationResult=null;
+let recaptchaVerifier=null;
+let workerLocation=null;
+
+let bookingData={
+  service:"",
+  hours:2,
+  price:0
+};
+
+
+/* AUTH */
+
+window.sendOTP=async function(){
+
+  const phone=document.getElementById("phoneInput").value.trim();
+
+  if(!phone){
+    showAuthMsg("Enter your mobile number.");
+    return;
+  }
+
+  let formatted=phone;
+
+  if(/^[0-9]{10}$/.test(phone)){
+    formatted="+91"+phone;
+  }
+
+  if(!/^\+[1-9][0-9]{7,14}$/.test(formatted)){
+    showAuthMsg("Enter a valid mobile number.");
+    return;
+  }
+
+  try{
+
+    showAuthMsg("Sending OTP...");
+
+    if(!recaptchaVerifier){
+
+      recaptchaVerifier=new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+          size:"invisible"
+        }
+      );
+
+    }
+
+    confirmationResult=
+      await signInWithPhoneNumber(
+        auth,
+        formatted,
+        recaptchaVerifier
+      );
+
+    document.getElementById("phoneStep").classList.add("hidden");
+    document.getElementById("otpStep").classList.remove("hidden");
+
+    showAuthMsg("OTP sent successfully.");
+
+  }catch(e){
+
+    console.error(e);
+    showAuthMsg("❌ "+friendlyFirebaseError(e));
+
+    if(recaptchaVerifier){
+      try{recaptchaVerifier.clear()}catch(x){}
+      recaptchaVerifier=null;
+    }
+
+  }
+
+};
+
+
+window.verifyOTP=async function(){
+
+  const otp=document.getElementById("otpInput").value.trim();
+
+  if(otp.length!==6){
+    showAuthMsg("Enter the 6 digit OTP.");
+    return;
+  }
+
+  if(!confirmationResult){
+    showAuthMsg("Please request OTP again.");
+    return;
+  }
+
+  try{
+
+    showAuthMsg("Verifying...");
+
+    const result=await confirmationResult.confirm(otp);
+
+    await createCustomerProfile(result.user);
+
+    showAuthMsg("Login successful.");
+
+  }catch(e){
+
+    console.error(e);
+    showAuthMsg("❌ "+friendlyFirebaseError(e));
+
+  }
+
+};
+
+
+window.backToPhone=function(){
+
+  document.getElementById("otpStep").classList.add("hidden");
+  document.getElementById("phoneStep").classList.remove("hidden");
+  document.getElementById("otpInput").value="";
+
+};
+
+
+async function createCustomerProfile(user){
+
+  const ref=doc(db,"customers",user.uid);
+  const snap=await getDoc(ref);
+
+  if(!snap.exists()){
+
+    await setDoc(ref,{
+      customerId:"CUS-"+user.uid.substring(0,8).toUpperCase(),
+      uid:user.uid,
+      phone:user.phoneNumber||"",
+      name:"",
+      apartment:"",
+      roomNo:"",
+      address:"",
+      location:null,
+      role:"customer",
+      status:"active",
+      createdAt:new Date().toISOString()
     });
 
-    document.getElementById(pageId).classList.add("active");
+  }
+
+}
 
 
-    document.querySelectorAll(".menu-item").forEach(function(item){
+onAuthStateChanged(auth,async user=>{
 
-        item.classList.remove("active");
+  if(!user){
+    document.getElementById("authScreen").classList.remove("hidden");
+    document.getElementById("app").classList.add("hidden");
+    return;
+  }
 
+  try{
+
+    await createCustomerProfile(user);
+
+    await loadCustomer();
+
+    document.getElementById("authScreen").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+
+    loadBookings();
+
+  }catch(e){
+
+    console.error(e);
+    showToast("Could not load customer profile.");
+
+  }
+
+});
+
+
+/* CUSTOMER */
+
+let customer={};
+
+async function loadCustomer(){
+
+  const user=auth.currentUser;
+
+  const snap=await getDoc(
+    doc(db,"customers",user.uid)
+  );
+
+  if(!snap.exists())return;
+
+  customer=snap.data();
+
+  const name=customer.name||"there";
+
+  document.getElementById("homeName").innerText=name;
+  document.getElementById("profileName").innerText=name;
+  document.getElementById("profilePhone").innerText=customer.phone||"—";
+  document.getElementById("customerId").innerText=customer.customerId||"—";
+
+  document.getElementById("profileApartment").innerText=
+    customer.apartment||"—";
+
+  document.getElementById("profileRoom").innerText=
+    customer.roomNo||"—";
+
+  document.getElementById("profileNameInput").value=
+    customer.name||"";
+
+  document.getElementById("profileApartmentInput").value=
+    customer.apartment||"";
+
+  document.getElementById("profileRoomInput").value=
+    customer.roomNo||"";
+
+  const initial=(name.trim()[0]||"H").toUpperCase();
+
+  document.getElementById("headerInitial").innerText=initial;
+  document.getElementById("profileAvatar").innerText=initial;
+
+}
+
+
+window.saveProfile=async function(){
+
+  const user=auth.currentUser;
+  if(!user)return;
+
+  const name=document.getElementById("profileNameInput").value.trim();
+  const apartment=document.getElementById("profileApartmentInput").value.trim();
+  const roomNo=document.getElementById("profileRoomInput").value.trim();
+
+  if(!name){
+    showToast("Please enter your name.");
+    return;
+  }
+
+  try{
+
+    await updateDoc(
+      doc(db,"customers",user.uid),
+      {
+        name,
+        apartment,
+        roomNo,
+        updatedAt:new Date().toISOString()
+      }
+    );
+
+    await loadCustomer();
+
+    showToast("Profile updated ✅");
+
+  }catch(e){
+
+    showToast("❌ "+friendlyFirebaseError(e));
+
+  }
+
+};
+
+
+/* BOOKING */
+
+window.startBooking=function(service){
+
+  bookingData.service=service;
+  bookingData.hours=2;
+
+  document.getElementById("bookingServiceTitle").innerText=service;
+
+  selectHours(2);
+
+  openPage("bookingPage");
+
+};
+
+
+window.selectHours=function(hours){
+
+  bookingData.hours=hours;
+
+  [2,4,6,8].forEach(h=>{
+
+    const el=document.getElementById("hours"+h);
+
+    if(el)el.classList.toggle(
+      "selected",
+      h===hours
+    );
+
+  });
+
+  calculatePrice();
+
+};
+
+
+function calculatePrice(){
+
+  /*
+    Temporary customer-side estimate.
+    CEO can later control actual pricing/margin
+    from Firebase.
+  */
+
+  const base={
+    "Home Cleaning":250,
+    "Cooking":300,
+    "Utensil Washing":200,
+    "Laundry":220,
+    "Dusting & Sweeping":200,
+    "Full Home Care":350
+  };
+
+  const price=(base[bookingData.service]||250)
+             * (bookingData.hours/2);
+
+  bookingData.price=price;
+
+  document.getElementById("totalPrice").innerText=price;
+
+}
+
+
+window.getLocation=function(){
+
+  if(!navigator.geolocation){
+
+    showToast("Location is not supported on this device.");
+    return;
+
+  }
+
+  document.getElementById("locationText").innerText=
+    "Getting your location...";
+
+  navigator.geolocation.getCurrentPosition(
+
+    position=>{
+
+      workerLocation={
+        latitude:position.coords.latitude,
+        longitude:position.coords.longitude
+      };
+
+      document.getElementById("locationText").innerText=
+        "📍 Location added successfully.";
+
+      showToast("Location added ✅");
+
+    },
+
+    error=>{
+
+      console.error(error);
+
+      document.getElementById("locationText").innerText=
+        "Unable to get location. Allow location permission.";
+
+      showToast("Please allow location permission.");
+
+    },
+
+    {
+      enableHighAccuracy:true,
+      timeout:10000,
+      maximumAge:0
+    }
+
+  );
+
+};
+
+
+window.reviewBooking=function(){
+
+  const apartment=document.getElementById("apartment").value.trim();
+  const roomNo=document.getElementById("roomNo").value.trim();
+  const address=document.getElementById("address").value.trim();
+  const date=document.getElementById("bookingDate").value;
+  const time=document.getElementById("bookingTime").value;
+
+  if(!apartment||!roomNo||!address||!date||!time){
+
+    showToast("Please complete all booking details.");
+    return;
+
+  }
+
+  document.getElementById("reviewService").innerText=
+    bookingData.service;
+
+  document.getElementById("reviewHours").innerText=
+    bookingData.hours+" Hours";
+
+  document.getElementById("reviewApartment").innerText=
+    apartment;
+
+  document.getElementById("reviewRoom").innerText=
+    roomNo;
+
+  document.getElementById("reviewAddress").innerText=
+    address;
+
+  document.getElementById("reviewDate").innerText=
+    date;
+
+  document.getElementById("reviewTime").innerText=
+    time;
+
+  document.getElementById("reviewTotal").innerText=
+    bookingData.price;
+
+  document.getElementById("reviewLocation").innerText=
+    workerLocation
+      ? "📍 GPS location added"
+      : "Not added";
+
+  openPage("reviewPage");
+
+};
+
+
+window.confirmBooking=async function(){
+
+  const user=auth.currentUser;
+
+  if(!user){
+    showToast("Please login first.");
+    return;
+  }
+
+  const apartment=document.getElementById("apartment").value.trim();
+  const roomNo=document.getElementById("roomNo").value.trim();
+  const address=document.getElementById("address").value.trim();
+  const date=document.getElementById("bookingDate").value;
+  const time=document.getElementById("bookingTime").value;
+  const instructions=document.getElementById("instructions").value.trim();
+
+  try{
+
+    const customerSnap=await getDoc(
+      doc(db,"customers",user.uid)
+    );
+
+    const c=customerSnap.exists()
+      ? customerSnap.data()
+      : {};
+
+    const bookingRef=await addDoc(
+      collection(db,"bookings"),
+      {
+
+        customerId:user.uid,
+
+        customerName:c.name||"",
+        customerPhone:c.phone||user.phoneNumber||"",
+
+        service:bookingData.service,
+
+        hours:bookingData.hours,
+
+        price:bookingData.price,
+
+        apartment:apartment,
+        roomNo:roomNo,
+        address:address,
+
+        location:workerLocation,
+
+        date:date,
+        time:time,
+
+        instructions:instructions,
+
+        workerId:"",
+        workerName:"",
+
+        status:"pending",
+
+        paymentStatus:"pending",
+
+        createdAt:new Date().toISOString()
+
+      }
+    );
+
+    showToast("Booking confirmed 🎉");
+
+    document.getElementById("apartment").value="";
+    document.getElementById("roomNo").value="";
+    document.getElementById("address").value="";
+    document.getElementById("instructions").value="";
+
+    workerLocation=null;
+
+    await loadBookings();
+
+    openPage("bookingsPage");
+
+    openBookingDetails(bookingRef.id);
+
+  }catch(e){
+
+    console.error(e);
+
+    showToast("❌ "+friendlyFirebaseError(e));
+
+  }
+
+};
+
+
+/* BOOKINGS */
+
+async function loadBookings(){
+
+  const user=auth.currentUser;
+
+  if(!user)return;
+
+  const box=document.getElementById("bookingList");
+  const latest=document.getElementById("latestBooking");
+
+  box.innerHTML='<div class="card muted">Loading...</div>';
+
+  try{
+
+    const q=query(
+      collection(db,"bookings"),
+      where("customerId","==",user.uid)
+    );
+
+    const snap=await getDocs(q);
+
+    let rows=[];
+
+    snap.forEach(d=>{
+      rows.push({
+        id:d.id,
+        ...d.data()
+      });
     });
 
-    element.classList.add("active");
+    rows.sort(
+      (a,b)=>
+        String(b.createdAt||"")
+        .localeCompare(String(a.createdAt||""))
+    );
 
+    if(!rows.length){
 
-    document.getElementById("sidebar").classList.remove("active");
-    document.getElementById("overlay").classList.remove("active");
+      box.innerHTML=
+        '<div class="card muted">No bookings yet.</div>';
+
+      latest.innerHTML=
+        '<div class="card muted">No bookings yet.</div>';
+
+      return;
+
+    }
+
+    box.innerHTML=rows.map(b=>bookingCardHTML(b)).join("");
+
+    latest.innerHTML=bookingCardHTML(rows[0]);
+
+  }catch(e){
+
+    console.error(e);
+
+    box.innerHTML=
+      '<div class="card">Unable to load bookings.</div>';
+
+  }
 
 }
 
 
-function saveSettings(){
+function bookingCardHTML(b){
 
-    alert("Settings saved successfully!");
+  const statusText=
+    String(b.status||"pending")
+    .replace(/_/g," ");
+
+  return `
+
+    <div class="booking-card">
+
+      <div class="row">
+
+        <h3>${escapeHTML(b.service||"Home Service")}</h3>
+
+        <span class="badge">
+          ${escapeHTML(statusText)}
+        </span>
+
+      </div>
+
+      <p>📅 ${escapeHTML(b.date||"-")} • ${escapeHTML(b.time||"-")}</p>
+
+      <p>⏱️ ${escapeHTML(String(b.hours||"-"))} hours</p>
+
+      <p>📍 ${escapeHTML(b.apartment||"")} ${escapeHTML(b.roomNo||"")}</p>
+
+      <p>💰 ₹${escapeHTML(String(b.price||0))}</p>
+
+      <button
+        class="secondary"
+        onclick="openBookingDetails('${b.id}')"
+      >
+        View Booking
+      </button>
+
+    </div>
+
+  `;
 
 }
+
+
+window.openBookingDetails=async function(id){
+
+  try{
+
+    const snap=await getDoc(
+      doc(db,"bookings",id)
+    );
+
+    if(!snap.exists()){
+      showToast("Booking not found.");
+      return;
+    }
+
+    const b=snap.data();
+
+    document.getElementById("modalContent").innerHTML=`
+
+      <div class="card">
+
+        <h3>${escapeHTML(b.service||"Home Service")}</h3>
+
+        <p>📅 ${escapeHTML(b.date||"-")} at ${escapeHTML(b.time||"-")}</p>
+
+        <p>⏱️ ${escapeHTML(String(b.hours||"-"))} hours</p>
+
+        <p>🏢 ${escapeHTML(b.apartment||"-")}</p>
+
+        <p>🚪 ${escapeHTML(b.roomNo||"-")}</p>
+
+        <p>📍 ${escapeHTML(b.address||"-")}</p>
+
+        <p>💰 ₹${escapeHTML(String(b.price||0))}</p>
+
+        <p>👷 Worker:
+          <b>${escapeHTML(b.workerName||"Not assigned yet")}</b>
+        </p>
+
+        <p>
+          Status:
+          <span class="badge">
+            ${escapeHTML(String(b.status||"pending"))}
+          </span>
+        </p>
+
+      </div>
+
+      <div class="status-track">
+
+        ${statusTrack(b.status)}
+
+      </div>
+
+      ${
+        b.status==="pending"
+        ? `
+          <button
+            class="secondary"
+            style="color:#dc2626"
+            onclick="cancelBooking('${id}')"
+          >
+            Cancel Booking
+          </button>
+        `
+        :""
+      }
+
+      ${
+        b.status==="completed"
+        ? `
+          <button
+            class="primary"
+            style="margin-top:10px"
+            onclick="giveFeedback('${id}')"
+          >
+            ⭐ Rate Worker
+          </button>
+        `
+        :""
+      }
+
+    `;
+
+    document.getElementById("bookingModal")
+      .classList.remove("hidden");
+
+  }catch(e){
+
+    showToast("Could not open booking.");
+
+  }
+
+};
+
+
+function statusTrack(status){
+
+  const stages=[
+    ["pending","Booking Received"],
+    ["accepted","Worker Assigned"],
+    ["on_the_way","Worker On The Way"],
+    ["started","Work Started"],
+    ["completed","Completed"]
+  ];
+
+  const currentIndex=
+    stages.findIndex(x=>x[0]===status);
+
+  return stages.map((s,i)=>{
+
+    const done=i<currentIndex;
+    const active=i===currentIndex;
+
+    return `
+
+      <div class="status-line ${done?"done":""} ${active?"active":""}">
+
+        <div class="status-dot">
+          ${done?"✓":i+1}
+        </div>
+
+        <div>
+          <b>${s[1]}</b>
+          ${
+            active
+            ? `<div class="muted" style="font-size:12px">
+                Current status
+               </div>`
+            :""
+          }
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+window.cancelBooking=async function(id){
+
+  if(!confirm("Cancel this booking?"))return;
+
+  try{
+
+    await updateDoc(
+      doc(db,"bookings",id),
+      {
+        status:"cancelled",
+        cancelledBy:"customer",
+        cancelledAt:new Date().toISOString()
+      }
+    );
+
+    closeModal();
+    showToast("Booking cancelled.");
+    loadBookings();
+
+  }catch(e){
+
+    showToast("❌ "+friendlyFirebaseError(e));
+
+  }
+
+};
+
+
+window.giveFeedback=function(id){
+
+  const rating=prompt(
+    "Give a rating from 1 to 5:"
+  );
+
+  if(!rating)return;
+
+  const value=Number(rating);
+
+  if(value<1||value>5){
+    showToast("Rating must be 1 to 5.");
+    return;
+  }
+
+  const text=prompt("Write feedback (optional):")||"";
+
+  submitFeedback(id,value,text);
+
+};
+
+
+async function submitFeedback(id,rating,text){
+
+  try{
+
+    await updateDoc(
+      doc(db,"bookings",id),
+      {
+        rating:rating,
+        feedback:text,
+        feedbackAt:new Date().toISOString()
+      }
+    );
+
+    closeModal();
+
+    showToast("Thank you for your feedback ⭐");
+
+  }catch(e){
+
+    showToast("Could not save feedback.");
+
+  }
+
+};
+
+
+/* NAVIGATION */
+
+window.openPage=function(pageId,button){
+
+  const pages=[
+    "homePage",
+    "bookingPage",
+    "reviewPage",
+    "bookingsPage",
+    "profilePage"
+  ];
+
+  pages.forEach(id=>{
+
+    const el=document.getElementById(id);
+
+    if(el){
+      el.classList.toggle(
+        "hidden",
+        id!==pageId
+      );
+    }
+
+  });
+
+  document.querySelectorAll(".nav-btn")
+    .forEach(b=>b.classList.remove("active"));
+
+  if(button){
+    button.classList.add("active");
+  }
+
+  if(pageId==="bookingsPage"){
+    loadBookings();
+  }
+
+  if(pageId==="profilePage"){
+    loadCustomer();
+  }
+
+};
+
+
+window.closeModal=function(){
+
+  document.getElementById("bookingModal")
+    .classList.add("hidden");
+
+};
+
+
+/* LOGOUT */
+
+window.logoutCustomer=async function(){
+
+  if(!confirm("Logout from HOMORA?"))return;
+
+  try{
+
+    await signOut(auth);
+
+  }catch(e){
+
+    showToast("Logout failed.");
+
+  }
+
+};
+
+
+/* HELPERS */
+
+function showAuthMsg(text){
+
+  document.getElementById("authMsg").innerText=text;
+
+}
+
+
+function showToast(text){
+
+  const old=document.querySelector(".toast");
+
+  if(old)old.remove();
+
+  const div=document.createElement("div");
+
+  div.className="toast";
+  div.innerText=text;
+
+  document.body.appendChild(div);
+
+  setTimeout(()=>{
+    div.remove();
+  },3500);
+
+}
+
+
+function escapeHTML(value){
+
+  return String(value??"")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function friendlyFirebaseError(e){
+
+  const code=e?.code||"";
+
+  if(code.includes("operation-not-allowed"))
+    return "Phone login is not enabled in Firebase.";
+
+  if(code.includes("invalid-phone-number"))
+    return "Invalid mobile number.";
+
+  if(code.includes("too-many-requests"))
+    return "Too many attempts. Please try later.";
+
+  if(code.includes("permission-denied"))
+    return "Firebase permission denied. Check Firestore rules.";
+
+  return e?.message||"Something went wrong.";
+
+}
+
+
+/* DATE DEFAULTS */
+
+const dateInput=document.getElementById("bookingDate");
+
+if(dateInput){
+
+  const today=new Date();
+
+  const yyyy=today.getFullYear();
+  const mm=String(today.getMonth()+1).padStart(2,"0");
+  const dd=String(today.getDate()).padStart(2,"0");
+
+  dateInput.min=`${yyyy}-${mm}-${dd}`;
+
+}
+
+
+/* AUTO REFRESH */
+
+setInterval(()=>{
+
+  if(auth.currentUser){
+    loadBookings();
+  }
+
+},15000);
 
 </script>
+
+<!-- Invisible reCAPTCHA container -->
+<div id="recaptcha-container"></div>
 
 </body>
 </html>
