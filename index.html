@@ -2,1942 +2,1953 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HOMORA — Home Services</title>
-
-<meta name="theme-color" content="#17112b">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:'Outfit',sans-serif;
-}
-
-:root{
-    --purple:#6d35e8;
-    --violet:#8b3dff;
-    --pink:#c83dff;
-    --dark:#17112b;
-    --text:#171522;
-    --muted:#777487;
-    --white:#fff;
-    --bg:#f7f5ff;
-    --green:#16a34a;
-    --red:#dc2626;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial,sans-serif;
 }
 
 body{
-    background:linear-gradient(180deg,#f7f5ff,#ffffff);
-    color:var(--text);
-    min-height:100vh;
-    padding-bottom:90px;
+  background:linear-gradient(135deg,#f6f4ff,#eef7ff);
+  color:#151522;
+  min-height:100vh;
 }
 
-button,input,select{
-    font-family:inherit;
+.hidden{display:none!important}
+
+button,input,select,textarea{
+  font:inherit;
 }
 
-button{
-    cursor:pointer;
-}
-
-/* ================= LOGO ================= */
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.logo-mark{
-    width:52px;
-    height:52px;
-    border-radius:17px;
-    background:linear-gradient(135deg,#6534ef,#b62dff);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    box-shadow:0 8px 25px rgba(109,53,232,.28);
-}
-
-.logo-mark:before{
-    content:"";
-    position:absolute;
-    width:29px;
-    height:29px;
-    border:4px solid white;
-    border-radius:9px;
-    opacity:.95;
-}
-
-.logo-mark span{
-    color:white;
-    font-size:25px;
-    font-weight:800;
-    z-index:2;
-}
-
-.brand-name{
-    font-size:29px;
-    font-weight:800;
-    letter-spacing:1px;
-    background:linear-gradient(90deg,#6334e9,#b12cff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-.brand-sub{
-    font-size:10px;
-    letter-spacing:4px;
-    color:#85818f;
-    margin-top:-4px;
-}
-
-/* ================= HEADER ================= */
+button{cursor:pointer}
 
 .header{
-    background:white;
-    min-height:82px;
-    padding:13px 18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid #eeeaf8;
-    position:sticky;
-    top:0;
-    z-index:100;
+  height:78px;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 4px 18px rgba(40,30,90,.10);
 }
 
-.profile-btn{
-    width:49px;
-    height:49px;
-    border-radius:50%;
-    border:2px solid #7638ed;
-    background:white;
-    color:#6d35e8;
-    font-size:20px;
-    font-weight:800;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
 }
 
-/* ================= LOGIN ================= */
-
-.login-screen{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:25px;
-    background:
-      radial-gradient(circle at 10% 10%,rgba(117,51,237,.2),transparent 35%),
-      radial-gradient(circle at 90% 90%,rgba(197,53,255,.18),transparent 35%),
-      #faf9ff;
+.logoMark{
+  width:50px;
+  height:50px;
+  border-radius:16px;
+  background:linear-gradient(135deg,#5b2cff,#20b8ff);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  font-weight:900;
+  box-shadow:0 8px 20px rgba(91,44,255,.28);
 }
 
-.login-card{
-    width:100%;
-    max-width:430px;
-    background:white;
-    border-radius:30px;
-    padding:32px 24px;
-    box-shadow:0 20px 70px rgba(67,36,120,.14);
-    text-align:center;
+.brandText{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:1px;
+  background:linear-gradient(90deg,#562cff,#09a8ff);
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
-.login-card h1{
-    margin-top:24px;
-    font-size:30px;
+.brandSub{
+  display:block;
+  font-size:9px;
+  letter-spacing:3px;
+  color:#777;
+  margin-top:2px;
 }
 
-.login-card p{
-    color:var(--muted);
-    margin:8px 0 25px;
+.topMenu{
+  width:45px;
+  height:45px;
+  border:0;
+  border-radius:14px;
+  background:#f1edff;
+  color:#5128d8;
+  font-size:26px;
 }
 
-.phone-input{
-    display:flex;
-    border:1.5px solid #ddd7ef;
-    border-radius:15px;
-    overflow:hidden;
-    margin-bottom:15px;
+.menuPanel{
+  position:fixed;
+  top:68px;
+  right:15px;
+  width:220px;
+  background:white;
+  border-radius:18px;
+  padding:10px;
+  box-shadow:0 15px 45px rgba(0,0,0,.18);
+  z-index:300;
+  display:none;
 }
 
-.phone-code{
-    padding:15px;
-    background:#f5f2fc;
-    font-weight:700;
+.menuPanel.open{display:block}
+
+.menuItem{
+  padding:14px;
+  border-radius:12px;
+  font-weight:700;
 }
 
-.phone-input input{
-    flex:1;
-    border:0;
-    outline:0;
-    padding:15px;
-    font-size:16px;
+.menuItem:hover{
+  background:#f1edff;
+}
+
+.login{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background:linear-gradient(135deg,#f2efff,#eaf8ff);
+}
+
+.loginBox{
+  width:100%;
+  max-width:430px;
+  background:white;
+  border-radius:28px;
+  padding:30px 22px;
+  box-shadow:0 20px 60px rgba(60,35,130,.15);
+  text-align:center;
+}
+
+.loginLogo{
+  width:76px;
+  height:76px;
+  margin:auto;
+  border-radius:24px;
+  background:linear-gradient(135deg,#542cff,#15b8ff);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:40px;
+  font-weight:900;
+}
+
+.loginBox h1{
+  margin-top:14px;
+  font-size:30px;
+}
+
+.loginBox p{
+  color:#777;
+  margin:8px 0 22px;
+}
+
+.input{
+  width:100%;
+  border:1px solid #ddd;
+  border-radius:14px;
+  padding:14px;
+  margin-bottom:12px;
+  outline:none;
+  background:#fafafa;
+}
+
+.input:focus{
+  border-color:#6634ff;
+  background:#fff;
 }
 
 .primary{
-    width:100%;
-    border:0;
-    padding:15px;
-    border-radius:15px;
-    color:white;
-    font-size:16px;
-    font-weight:700;
-    background:linear-gradient(135deg,#6834eb,#a934ff);
-    box-shadow:0 10px 25px rgba(109,53,232,.22);
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:15px;
+  background:linear-gradient(90deg,#6330ff,#159cff);
+  color:white;
+  font-weight:800;
+  box-shadow:0 10px 22px rgba(91,44,255,.22);
 }
 
-.otp-box{
-    display:none;
+.secondary{
+  border:0;
+  border-radius:12px;
+  padding:12px 16px;
+  background:#eeeaff;
+  color:#5428d8;
+  font-weight:800;
 }
 
-.otp-box input{
-    width:100%;
-    padding:15px;
-    border:1.5px solid #ddd7ef;
-    border-radius:15px;
-    text-align:center;
-    letter-spacing:7px;
-    font-size:20px;
-    outline:none;
-    margin-bottom:15px;
+.msg{
+  margin-top:12px;
+  font-size:13px;
+  color:#d22;
 }
 
-/* ================= MAIN ================= */
-
-#app{
-    display:none;
-}
-
-.main{
-    max-width:900px;
-    margin:auto;
-    padding:18px;
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:18px 15px 100px;
 }
 
 .hero{
-    background:linear-gradient(135deg,#6334e9,#8b3dff 50%,#bd37ff);
-    border-radius:28px;
-    padding:30px 24px;
-    color:white;
-    margin-bottom:22px;
-    position:relative;
-    overflow:hidden;
-}
-
-.hero:after{
-    content:"";
-    position:absolute;
-    width:170px;
-    height:170px;
-    border:35px solid rgba(255,255,255,.08);
-    border-radius:50%;
-    right:-55px;
-    top:-60px;
+  margin-top:8px;
+  border-radius:28px;
+  padding:26px 22px;
+  color:white;
+  background:linear-gradient(135deg,#5c2cff,#2477ff,#09b7d9);
+  box-shadow:0 15px 35px rgba(71,45,180,.22);
 }
 
 .hero h1{
-    font-size:31px;
-    line-height:1.1;
-    position:relative;
-    z-index:2;
+  font-size:31px;
+  margin-bottom:10px;
 }
 
 .hero p{
-    margin-top:12px;
-    font-size:16px;
-    opacity:.9;
-    position:relative;
-    z-index:2;
+  font-size:16px;
+  line-height:1.5;
+  opacity:.95;
 }
 
-.section-title{
-    font-size:23px;
-    margin:22px 0 14px;
+.section{
+  background:#fff;
+  margin-top:18px;
+  padding:20px;
+  border-radius:24px;
+  box-shadow:0 7px 25px rgba(40,30,90,.08);
 }
 
-/* ================= SERVICES ================= */
+.section h2{
+  margin-bottom:16px;
+}
 
 .services{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:14px;
 }
 
 .service{
-    background:white;
-    border:2px solid #eee9fb;
-    border-radius:22px;
-    padding:20px 10px;
-    text-align:center;
-    transition:.2s;
-    box-shadow:0 7px 22px rgba(50,30,90,.05);
+  border:2px solid #eeeaff;
+  background:linear-gradient(145deg,#fff,#faf8ff);
+  border-radius:20px;
+  padding:20px 12px;
+  text-align:center;
+  transition:.2s;
 }
 
-.service:active{
-    transform:scale(.97);
+.service:hover{
+  transform:translateY(-2px);
+  border-color:#7645ff;
 }
 
-.service.selected{
-    border-color:#7638ed;
-    background:#faf7ff;
-    box-shadow:0 8px 25px rgba(109,53,232,.15);
-}
-
-.service-icon{
-    font-size:43px;
-    margin-bottom:8px;
+.serviceIcon{
+  font-size:42px;
+  margin-bottom:10px;
 }
 
 .service h3{
-    font-size:17px;
+  margin-bottom:6px;
 }
 
 .price{
-    margin-top:5px;
-    color:#756f7e;
+  color:#6b35e9;
+  font-weight:800;
 }
 
-.price b{
-    color:#6233df;
-    font-size:17px;
+.formGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-/* ================= BOOKINGS ================= */
-
-.booking-card{
-    background:white;
-    border-radius:23px;
-    padding:20px;
-    margin-top:15px;
-    box-shadow:0 7px 25px rgba(50,30,90,.07);
-    border:1px solid #eeeaf7;
+.full{
+  grid-column:1/-1;
 }
 
-.booking-head{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
+textarea.input{
+  min-height:90px;
+  resize:vertical;
 }
 
-.booking-status{
-    background:#fff3cd;
-    color:#9a6800;
-    padding:7px 11px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:700;
+.locationBox{
+  border:2px dashed #7650ff;
+  background:#f7f4ff;
+  padding:15px;
+  border-radius:16px;
+  margin-bottom:14px;
 }
 
-.detail{
-    margin-top:13px;
-    color:#65606e;
-    line-height:1.7;
+.locationBtn{
+  border:0;
+  padding:11px 14px;
+  border-radius:12px;
+  background:#6535ee;
+  color:#fff;
+  font-weight:800;
 }
 
-.detail strong{
-    color:#25212e;
+.bookingCard{
+  background:white;
+  padding:18px;
+  border-radius:20px;
+  margin-bottom:12px;
+  box-shadow:0 6px 20px rgba(0,0,0,.07);
 }
 
-/* ================= BOTTOM NAV ================= */
-
-.bottom{
-    position:fixed;
-    bottom:13px;
-    left:16px;
-    right:16px;
-    height:70px;
-    background:#19152b;
-    border-radius:24px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    z-index:200;
-    box-shadow:0 12px 35px rgba(22,16,40,.3);
-    overflow:hidden;
+.badge{
+  display:inline-block;
+  margin-top:8px;
+  padding:6px 10px;
+  border-radius:20px;
+  background:#fff0c7;
+  color:#956000;
+  font-size:12px;
+  font-weight:800;
 }
 
-.nav-btn{
-    border:0;
-    background:transparent;
-    color:#bdb8ca;
-    font-size:13px;
+.paymentModal{
+  position:fixed;
+  inset:0;
+  background:rgba(10,8,25,.72);
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:15px;
 }
 
-.nav-btn span{
-    display:block;
-    font-size:23px;
-    margin-bottom:2px;
+.paymentModal.show{
+  display:flex;
 }
 
-.nav-btn.active{
-    background:linear-gradient(135deg,#6c35ed,#963cff);
-    color:white;
-    margin:6px;
-    border-radius:18px;
+.paymentBox{
+  width:100%;
+  max-width:430px;
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:26px;
+  padding:22px;
+  text-align:center;
 }
 
-/* ================= MODAL ================= */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(13,9,25,.62);
-    z-index:500;
-    align-items:flex-end;
-    justify-content:center;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.sheet{
-    width:100%;
-    max-width:620px;
-    max-height:92vh;
-    overflow-y:auto;
-    background:white;
-    border-radius:30px 30px 0 0;
-    padding:24px 18px 30px;
-    animation:up .25s ease;
-}
-
-@keyframes up{
-    from{transform:translateY(100%)}
-    to{transform:translateY(0)}
-}
-
-.sheet h2{
-    margin-bottom:5px;
-}
-
-.sheet-sub{
-    color:#77717f;
-    margin-bottom:18px;
-}
-
-.field{
-    margin-bottom:14px;
-}
-
-.field label{
-    display:block;
-    font-size:13px;
-    font-weight:700;
-    margin-bottom:6px;
-}
-
-.field input,.field select{
-    width:100%;
-    padding:14px;
-    border:1.5px solid #ddd8ea;
-    border-radius:13px;
-    outline:none;
-    background:white;
-}
-
-.row{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
-}
-
-.location-box{
-    border:1.5px dashed #7a3bed;
-    border-radius:14px;
-    padding:14px;
-    background:#faf7ff;
-    margin-bottom:15px;
-}
-
-.location-box button{
-    margin-top:8px;
-    border:0;
-    background:#ede5ff;
-    color:#6334df;
-    padding:9px 12px;
-    border-radius:10px;
-    font-weight:700;
-}
-
-.close-btn{
-    width:100%;
-    margin-top:10px;
-    padding:13px;
-    border:0;
-    background:#f1eff5;
-    border-radius:13px;
-    font-weight:700;
-}
-
-/* ================= PAYMENT ================= */
-
-.payment-card{
-    text-align:center;
+.paymentLogo{
+  width:58px;
+  height:58px;
+  margin:auto;
+  border-radius:18px;
+  background:linear-gradient(135deg,#5b2cff,#12b7ff);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  font-weight:900;
 }
 
 .amount{
-    font-size:38px;
-    font-weight:800;
-    color:#6534e8;
-    margin:10px 0 15px;
+  font-size:34px;
+  font-weight:900;
+  color:#5225d8;
+  margin:8px 0 15px;
 }
 
-.qr-box{
-    width:260px;
-    min-height:260px;
-    margin:10px auto 16px;
-    padding:14px;
-    background:white;
-    border-radius:20px;
-    border:2px solid #eeeaf7;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    box-shadow:0 8px 30px rgba(30,20,60,.08);
+.qr{
+  width:250px;
+  height:250px;
+  object-fit:contain;
+  border-radius:16px;
+  background:#fff;
+  padding:8px;
+  margin:10px auto 16px;
+  box-shadow:0 5px 20px rgba(0,0,0,.12);
 }
 
-#qrcode img{
-    width:230px !important;
-    height:230px !important;
+.payNote{
+  background:#f5f2ff;
+  padding:12px;
+  border-radius:14px;
+  font-size:13px;
+  color:#555;
+  margin-bottom:15px;
 }
 
-.upi{
-    background:#f7f5fb;
-    border-radius:12px;
-    padding:12px;
-    margin-bottom:14px;
-    font-size:14px;
+.modalActions{
+  display:flex;
+  gap:10px;
 }
 
-.pay-btn{
-    display:block;
-    width:100%;
-    text-decoration:none;
-    text-align:center;
-    padding:15px;
-    border-radius:15px;
-    background:#111827;
-    color:white;
-    font-weight:700;
-    margin-bottom:10px;
+.modalActions button{
+  flex:1;
 }
 
-.paid-btn{
-    background:linear-gradient(135deg,#16a34a,#22c55e);
+.bottom{
+  position:fixed;
+  bottom:12px;
+  left:12px;
+  right:12px;
+  max-width:700px;
+  margin:auto;
+  background:#181627;
+  border-radius:22px;
+  padding:8px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  z-index:150;
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
 }
 
-.warning{
-    font-size:12px;
-    color:#77717f;
-    margin-top:10px;
+.bottom button{
+  border:0;
+  background:transparent;
+  color:#aaa;
+  padding:10px 5px;
+  border-radius:16px;
 }
 
-/* ================= PROFILE ================= */
-
-.profile-page{
-    display:none;
+.bottom button.active{
+  background:linear-gradient(135deg,#6833ff,#8758ff);
+  color:white;
 }
 
-.profile-card{
-    background:white;
-    border-radius:25px;
-    padding:25px;
-    box-shadow:0 7px 25px rgba(50,30,90,.07);
+.profileCard{
+  text-align:center;
 }
 
-.avatar-big{
-    width:80px;
-    height:80px;
-    border-radius:50%;
-    background:linear-gradient(135deg,#6334e9,#bb38ff);
-    color:white;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:32px;
-    font-weight:800;
-    margin-bottom:15px;
+.avatar{
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#6330ff,#13aaff);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:35px;
+  font-weight:900;
+  margin:5px auto 12px;
 }
 
-.logout{
-    margin-top:18px;
-    width:100%;
-    padding:13px;
-    border:0;
-    background:#fee2e2;
-    color:#b91c1c;
-    border-radius:13px;
-    font-weight:700;
+.helpItem{
+  padding:15px;
+  border-radius:15px;
+  background:#f7f5ff;
+  margin-bottom:10px;
 }
 
-.success-box{
-    display:none;
-    text-align:center;
-    padding:20px;
-    background:#ecfdf3;
-    border:1px solid #bbf7d0;
-    border-radius:17px;
-    margin-bottom:15px;
-}
+@media(max-width:600px){
+  .services{
+    grid-template-columns:1fr 1fr;
+  }
 
-.success-box h3{
-    color:#15803d;
-}
+  .formGrid{
+    grid-template-columns:1fr;
+  }
 
-@media(min-width:700px){
-    .services{
-        grid-template-columns:repeat(4,1fr);
-    }
+  .full{
+    grid-column:auto;
+  }
+
+  .hero h1{
+    font-size:26px;
+  }
+
+  .brandText{
+    font-size:21px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= LOGIN ================= -->
+<!-- LOGIN -->
+<div id="loginScreen" class="login">
 
-<section class="login-screen" id="loginScreen">
+  <div class="loginBox">
 
-    <div class="login-card">
+    <div class="loginLogo">H</div>
 
-        <div class="brand" style="justify-content:center">
+    <h1>HOMORA</h1>
+    <p>Home Services</p>
 
-            <div class="logo-mark">
-                <span>H</span>
-            </div>
+    <div id="phoneStep">
 
-            <div style="text-align:left">
-                <div class="brand-name">HOMORA</div>
-                <div class="brand-sub">HOME SERVICES</div>
-            </div>
+      <input
+        id="phone"
+        class="input"
+        type="tel"
+        inputmode="numeric"
+        maxlength="10"
+        placeholder="Enter mobile number"
+      >
 
-        </div>
-
-        <h1>Welcome to HOMORA</h1>
-
-        <p>Book trusted home services at your doorstep.</p>
-
-        <div id="phoneBox">
-
-            <div class="phone-input">
-                <div class="phone-code">+91</div>
-                <input
-                    id="phone"
-                    type="tel"
-                    maxlength="10"
-                    placeholder="Mobile number"
-                >
-            </div>
-
-            <button class="primary" onclick="sendOTP()">
-                Continue with OTP
-            </button>
-
-        </div>
-
-        <div class="otp-box" id="otpBox">
-
-            <input
-                id="otp"
-                type="tel"
-                maxlength="6"
-                placeholder="••••••"
-            >
-
-            <button class="primary" onclick="verifyOTP()">
-                Verify & Continue
-            </button>
-
-        </div>
-
-        <div id="recaptcha-container"></div>
-
-        <p id="loginError"
-           style="color:#dc2626;margin-top:12px;font-size:13px">
-        </p>
+      <button id="sendOtp" class="primary">
+        Continue with Mobile
+      </button>
 
     </div>
 
-</section>
+    <div id="otpStep" class="hidden">
+
+      <input
+        id="otp"
+        class="input"
+        type="text"
+        inputmode="numeric"
+        maxlength="6"
+        placeholder="Enter OTP"
+      >
+
+      <button id="verifyOtp" class="primary">
+        Verify & Continue
+      </button>
+
+    </div>
+
+    <div id="recaptcha-container"></div>
+
+    <div id="loginMsg" class="msg"></div>
+
+  </div>
+
+</div>
 
 
-<!-- ================= APP ================= -->
-
-<div id="app">
+<!-- APP -->
+<div id="app" class="hidden">
 
 <header class="header">
 
-    <div class="brand">
+  <div class="brand">
 
-        <div class="logo-mark">
-            <span>H</span>
-        </div>
+    <div class="logoMark">H</div>
 
-        <div>
-            <div class="brand-name">HOMORA</div>
-            <div class="brand-sub">HOME SERVICES</div>
-        </div>
-
+    <div>
+      <div class="brandText">HOMORA</div>
+      <span class="brandSub">HOME SERVICES</span>
     </div>
 
-    <button class="profile-btn" onclick="showPage('profile')">
-        <span id="profileLetter">C</span>
-    </button>
+  </div>
+
+  <button id="menuButton" class="topMenu">
+    ⋮
+  </button>
 
 </header>
 
 
-<main class="main">
+<!-- THREE DOT MENU -->
+<div id="menuPanel" class="menuPanel">
 
-<!-- HOME -->
+  <div class="menuItem" data-tab="profile">
+    👤 My Profile
+  </div>
 
-<section id="homePage">
+  <div class="menuItem" data-tab="help">
+    🆘 Customer Help
+  </div>
+
+  <div class="menuItem" id="logoutBtn">
+    🚪 Logout
+  </div>
+
+</div>
+
+
+<main class="container">
+
+  <!-- HOME -->
+  <section id="homePage" class="page">
 
     <div class="hero">
 
-        <h1 id="welcomeText">Welcome</h1>
+      <h1 id="welcomeText">
+        Welcome Customer
+      </h1>
 
-        <p>
-            Home services, delivered with care.
-        </p>
-
-    </div>
-
-    <h2 class="section-title">
-        Choose a Service
-    </h2>
-
-    <div class="services">
-
-        <div class="service"
-             onclick="selectService('Cleaning')">
-            <div class="service-icon">🧹</div>
-            <h3>Cleaning</h3>
-            <div class="price"><b>₹250</b> / booking</div>
-        </div>
-
-        <div class="service"
-             onclick="selectService('Cooking')">
-            <div class="service-icon">👨‍🍳</div>
-            <h3>Cooking</h3>
-            <div class="price"><b>₹250</b> / booking</div>
-        </div>
-
-        <div class="service"
-             onclick="selectService('Utensils')">
-            <div class="service-icon">🍽️</div>
-            <h3>Utensils</h3>
-            <div class="price"><b>₹250</b> / booking</div>
-        </div>
-
-        <div class="service"
-             onclick="selectService('Laundry')">
-            <div class="service-icon">👕</div>
-            <h3>Laundry</h3>
-            <div class="price"><b>₹250</b> / booking</div>
-        </div>
-
-        <div class="service"
-             onclick="selectService('House Help')">
-            <div class="service-icon">🏠</div>
-            <h3>House Help</h3>
-            <div class="price"><b>₹250</b> / booking</div>
-        </div>
-
-        <div class="service"
-             onclick="selectService('All-in-One')">
-            <div class="service-icon">✨</div>
-            <h3>All-in-One</h3>
-            <div class="price"><b>₹250</b> / booking</div>
-        </div>
+      <p>
+        What can HOMORA help you with today?
+      </p>
 
     </div>
 
-</section>
 
+    <div class="section">
 
-<!-- BOOKINGS -->
+      <h2>Choose a Service</h2>
 
-<section id="bookingsPage" style="display:none">
+      <div class="services">
 
-    <h1 class="section-title">
-        My Bookings
-    </h1>
-
-    <div id="bookingList">
-        <div class="booking-card"
-             style="text-align:center;color:#777">
-            No bookings yet.
+        <div class="service" data-service="Cleaning">
+          <div class="serviceIcon">🧹</div>
+          <h3>Cleaning</h3>
+          <div class="price">₹250 / booking</div>
         </div>
+
+        <div class="service" data-service="Cooking">
+          <div class="serviceIcon">👨‍🍳</div>
+          <h3>Cooking</h3>
+          <div class="price">₹250 / booking</div>
+        </div>
+
+        <div class="service" data-service="Utensils">
+          <div class="serviceIcon">🍽️</div>
+          <h3>Utensils</h3>
+          <div class="price">₹250 / booking</div>
+        </div>
+
+        <div class="service" data-service="Laundry">
+          <div class="serviceIcon">👕</div>
+          <h3>Laundry</h3>
+          <div class="price">₹250 / booking</div>
+        </div>
+
+      </div>
+
     </div>
 
-</section>
+
+    <!-- BOOKING FORM -->
+    <div id="bookingSection" class="section hidden">
+
+      <h2 id="selectedServiceTitle">
+        Book Service
+      </h2>
+
+      <div class="formGrid">
+
+        <input
+          id="customerName"
+          class="input"
+          placeholder="Your name"
+        >
+
+        <input
+          id="customerPhone"
+          class="input"
+          placeholder="Mobile number"
+          readonly
+        >
+
+        <input
+          id="apartment"
+          class="input"
+          placeholder="Apartment / Building name"
+        >
+
+        <input
+          id="room"
+          class="input"
+          placeholder="Room / Flat number"
+        >
+
+        <input
+          id="landmark"
+          class="input full"
+          placeholder="Landmark / Area"
+        >
+
+        <textarea
+          id="address"
+          class="input full"
+          placeholder="Full address / instructions for worker"
+        ></textarea>
+
+      </div>
 
 
-<!-- PROFILE -->
+      <div class="locationBox">
 
-<section id="profilePage" class="profile-page">
+        <b>📍 Your service location</b>
 
-    <h1 class="section-title">
-        My Profile
-    </h1>
-
-    <div class="profile-card">
-
-        <div class="avatar-big" id="bigAvatar">
-            C
-        </div>
-
-        <h2 id="profileName">
-            Customer
-        </h2>
-
-        <p id="profilePhone"
-           style="color:#777;margin-top:5px">
+        <p id="locationText" style="margin:8px 0;color:#666">
+          Location not added
         </p>
 
-        <p id="customerId"
-           style="color:#777;margin-top:8px;font-size:13px">
-        </p>
-
-        <button class="logout"
-                onclick="logoutUser()">
-            Logout
+        <button id="locationBtn" class="locationBtn">
+          Use My Live Location
         </button>
 
+      </div>
+
+
+      <button id="payButton" class="primary">
+        Pay ₹250 & Book Service
+      </button>
+
     </div>
 
-</section>
+  </section>
+
+
+  <!-- BOOKINGS -->
+  <section id="bookingsPage" class="page hidden">
+
+    <div class="section">
+
+      <h2>My Bookings</h2>
+
+      <div id="bookingList">
+        <p style="color:#888">Loading bookings...</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROFILE -->
+  <section id="profilePage" class="page hidden">
+
+    <div class="section profileCard">
+
+      <div id="profileAvatar" class="avatar">
+        C
+      </div>
+
+      <h2 id="profileName">
+        Customer
+      </h2>
+
+      <p id="profilePhone" style="color:#777;margin:7px 0 18px">
+        —
+      </p>
+
+      <div style="text-align:left">
+
+        <p><b>Customer ID</b></p>
+        <p id="profileId" style="color:#777;margin:5px 0 15px">
+          —
+        </p>
+
+        <p><b>Account</b></p>
+        <p style="color:#16a34a;margin-top:5px">
+          ● Active
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HELP -->
+  <section id="helpPage" class="page hidden">
+
+    <div class="section">
+
+      <h2>Customer Help 🆘</h2>
+
+      <div class="helpItem">
+        <b>📞 Booking Help</b>
+        <p style="margin-top:6px;color:#666">
+          Booking ya worker se related problem ho to support request bhejo.
+        </p>
+      </div>
+
+      <div class="helpItem">
+        <b>💳 Payment Help</b>
+        <p style="margin-top:6px;color:#666">
+          Payment complete hone ke baad booking update na ho to support contact karo.
+        </p>
+      </div>
+
+      <div class="helpItem">
+        <b>📍 Location Help</b>
+        <p style="margin-top:6px;color:#666">
+          Worker ko exact location dene ke liye apartment, room aur landmark correctly bharo.
+        </p>
+      </div>
+
+      <button id="supportButton" class="primary">
+        Contact HOMORA Support
+      </button>
+
+    </div>
+
+  </section>
 
 </main>
 
 
 <!-- BOTTOM NAV -->
-
 <nav class="bottom">
 
-    <button class="nav-btn active"
-            id="navHome"
-            onclick="showPage('home')">
-        <span>🏠</span>
-        Home
-    </button>
+  <button class="active" data-tab="home">
+    🏠<br>Home
+  </button>
 
-    <button class="nav-btn"
-            id="navBookings"
-            onclick="showPage('bookings')">
-        <span>📅</span>
-        Bookings
-    </button>
+  <button data-tab="bookings">
+    📅<br>Bookings
+  </button>
 
-    <button class="nav-btn"
-            id="navProfile"
-            onclick="showPage('profile')">
-        <span>👤</span>
-        Profile
-    </button>
+  <button data-tab="profile">
+    👤<br>Profile
+  </button>
 
 </nav>
 
-</div>
 
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="paymentModal">
 
-<!-- ================= BOOKING MODAL ================= -->
+  <div class="paymentBox">
 
-<div class="modal" id="bookingModal">
+    <div class="paymentLogo">H</div>
 
-    <div class="sheet">
+    <h2 style="margin-top:10px">
+      HOMORA PAYMENT
+    </h2>
 
-        <h2 id="selectedService">
-            Booking
-        </h2>
+    <p style="color:#777;margin-top:5px">
+      Secure booking payment
+    </p>
 
-        <div class="sheet-sub">
-            Please enter your service location.
-        </div>
+    <div class="amount">
+      ₹250
+    </div>
 
-        <div class="field">
-            <label>Customer Name</label>
-            <input id="customerName"
-                   type="text"
-                   placeholder="Full name">
-        </div>
+    <!-- QR generated from payment URI -->
+    <img
+      id="paymentQR"
+      class="qr"
+      alt="HOMORA Payment QR"
+    >
 
-        <div class="field">
-            <label>Mobile Number</label>
-            <input id="customerMobile"
-                   type="tel"
-                   readonly>
-        </div>
+    <div class="payNote">
 
-        <div class="field">
-            <label>Apartment / Building Name</label>
-            <input id="apartment"
-                   type="text"
-                   placeholder="Example: Bhumika Darshan Apartment">
-        </div>
+      Scan the QR using your UPI app and complete
+      <b>₹250</b> payment.
 
-        <div class="row">
+      <br><br>
 
-            <div class="field">
-                <label>Room / Flat No.</label>
-                <input id="roomNo"
-                       type="text"
-                       placeholder="002">
-            </div>
-
-            <div class="field">
-                <label>Floor</label>
-                <input id="floorNo"
-                       type="text"
-                       placeholder="3">
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="field">
-                <label>Date</label>
-                <input id="bookingDate"
-                       type="date">
-            </div>
-
-            <div class="field">
-                <label>Time</label>
-                <input id="bookingTime"
-                       type="time">
-            </div>
-
-        </div>
-
-        <div class="field">
-            <label>Extra Address / Landmark</label>
-            <input id="landmark"
-                   type="text"
-                   placeholder="Near / beside / landmark">
-        </div>
-
-        <div class="location-box">
-
-            <b>📍 Live Location</b>
-
-            <div id="locationText"
-                 style="margin-top:5px;color:#777">
-                Location not captured yet.
-            </div>
-
-            <button onclick="getLocation()">
-                Capture My Location
-            </button>
-
-        </div>
-
-        <button class="primary"
-                onclick="goToPayment()">
-            Continue to Payment — ₹250
-        </button>
-
-        <button class="close-btn"
-                onclick="closeBooking()">
-            Cancel
-        </button>
+      After successful payment, return here and tap
+      <b>“I Have Paid”</b>.
 
     </div>
 
-</div>
+    <div class="modalActions">
 
+      <button id="closePayment" class="secondary">
+        Cancel
+      </button>
 
-<!-- ================= PAYMENT MODAL ================= -->
-
-<div class="modal" id="paymentModal">
-
-    <div class="sheet payment-card">
-
-        <h2>Secure Payment</h2>
-
-        <div class="sheet-sub">
-            Pay HOMORA booking amount
-        </div>
-
-        <div class="amount">
-            ₹250
-        </div>
-
-        <div class="qr-box">
-
-            <div id="qrcode"></div>
-
-        </div>
-
-        <div class="upi">
-            UPI ID:
-            <b>8446060669@ptyes</b>
-        </div>
-
-        <a id="upiButton"
-           class="pay-btn"
-           href="#">
-            📱 Pay ₹250 using UPI App
-        </a>
-
-        <button class="primary paid-btn"
-                onclick="confirmPaid()">
-            ✓ I've Paid ₹250 — Confirm Booking
-        </button>
-
-        <p class="warning">
-            Scan the QR or use the UPI button.
-            After completing payment, tap “I've Paid”.
-        </p>
-
-        <button class="close-btn"
-                onclick="closePayment()">
-            Go Back
-        </button>
+      <button id="paidButton" class="primary">
+        I Have Paid
+      </button>
 
     </div>
 
-</div>
-
-
-<!-- ================= SUCCESS ================= -->
-
-<div class="modal" id="successModal">
-
-    <div class="sheet" style="text-align:center">
-
-        <div style="font-size:65px">
-            🎉
-        </div>
-
-        <h2>Booking Confirmed!</h2>
-
-        <p style="color:#777;margin:10px 0 20px">
-            Your HOMORA booking has been received.
-        </p>
-
-        <div class="success-box"
-             style="display:block">
-
-            <h3 id="successBookingId">
-                Booking ID
-            </h3>
-
-            <p style="margin-top:7px">
-                Payment status:
-                <b>Submitted</b>
-            </p>
-
-        </div>
-
-        <button class="primary"
-                onclick="finishSuccess()">
-            View My Booking
-        </button>
-
-    </div>
+  </div>
 
 </div>
 
 
-<!-- ================= FIREBASE ================= -->
+<script type="module">
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
 
-<!-- QR GENERATOR -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+import {
+  getAuth,
+  onAuthStateChanged,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+  setPersistence,
+  browserLocalPersistence,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  addDoc,
+  collection,
+  query,
+  where,
+  orderBy,
+  onSnapshot,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
-<script>
-
-/* =========================================================
+/* ==========================
    HOMORA FIREBASE
-   ========================================================= */
+========================== */
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
-    authDomain: "homora-41400.firebaseapp.com",
-    projectId: "homora-41400",
-    storageBucket: "homora-41400.firebasestorage.app",
-    messagingSenderId: "252376803932"
+  apiKey: "AIzaSyAFnzY61X6YVWaKB03ig6_a-EUQ6qfFRec",
+  authDomain: "homora-41400.firebaseapp.com",
+  projectId: "homora-41400",
+  storageBucket: "homora-41400.firebasestorage.app",
+  messagingSenderId: "252376803932",
+  appId: "1:252376803932:web:595c23360a014a0cfc9499"
 };
 
-let firebaseReady = false;
-let auth = null;
-let db = null;
+const app = initializeApp(firebaseConfig);
 
-try{
+const auth = getAuth(app);
 
-    firebase.initializeApp(firebaseConfig);
-
-    auth = firebase.auth();
-    db = firebase.firestore();
-
-    firebaseReady = true;
-
-}catch(error){
-
-    console.error(error);
-
-}
+const db = getFirestore(app);
 
 
-/* =========================================================
-   APP DATA
-   ========================================================= */
+/* ==========================
+   LOCAL AUTH PERSISTENCE
+========================== */
 
-let confirmationResult = null;
+await setPersistence(
+  auth,
+  browserLocalPersistence
+);
+
+
+/* ==========================
+   STATE
+========================== */
+
 let currentUser = null;
+let currentCustomer = null;
+let selectedService = "";
 
-let selectedServiceName = "";
 let latitude = null;
 let longitude = null;
 
-let pendingBooking = null;
-
-const PRICE = 250;
-
-const UPI_ID = "8446060669@ptyes";
+let confirmationResult = null;
+let recaptchaVerifier = null;
 
 
-/* =========================================================
-   OTP
-   ========================================================= */
+/* ==========================
+   HELPERS
+========================== */
 
-function sendOTP(){
+function esc(value){
 
-    const phone =
-        document.getElementById("phone").value.trim();
-
-    if(phone.length !== 10){
-
-        showError("Please enter a valid 10-digit mobile number.");
-        return;
-
-    }
-
-    if(!firebaseReady){
-
-        showError(
-            "Firebase configuration is not valid. Check Firebase API key."
-        );
-
-        return;
-
-    }
-
-    showError("");
-
-    window.recaptchaVerifier =
-        new firebase.auth.RecaptchaVerifier(
-            "recaptcha-container",
-            {
-                size:"invisible"
-            }
-        );
-
-    auth.signInWithPhoneNumber(
-        "+91"+phone,
-        window.recaptchaVerifier
-    )
-    .then(function(result){
-
-        confirmationResult = result;
-
-        document.getElementById("phoneBox").style.display="none";
-        document.getElementById("otpBox").style.display="block";
-
-    })
-    .catch(function(error){
-
-        console.error(error);
-
-        showError(
-            "OTP error: " + error.message
-        );
-
-        if(window.recaptchaVerifier){
-
-            try{
-                window.recaptchaVerifier.clear();
-            }catch(e){}
-
-        }
-
-    });
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 
 }
 
 
-function verifyOTP(){
+function getName(){
 
-    const otp =
-        document.getElementById("otp").value.trim();
-
-    if(!confirmationResult){
-
-        showError("Please request OTP first.");
-        return;
-
-    }
-
-    if(otp.length !== 6){
-
-        showError("Enter the 6-digit OTP.");
-        return;
-
-    }
-
-    confirmationResult.confirm(otp)
-
-    .then(async function(result){
-
-        currentUser = result.user;
-
-        await loadCustomer();
-
-        document.getElementById("loginScreen").style.display="none";
-        document.getElementById("app").style.display="block";
-
-        loadBookings();
-
-    })
-
-    .catch(function(error){
-
-        console.error(error);
-
-        showError(
-            "OTP verification failed: " + error.message
-        );
-
-    });
+  return (
+    currentCustomer?.name ||
+    currentCustomer?.fullName ||
+    currentUser?.displayName ||
+    "Customer"
+  ).trim();
 
 }
 
 
-function showError(text){
+function showPage(name){
 
-    document.getElementById("loginError").innerText=text;
+  document
+    .querySelectorAll(".page")
+    .forEach(p=>p.classList.add("hidden"));
+
+  const page =
+    document.getElementById(name+"Page");
+
+  if(page){
+    page.classList.remove("hidden");
+  }
+
+  document
+    .querySelectorAll(".bottom button")
+    .forEach(b=>b.classList.remove("active"));
+
+  const active =
+    document.querySelector(
+      `.bottom button[data-tab="${name}"]`
+    );
+
+  if(active){
+    active.classList.add("active");
+  }
+
+  document
+    .getElementById("menuPanel")
+    .classList.remove("open");
 
 }
 
 
-/* =========================================================
+function updateCustomerUI(){
+
+  const name = getName();
+
+  document.getElementById(
+    "welcomeText"
+  ).textContent =
+    `Welcome ${name}`;
+
+  document.getElementById(
+    "profileName"
+  ).textContent = name;
+
+  document.getElementById(
+    "profilePhone"
+  ).textContent =
+    currentUser?.phoneNumber || "—";
+
+  document.getElementById(
+    "profileId"
+  ).textContent =
+    currentUser?.uid || "—";
+
+  document.getElementById(
+    "profileAvatar"
+  ).textContent =
+    name.charAt(0).toUpperCase();
+
+  document.getElementById(
+    "customerPhone"
+  ).value =
+    currentUser?.phoneNumber || "";
+
+}
+
+
+/* ==========================
+   AUTH
+========================== */
+
+onAuthStateChanged(
+  auth,
+  async user => {
+
+    if(!user){
+
+      currentUser = null;
+
+      document
+        .getElementById("loginScreen")
+        .classList.remove("hidden");
+
+      document
+        .getElementById("app")
+        .classList.add("hidden");
+
+      return;
+    }
+
+    currentUser = user;
+
+    document
+      .getElementById("loginScreen")
+      .classList.add("hidden");
+
+    document
+      .getElementById("app")
+      .classList.remove("hidden");
+
+    await loadCustomer();
+
+    updateCustomerUI();
+
+    showPage("home");
+
+    loadBookings();
+
+  }
+);
+
+
+/* ==========================
    CUSTOMER PROFILE
-   ========================================================= */
+========================== */
 
 async function loadCustomer(){
 
-    if(!currentUser) return;
+  const ref =
+    doc(db,"customers",currentUser.uid);
 
-    const ref =
-        db.collection("customers")
-          .doc(currentUser.uid);
+  const snap =
+    await getDoc(ref);
 
-    const snap = await ref.get();
+  if(snap.exists()){
 
-    let data = snap.exists ? snap.data() : {};
+    currentCustomer = {
+      id:snap.id,
+      ...snap.data()
+    };
 
-    if(!data.name){
+  }else{
 
-        const name =
-            prompt("Enter your full name:");
+    currentCustomer = {
+      name:"",
+      phone:currentUser.phoneNumber || "",
+      uid:currentUser.uid,
+      createdAt:serverTimestamp()
+    };
 
-        data.name =
-            name && name.trim()
-            ? name.trim()
-            : "Customer";
+    await setDoc(
+      ref,
+      currentCustomer,
+      {merge:true}
+    );
 
-        data.phone =
-            currentUser.phoneNumber || "";
-
-        data.customerId =
-            "CUS-" +
-            currentUser.uid.substring(0,8).toUpperCase();
-
-        data.createdAt =
-            firebase.firestore.FieldValue.serverTimestamp();
-
-        await ref.set(data,{merge:true});
-
-    }
-
-    const name =
-        data.name || "Customer";
-
-    const phone =
-        data.phone ||
-        currentUser.phoneNumber ||
-        "";
-
-    document.getElementById("welcomeText").innerText =
-        getGreeting(name);
-
-    document.getElementById("profileName").innerText =
-        name;
-
-    document.getElementById("profilePhone").innerText =
-        phone;
-
-    document.getElementById("customerId").innerText =
-        "Customer ID: " +
-        (data.customerId ||
-         "CUS-"+currentUser.uid.substring(0,8).toUpperCase());
-
-    document.getElementById("profileLetter").innerText =
-        name.charAt(0).toUpperCase();
-
-    document.getElementById("bigAvatar").innerText =
-        name.charAt(0).toUpperCase();
-
-    document.getElementById("customerMobile").value =
-        phone;
+  }
 
 }
 
 
-function getGreeting(name){
+/* ==========================
+   OTP
+========================== */
 
-    const first =
-        name.trim().split(" ")[0];
+function setupRecaptcha(){
 
-    const gender =
-        prompt(
-            "For personalised greeting, enter M for Male or F for Female:"
-        );
+  if(recaptchaVerifier) return;
 
-    if(
-        gender &&
-        gender.toLowerCase() === "f"
-    ){
-
-        return "Welcome, Ms. " + first + " 👋";
-
-    }
-
-    if(
-        gender &&
-        gender.toLowerCase() === "m"
-    ){
-
-        return "Welcome, Mr. " + first + " 👋";
-
-    }
-
-    return "Welcome, " + first + " 👋";
-
-}
-
-
-/* =========================================================
-   SERVICE
-   ========================================================= */
-
-function selectService(service){
-
-    selectedServiceName = service;
-
-    document.getElementById("selectedService").innerText =
-        service + " Booking";
-
-    document.getElementById("bookingModal")
-            .classList.add("show");
-
-}
-
-
-function closeBooking(){
-
-    document.getElementById("bookingModal")
-            .classList.remove("show");
-
-}
-
-
-/* =========================================================
-   LOCATION
-   ========================================================= */
-
-function getLocation(){
-
-    const text =
-        document.getElementById("locationText");
-
-    if(!navigator.geolocation){
-
-        text.innerText =
-            "Location is not supported on this device.";
-
-        return;
-
-    }
-
-    text.innerText =
-        "Capturing your live location...";
-
-    navigator.geolocation.getCurrentPosition(
-
-        function(position){
-
-            latitude =
-                position.coords.latitude;
-
-            longitude =
-                position.coords.longitude;
-
-            text.innerText =
-                "✓ Location captured successfully";
-
-        },
-
-        function(error){
-
-            console.error(error);
-
-            text.innerText =
-                "Location permission denied. Please allow GPS.";
-
-        },
-
-        {
-            enableHighAccuracy:true,
-            timeout:15000,
-            maximumAge:0
-        }
-
+  recaptchaVerifier =
+    new RecaptchaVerifier(
+      auth,
+      "recaptcha-container",
+      {
+        size:"invisible"
+      }
     );
 
 }
 
 
-/* =========================================================
-   PAYMENT
-   ========================================================= */
+document
+  .getElementById("sendOtp")
+  .addEventListener("click",async()=>{
 
-function goToPayment(){
+    const phone =
+      document
+        .getElementById("phone")
+        .value
+        .replace(/\D/g,"");
+
+    const msg =
+      document.getElementById("loginMsg");
+
+    if(phone.length !== 10){
+
+      msg.textContent =
+        "Enter valid 10 digit mobile number.";
+
+      return;
+    }
+
+    msg.textContent =
+      "Sending OTP...";
+
+    try{
+
+      setupRecaptcha();
+
+      confirmationResult =
+        await signInWithPhoneNumber(
+          auth,
+          "+91"+phone,
+          recaptchaVerifier
+        );
+
+      document
+        .getElementById("phoneStep")
+        .classList.add("hidden");
+
+      document
+        .getElementById("otpStep")
+        .classList.remove("hidden");
+
+      msg.textContent =
+        "OTP sent successfully.";
+
+    }catch(error){
+
+      console.error(error);
+
+      msg.textContent =
+        "OTP error: "+error.message;
+
+      if(recaptchaVerifier){
+
+        try{
+          recaptchaVerifier.clear();
+        }catch(e){}
+
+        recaptchaVerifier = null;
+
+      }
+
+    }
+
+});
+
+
+document
+  .getElementById("verifyOtp")
+  .addEventListener("click",async()=>{
+
+    const otp =
+      document
+        .getElementById("otp")
+        .value
+        .trim();
+
+    const msg =
+      document.getElementById("loginMsg");
+
+    if(!confirmationResult){
+
+      msg.textContent =
+        "Please request OTP again.";
+
+      return;
+    }
+
+    if(otp.length !== 6){
+
+      msg.textContent =
+        "Enter 6 digit OTP.";
+
+      return;
+    }
+
+    try{
+
+      msg.textContent =
+        "Verifying...";
+
+      await confirmationResult.confirm(otp);
+
+      msg.textContent =
+        "";
+
+    }catch(error){
+
+      console.error(error);
+
+      msg.textContent =
+        "Invalid OTP. Please try again.";
+
+    }
+
+});
+
+
+/* ==========================
+   SERVICE SELECTION
+========================== */
+
+document
+  .querySelectorAll(".service")
+  .forEach(card=>{
+
+    card.addEventListener(
+      "click",
+      ()=>{
+
+        selectedService =
+          card.dataset.service;
+
+        document
+          .getElementById("selectedServiceTitle")
+          .textContent =
+          `Book ${selectedService}`;
+
+        document
+          .getElementById("bookingSection")
+          .classList.remove("hidden");
+
+        document
+          .getElementById("bookingSection")
+          .scrollIntoView({
+            behavior:"smooth"
+          });
+
+      }
+    );
+
+  });
+
+
+/* ==========================
+   LOCATION
+========================== */
+
+document
+  .getElementById("locationBtn")
+  .addEventListener("click",()=>{
+
+    const text =
+      document.getElementById("locationText");
+
+    if(!navigator.geolocation){
+
+      text.textContent =
+        "Location not supported.";
+
+      return;
+    }
+
+    text.textContent =
+      "Getting live location...";
+
+    navigator.geolocation.getCurrentPosition(
+
+      position=>{
+
+        latitude =
+          position.coords.latitude;
+
+        longitude =
+          position.coords.longitude;
+
+        text.textContent =
+          `Location added ✓
+           ${latitude.toFixed(6)},
+           ${longitude.toFixed(6)}`;
+
+      },
+
+      ()=>{
+        text.textContent =
+          "Location permission denied.";
+      },
+
+      {
+        enableHighAccuracy:true,
+        timeout:10000
+      }
+
+    );
+
+  });
+
+
+/* ==========================
+   PAYMENT QR
+========================== */
+
+/*
+ IMPORTANT:
+ Replace this later with HOMORA BUSINESS UPI.
+ Do not use personal UPI for production
+ if you want the payer-facing account identity
+ to be HOMORA.
+*/
+
+const HOMORA_UPI_ID =
+  "8446060669@ptyes";
+
+
+function createPaymentQR(){
+
+  const upi =
+    "upi://pay?" +
+    "pa="+encodeURIComponent(HOMORA_UPI_ID) +
+    "&pn="+encodeURIComponent("HOMORA HOME SERVICES") +
+    "&am=250" +
+    "&cu=INR";
+
+  const qrUrl =
+    "https://api.qrserver.com/v1/create-qr-code/" +
+    "?size=500x500&margin=10&data=" +
+    encodeURIComponent(upi);
+
+  document
+    .getElementById("paymentQR")
+    .src = qrUrl;
+
+}
+
+
+/* ==========================
+   PAYMENT OPEN
+========================== */
+
+document
+  .getElementById("payButton")
+  .addEventListener("click",()=>{
+
+    if(!selectedService){
+
+      alert("Please select a service.");
+
+      return;
+    }
 
     const name =
-        document.getElementById("customerName").value.trim();
+      document
+        .getElementById("customerName")
+        .value
+        .trim();
 
     const apartment =
-        document.getElementById("apartment").value.trim();
+      document
+        .getElementById("apartment")
+        .value
+        .trim();
 
     const room =
-        document.getElementById("roomNo").value.trim();
+      document
+        .getElementById("room")
+        .value
+        .trim();
 
-    const floor =
-        document.getElementById("floorNo").value.trim();
-
-    const date =
-        document.getElementById("bookingDate").value;
-
-    const time =
-        document.getElementById("bookingTime").value;
+    const address =
+      document
+        .getElementById("address")
+        .value
+        .trim();
 
     if(!name){
 
-        alert("Please enter your name.");
-        return;
+      alert("Please enter your name.");
 
+      return;
     }
 
     if(!apartment){
 
-        alert("Please enter apartment/building name.");
-        return;
+      alert("Please enter apartment/building name.");
 
+      return;
     }
 
     if(!room){
 
-        alert("Please enter room/flat number.");
-        return;
+      alert("Please enter room/flat number.");
 
+      return;
     }
 
-    if(!date || !time){
+    if(!address){
 
-        alert("Please select booking date and time.");
-        return;
+      alert("Please enter full address.");
 
+      return;
     }
 
-    if(latitude === null){
+    createPaymentQR();
 
-        alert(
-            "Please capture your live location before payment."
-        );
+    document
+      .getElementById("paymentModal")
+      .classList.add("show");
 
-        return;
-
-    }
-
-    pendingBooking = {
-
-        service:selectedServiceName,
-
-        customerName:name,
-
-        customerPhone:
-            document.getElementById("customerMobile").value,
-
-        apartment:apartment,
-
-        roomNo:room,
-
-        floorNo:floor,
-
-        landmark:
-            document.getElementById("landmark").value.trim(),
-
-        date:date,
-
-        time:time,
-
-        latitude:latitude,
-
-        longitude:longitude,
-
-        amount:PRICE
-
-    };
-
-    closeBooking();
-
-    document.getElementById("paymentModal")
-            .classList.add("show");
-
-    generateQR();
-
-}
+  });
 
 
-function generateQR(){
+/* ==========================
+   CLOSE PAYMENT
+========================== */
 
-    const upiUrl =
-        "upi://pay" +
-        "?pa=" + encodeURIComponent(UPI_ID) +
-        "&pn=" + encodeURIComponent("HOMORA") +
-        "&am=" + PRICE +
-        "&cu=INR";
+document
+  .getElementById("closePayment")
+  .addEventListener("click",()=>{
 
-    document.getElementById("upiButton").href =
-        upiUrl;
+    document
+      .getElementById("paymentModal")
+      .classList.remove("show");
 
-    const qr =
-        document.getElementById("qrcode");
-
-    qr.innerHTML="";
-
-    new QRCode(qr,{
-
-        text:upiUrl,
-
-        width:230,
-        height:230,
-
-        colorDark:"#111111",
-        colorLight:"#ffffff",
-
-        correctLevel:
-            QRCode.CorrectLevel.H
-
-    });
-
-}
+  });
 
 
-function closePayment(){
+/* ==========================
+   CREATE BOOKING
+========================== */
 
-    document.getElementById("paymentModal")
-            .classList.remove("show");
-
-}
-
-
-async function confirmPaid(){
-
-    if(!pendingBooking){
-
-        alert("Booking information missing.");
-        return;
-
-    }
+document
+  .getElementById("paidButton")
+  .addEventListener("click",async()=>{
 
     if(!currentUser){
 
-        alert("Please login again.");
-        return;
+      alert("Please login again.");
 
+      return;
     }
 
-    const bookingId =
-        "HOM-" +
-        Date.now().toString().slice(-8);
+    const name =
+      document
+        .getElementById("customerName")
+        .value
+        .trim();
 
-    const booking = {
+    const phone =
+      currentUser.phoneNumber || "";
 
-        bookingId:bookingId,
+    const apartment =
+      document
+        .getElementById("apartment")
+        .value
+        .trim();
 
-        customerId:currentUser.uid,
+    const room =
+      document
+        .getElementById("room")
+        .value
+        .trim();
+
+    const landmark =
+      document
+        .getElementById("landmark")
+        .value
+        .trim();
+
+    const address =
+      document
+        .getElementById("address")
+        .value
+        .trim();
+
+    const paidButton =
+      document.getElementById("paidButton");
+
+    paidButton.disabled = true;
+
+    paidButton.textContent =
+      "Submitting...";
+
+    try{
+
+      const booking = {
+
+        customerId:
+          currentUser.uid,
 
         customerName:
-            pendingBooking.customerName,
+          name,
 
         customerPhone:
-            pendingBooking.customerPhone,
+          phone,
 
         service:
-            pendingBooking.service,
+          selectedService,
 
-        amount:PRICE,
+        amount:
+          250,
 
-        apartment:
-            pendingBooking.apartment,
+        currency:
+          "INR",
 
-        roomNo:
-            pendingBooking.roomNo,
+        apartmentName:
+          apartment,
 
-        floorNo:
-            pendingBooking.floorNo,
+        roomNumber:
+          room,
 
         landmark:
-            pendingBooking.landmark,
+          landmark,
 
-        bookingDate:
-            pendingBooking.date,
+        address:
+          address,
 
-        bookingTime:
-            pendingBooking.time,
+        latitude:
+          latitude,
 
-        location:{
-            latitude:
-                pendingBooking.latitude,
+        longitude:
+          longitude,
 
-            longitude:
-                pendingBooking.longitude
-        },
+        locationSource:
+          latitude !== null
+            ? "customer_live_location"
+            : "address_only",
 
-        paymentMethod:"UPI",
+        workerId:
+          null,
 
-        paymentUpiId:UPI_ID,
+        workerName:
+          null,
 
-        paymentStatus:"submitted",
+        status:
+          "pending",
 
-        status:"pending",
+        paymentStatus:
+          "submitted",
 
-        workerId:null,
+        paymentAmount:
+          250,
 
-        workerName:null,
+        paymentMethod:
+          "UPI_QR",
+
+        paymentMerchantLabel:
+          "HOMORA HOME SERVICES",
 
         createdAt:
-            firebase.firestore.FieldValue.serverTimestamp()
+          serverTimestamp(),
 
-    };
+        updatedAt:
+          serverTimestamp()
 
-    try{
+      };
 
-        await db.collection("bookings")
-                .doc(bookingId)
-                .set(booking);
 
-        document.getElementById("paymentModal")
-                .classList.remove("show");
-
-        document.getElementById("successBookingId")
-                .innerText =
-                "Booking ID: " + bookingId;
-
-        document.getElementById("successModal")
-                .classList.add("show");
-
-        pendingBooking=null;
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "Booking save failed: " +
-            error.message
+      const ref =
+        await addDoc(
+          collection(db,"bookings"),
+          booking
         );
 
-    }
 
-}
+      await setDoc(
 
+        doc(
+          db,
+          "payments",
+          ref.id
+        ),
 
-/* =========================================================
-   BOOKINGS
-   ========================================================= */
+        {
+          bookingId:
+            ref.id,
 
-async function loadBookings(){
+          customerId:
+            currentUser.uid,
 
-    if(!currentUser || !db) return;
+          amount:
+            250,
 
-    const list =
-        document.getElementById("bookingList");
+          method:
+            "UPI_QR",
 
-    try{
+          status:
+            "submitted",
 
-        const snap =
-            await db.collection("bookings")
-            .where(
-                "customerId",
-                "==",
-                currentUser.uid
-            )
-            .orderBy(
-                "createdAt",
-                "desc"
-            )
-            .limit(20)
-            .get();
+          merchantLabel:
+            "HOMORA HOME SERVICES",
 
-        if(snap.empty){
-
-            list.innerHTML =
-                '<div class="booking-card" style="text-align:center;color:#777">No bookings yet.</div>';
-
-            return;
+          createdAt:
+            serverTimestamp()
 
         }
 
-        list.innerHTML="";
+      );
 
-        snap.forEach(function(doc){
 
-            const b=doc.data();
+      document
+        .getElementById("paymentModal")
+        .classList.remove("show");
 
-            const div =
-                document.createElement("div");
 
-            div.className="booking-card";
+      alert(
+        "Booking received successfully! HOMORA will assign a worker."
+      );
 
-            div.innerHTML = `
 
-                <div class="booking-head">
+      document
+        .getElementById("bookingSection")
+        .classList.add("hidden");
 
-                    <div>
-                        <h3>${escapeHTML(b.service || "Service")}</h3>
+      showPage("bookings");
 
-                        <small>
-                            ${escapeHTML(b.bookingId || doc.id)}
-                        </small>
-                    </div>
+      loadBookings();
 
-                    <span class="booking-status">
-                        ${escapeHTML(b.status || "pending")}
-                    </span>
 
-                </div>
+    }catch(error){
 
-                <div class="detail">
+      console.error(error);
 
-                    📅 <strong>Date:</strong>
-                    ${escapeHTML(b.bookingDate || "-")}
-                    <br>
+      alert(
+        "Booking error: "+error.message
+      );
 
-                    ⏰ <strong>Time:</strong>
-                    ${escapeHTML(b.bookingTime || "-")}
-                    <br>
+    }finally{
 
-                    🏢 <strong>Apartment:</strong>
-                    ${escapeHTML(b.apartment || "-")}
-                    <br>
+      paidButton.disabled = false;
 
-                    🚪 <strong>Room:</strong>
-                    ${escapeHTML(b.roomNo || "-")}
-                    <br>
-
-                    📍 <strong>Floor:</strong>
-                    ${escapeHTML(b.floorNo || "-")}
-                    <br>
-
-                    💰 <strong>Amount:</strong>
-                    ₹${b.amount || 250}
-                    <br>
-
-                    💳 <strong>Payment:</strong>
-                    ${escapeHTML(b.paymentStatus || "submitted")}
-                    <br>
-
-                    👷 <strong>Worker:</strong>
-                    ${escapeHTML(b.workerName || "Not assigned yet")}
-
-                </div>
-            `;
-
-            list.appendChild(div);
-
-        });
+      paidButton.textContent =
+        "I Have Paid";
 
     }
-    catch(error){
 
-        console.error(error);
+  });
+
+
+/* ==========================
+   BOOKINGS
+========================== */
+
+function loadBookings(){
+
+  if(!currentUser) return;
+
+  const list =
+    document.getElementById("bookingList");
+
+  const q =
+    query(
+      collection(db,"bookings"),
+      where(
+        "customerId",
+        "==",
+        currentUser.uid
+      ),
+      orderBy(
+        "createdAt",
+        "desc"
+      )
+    );
+
+
+  onSnapshot(
+
+    q,
+
+    snap=>{
+
+      if(snap.empty){
 
         list.innerHTML =
-            '<div class="booking-card" style="text-align:center;color:#777">Bookings will appear here after your first booking.</div>';
+          `<p style="color:#888">
+             No bookings yet.
+           </p>`;
+
+        return;
+      }
+
+      list.innerHTML =
+        snap.docs.map(d=>{
+
+          const b = d.data();
+
+          return `
+
+            <div class="bookingCard">
+
+              <h3>
+                ${esc(b.service || "Service")}
+              </h3>
+
+              <p style="margin-top:8px">
+                📅 Booking received
+              </p>
+
+              <p style="margin-top:6px">
+                🏢 ${esc(b.apartmentName || "—")}
+              </p>
+
+              <p style="margin-top:6px">
+                🚪 Room ${esc(b.roomNumber || "—")}
+              </p>
+
+              <p style="margin-top:6px">
+                💰 ₹${Number(b.amount || 250)}
+              </p>
+
+              <p style="margin-top:6px">
+                👷 Worker:
+                ${esc(b.workerName || "Not assigned yet")}
+              </p>
+
+              <span class="badge">
+                ${esc(b.status || "pending")}
+              </span>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+    },
+
+    error=>{
+
+      console.error(error);
+
+      list.innerHTML =
+        `<p style="color:#c00">
+          Unable to load bookings.
+        </p>`;
 
     }
+
+  );
 
 }
 
 
-/* =========================================================
+/* ==========================
    NAVIGATION
-   ========================================================= */
+========================== */
 
-function showPage(page){
+document
+  .querySelectorAll("[data-tab]")
+  .forEach(button=>{
 
-    document.getElementById("homePage").style.display =
-        page==="home" ? "block" : "none";
+    button.addEventListener("click",()=>{
 
-    document.getElementById("bookingsPage").style.display =
-        page==="bookings" ? "block" : "none";
+      const tab =
+        button.dataset.tab;
 
-    document.getElementById("profilePage").style.display =
-        page==="profile" ? "block" : "none";
+      if(tab === "home")
+        showPage("home");
 
-    document
-        .querySelectorAll(".nav-btn")
-        .forEach(function(btn){
-            btn.classList.remove("active");
-        });
+      if(tab === "bookings")
+        showPage("bookings");
 
-    if(page==="home"){
-        document.getElementById("navHome")
-                .classList.add("active");
-    }
-
-    if(page==="bookings"){
-        document.getElementById("navBookings")
-                .classList.add("active");
-
-        loadBookings();
-    }
-
-    if(page==="profile"){
-        document.getElementById("navProfile")
-                .classList.add("active");
-    }
-
-}
-
-
-function finishSuccess(){
-
-    document.getElementById("successModal")
-            .classList.remove("show");
-
-    showPage("bookings");
-
-}
-
-
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
-function logoutUser(){
-
-    if(auth){
-
-        auth.signOut()
-        .then(function(){
-
-            location.reload();
-
-        });
-
-    }else{
-
-        location.reload();
-
-    }
-
-}
-
-
-/* =========================================================
-   SECURITY / HTML
-   ========================================================= */
-
-function escapeHTML(value){
-
-    return String(value || "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================================================
-   DATE MINIMUM
-   ========================================================= */
-
-(function(){
-
-    const date =
-        document.getElementById("bookingDate");
-
-    const today =
-        new Date().toISOString().split("T")[0];
-
-    date.min=today;
-
-})();
-
-
-/* =========================================================
-   AUTO LOGIN
-   ========================================================= */
-
-if(firebaseReady){
-
-    auth.onAuthStateChanged(function(user){
-
-        if(user){
-
-            currentUser=user;
-
-            loadCustomer()
-            .then(function(){
-
-                document.getElementById("loginScreen")
-                        .style.display="none";
-
-                document.getElementById("app")
-                        .style.display="block";
-
-                loadBookings();
-
-            });
-
-        }
+      if(tab === "profile")
+        showPage("profile");
 
     });
 
-}
+  });
+
+
+/* ==========================
+   THREE DOT MENU
+========================== */
+
+document
+  .getElementById("menuButton")
+  .addEventListener("click",()=>{
+
+    document
+      .getElementById("menuPanel")
+      .classList.toggle("open");
+
+  });
+
+
+document
+  .querySelectorAll(".menuPanel .menuItem[data-tab]")
+  .forEach(item=>{
+
+    item.addEventListener("click",()=>{
+
+      const tab =
+        item.dataset.tab;
+
+      showPage(tab);
+
+    });
+
+  });
+
+
+/* ==========================
+   SUPPORT
+========================== */
+
+document
+  .getElementById("supportButton")
+  .addEventListener("click",async()=>{
+
+    if(!currentUser) return;
+
+    const message =
+      prompt(
+        "HOMORA Support ke liye apni problem likho:"
+      );
+
+    if(!message) return;
+
+    try{
+
+      await addDoc(
+
+        collection(db,"support"),
+
+        {
+          customerId:
+            currentUser.uid,
+
+          customerName:
+            getName(),
+
+          customerPhone:
+            currentUser.phoneNumber || "",
+
+          subject:
+            "Customer Support",
+
+          message:
+            message,
+
+          status:
+            "pending",
+
+          createdAt:
+            serverTimestamp()
+
+        }
+
+      );
+
+      alert(
+        "Support request sent successfully."
+      );
+
+    }catch(error){
+
+      alert(
+        "Support error: "+error.message
+      );
+
+    }
+
+  });
+
+
+/* ==========================
+   LOGOUT
+========================== */
+
+document
+  .getElementById("logoutBtn")
+  .addEventListener("click",async()=>{
+
+    await signOut(auth);
+
+    location.reload();
+
+  });
+
+
+/* ==========================
+   CLOSE MENU OUTSIDE
+========================== */
+
+document.addEventListener("click",e=>{
+
+  const menu =
+    document.getElementById("menuPanel");
+
+  const button =
+    document.getElementById("menuButton");
+
+  if(
+    menu.classList.contains("open") &&
+    !menu.contains(e.target) &&
+    !button.contains(e.target)
+  ){
+
+    menu.classList.remove("open");
+
+  }
+
+});
 
 </script>
 
