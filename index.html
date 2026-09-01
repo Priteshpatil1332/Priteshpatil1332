@@ -51,7 +51,7 @@ button{cursor:pointer}
   height:50px;
   border-radius:16px;
   background:linear-gradient(135deg,#5b2cff,#20b8ff);
-  color:white;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -84,15 +84,16 @@ button{cursor:pointer}
   border-radius:14px;
   background:#f1edff;
   color:#5128d8;
-  font-size:26px;
+  font-size:27px;
+  font-weight:900;
 }
 
 .menuPanel{
   position:fixed;
   top:68px;
   right:15px;
-  width:220px;
-  background:white;
+  width:230px;
+  background:#fff;
   border-radius:18px;
   padding:10px;
   box-shadow:0 15px 45px rgba(0,0,0,.18);
@@ -100,7 +101,9 @@ button{cursor:pointer}
   display:none;
 }
 
-.menuPanel.open{display:block}
+.menuPanel.open{
+  display:block;
+}
 
 .menuItem{
   padding:14px;
@@ -124,7 +127,7 @@ button{cursor:pointer}
 .loginBox{
   width:100%;
   max-width:430px;
-  background:white;
+  background:#fff;
   border-radius:28px;
   padding:30px 22px;
   box-shadow:0 20px 60px rgba(60,35,130,.15);
@@ -176,9 +179,14 @@ button{cursor:pointer}
   border-radius:14px;
   padding:15px;
   background:linear-gradient(90deg,#6330ff,#159cff);
-  color:white;
+  color:#fff;
   font-weight:800;
   box-shadow:0 10px 22px rgba(91,44,255,.22);
+}
+
+.primary:disabled{
+  opacity:.6;
+  cursor:not-allowed;
 }
 
 .secondary{
@@ -206,7 +214,7 @@ button{cursor:pointer}
   margin-top:8px;
   border-radius:28px;
   padding:26px 22px;
-  color:white;
+  color:#fff;
   background:linear-gradient(135deg,#5c2cff,#2477ff,#09b7d9);
   box-shadow:0 15px 35px rgba(71,45,180,.22);
 }
@@ -301,7 +309,7 @@ textarea.input{
 }
 
 .bookingCard{
-  background:white;
+  background:#fff;
   padding:18px;
   border-radius:20px;
   margin-bottom:12px;
@@ -351,7 +359,7 @@ textarea.input{
   margin:auto;
   border-radius:18px;
   background:linear-gradient(135deg,#5b2cff,#12b7ff);
-  color:white;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -384,6 +392,7 @@ textarea.input{
   font-size:13px;
   color:#555;
   margin-bottom:15px;
+  line-height:1.5;
 }
 
 .modalActions{
@@ -421,7 +430,7 @@ textarea.input{
 
 .bottom button.active{
   background:linear-gradient(135deg,#6833ff,#8758ff);
-  color:white;
+  color:#fff;
 }
 
 .profileCard{
@@ -433,7 +442,7 @@ textarea.input{
   height:82px;
   border-radius:50%;
   background:linear-gradient(135deg,#6330ff,#13aaff);
-  color:white;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
@@ -450,6 +459,7 @@ textarea.input{
 }
 
 @media(max-width:600px){
+
   .services{
     grid-template-columns:1fr 1fr;
   }
@@ -469,6 +479,7 @@ textarea.input{
   .brandText{
     font-size:21px;
   }
+
 }
 </style>
 </head>
@@ -571,217 +582,228 @@ textarea.input{
 
 <main class="container">
 
-  <!-- HOME -->
-  <section id="homePage" class="page">
+<!-- HOME -->
+<section id="homePage" class="page">
 
-    <div class="hero">
+  <div class="hero">
 
-      <h1 id="welcomeText">
-        Welcome Customer
-      </h1>
+    <h1 id="welcomeText">
+      Welcome Customer
+    </h1>
 
-      <p>
-        What can HOMORA help you with today?
+    <p>
+      What can HOMORA help you with today?
+    </p>
+
+  </div>
+
+
+  <div class="section">
+
+    <h2>Choose a Service</h2>
+
+    <div class="services">
+
+      <div class="service" data-service="Cleaning">
+        <div class="serviceIcon">🧹</div>
+        <h3>Cleaning</h3>
+        <div class="price">₹250 / booking</div>
+      </div>
+
+      <div class="service" data-service="Cooking">
+        <div class="serviceIcon">👨‍🍳</div>
+        <h3>Cooking</h3>
+        <div class="price">₹250 / booking</div>
+      </div>
+
+      <div class="service" data-service="Utensils">
+        <div class="serviceIcon">🍽️</div>
+        <h3>Utensils</h3>
+        <div class="price">₹250 / booking</div>
+      </div>
+
+      <div class="service" data-service="Laundry">
+        <div class="serviceIcon">👕</div>
+        <h3>Laundry</h3>
+        <div class="price">₹250 / booking</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- BOOKING FORM -->
+  <div id="bookingSection" class="section hidden">
+
+    <h2 id="selectedServiceTitle">
+      Book Service
+    </h2>
+
+    <div class="formGrid">
+
+      <input
+        id="customerName"
+        class="input"
+        placeholder="Your name"
+        autocomplete="name"
+      >
+
+      <!-- FIXED: MOBILE NUMBER IS EDITABLE -->
+      <input
+        id="customerPhone"
+        class="input"
+        type="tel"
+        inputmode="numeric"
+        maxlength="10"
+        placeholder="Mobile number"
+        autocomplete="tel"
+      >
+
+      <input
+        id="apartment"
+        class="input"
+        placeholder="Apartment / Building name"
+      >
+
+      <input
+        id="room"
+        class="input"
+        placeholder="Room / Flat number"
+      >
+
+      <input
+        id="landmark"
+        class="input full"
+        placeholder="Landmark / Area"
+      >
+
+      <textarea
+        id="address"
+        class="input full"
+        placeholder="Full address / instructions for worker"
+      ></textarea>
+
+    </div>
+
+
+    <div class="locationBox">
+
+      <b>📍 Your service location</b>
+
+      <p id="locationText" style="margin:8px 0;color:#666">
+        Location not added
       </p>
 
-    </div>
-
-
-    <div class="section">
-
-      <h2>Choose a Service</h2>
-
-      <div class="services">
-
-        <div class="service" data-service="Cleaning">
-          <div class="serviceIcon">🧹</div>
-          <h3>Cleaning</h3>
-          <div class="price">₹250 / booking</div>
-        </div>
-
-        <div class="service" data-service="Cooking">
-          <div class="serviceIcon">👨‍🍳</div>
-          <h3>Cooking</h3>
-          <div class="price">₹250 / booking</div>
-        </div>
-
-        <div class="service" data-service="Utensils">
-          <div class="serviceIcon">🍽️</div>
-          <h3>Utensils</h3>
-          <div class="price">₹250 / booking</div>
-        </div>
-
-        <div class="service" data-service="Laundry">
-          <div class="serviceIcon">👕</div>
-          <h3>Laundry</h3>
-          <div class="price">₹250 / booking</div>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- BOOKING FORM -->
-    <div id="bookingSection" class="section hidden">
-
-      <h2 id="selectedServiceTitle">
-        Book Service
-      </h2>
-
-      <div class="formGrid">
-
-        <input
-          id="customerName"
-          class="input"
-          placeholder="Your name"
-        >
-
-        <input
-          id="customerPhone"
-          class="input"
-          placeholder="Mobile number"
-          readonly
-        >
-
-        <input
-          id="apartment"
-          class="input"
-          placeholder="Apartment / Building name"
-        >
-
-        <input
-          id="room"
-          class="input"
-          placeholder="Room / Flat number"
-        >
-
-        <input
-          id="landmark"
-          class="input full"
-          placeholder="Landmark / Area"
-        >
-
-        <textarea
-          id="address"
-          class="input full"
-          placeholder="Full address / instructions for worker"
-        ></textarea>
-
-      </div>
-
-
-      <div class="locationBox">
-
-        <b>📍 Your service location</b>
-
-        <p id="locationText" style="margin:8px 0;color:#666">
-          Location not added
-        </p>
-
-        <button id="locationBtn" class="locationBtn">
-          Use My Live Location
-        </button>
-
-      </div>
-
-
-      <button id="payButton" class="primary">
-        Pay ₹250 & Book Service
+      <button id="locationBtn" class="locationBtn">
+        Use My Live Location
       </button>
 
     </div>
 
-  </section>
+
+    <button id="payButton" class="primary">
+      Pay ₹250 & Book Service
+    </button>
+
+  </div>
+
+</section>
 
 
-  <!-- BOOKINGS -->
-  <section id="bookingsPage" class="page hidden">
+<!-- BOOKINGS -->
+<section id="bookingsPage" class="page hidden">
 
-    <div class="section">
+  <div class="section">
 
-      <h2>My Bookings</h2>
+    <h2>My Bookings</h2>
 
-      <div id="bookingList">
-        <p style="color:#888">Loading bookings...</p>
-      </div>
-
+    <div id="bookingList">
+      <p style="color:#888">
+        Loading bookings...
+      </p>
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- PROFILE -->
-  <section id="profilePage" class="page hidden">
+<!-- PROFILE -->
+<section id="profilePage" class="page hidden">
 
-    <div class="section profileCard">
+  <div class="section profileCard">
 
-      <div id="profileAvatar" class="avatar">
-        C
-      </div>
+    <div id="profileAvatar" class="avatar">
+      C
+    </div>
 
-      <h2 id="profileName">
-        Customer
-      </h2>
+    <h2 id="profileName">
+      Customer
+    </h2>
 
-      <p id="profilePhone" style="color:#777;margin:7px 0 18px">
+    <p id="profilePhone"
+       style="color:#777;margin:7px 0 18px">
+      —
+    </p>
+
+    <div style="text-align:left">
+
+      <p><b>Customer ID</b></p>
+
+      <p id="profileId"
+         style="color:#777;margin:5px 0 15px">
         —
       </p>
 
-      <div style="text-align:left">
+      <p><b>Account</b></p>
 
-        <p><b>Customer ID</b></p>
-        <p id="profileId" style="color:#777;margin:5px 0 15px">
-          —
-        </p>
-
-        <p><b>Account</b></p>
-        <p style="color:#16a34a;margin-top:5px">
-          ● Active
-        </p>
-
-      </div>
+      <p style="color:#16a34a;margin-top:5px">
+        ● Active
+      </p>
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- HELP -->
-  <section id="helpPage" class="page hidden">
+<!-- HELP -->
+<section id="helpPage" class="page hidden">
 
-    <div class="section">
+  <div class="section">
 
-      <h2>Customer Help 🆘</h2>
+    <h2>Customer Help 🆘</h2>
 
-      <div class="helpItem">
-        <b>📞 Booking Help</b>
-        <p style="margin-top:6px;color:#666">
-          Booking ya worker se related problem ho to support request bhejo.
-        </p>
-      </div>
-
-      <div class="helpItem">
-        <b>💳 Payment Help</b>
-        <p style="margin-top:6px;color:#666">
-          Payment complete hone ke baad booking update na ho to support contact karo.
-        </p>
-      </div>
-
-      <div class="helpItem">
-        <b>📍 Location Help</b>
-        <p style="margin-top:6px;color:#666">
-          Worker ko exact location dene ke liye apartment, room aur landmark correctly bharo.
-        </p>
-      </div>
-
-      <button id="supportButton" class="primary">
-        Contact HOMORA Support
-      </button>
-
+    <div class="helpItem">
+      <b>📞 Booking Help</b>
+      <p style="margin-top:6px;color:#666">
+        Booking ya worker se related problem ho to support request bhejo.
+      </p>
     </div>
 
-  </section>
+    <div class="helpItem">
+      <b>💳 Payment Help</b>
+      <p style="margin-top:6px;color:#666">
+        Payment complete hone ke baad booking update na ho to support contact karo.
+      </p>
+    </div>
+
+    <div class="helpItem">
+      <b>📍 Location Help</b>
+      <p style="margin-top:6px;color:#666">
+        Worker ko exact location dene ke liye apartment, room aur landmark correctly bharo.
+      </p>
+    </div>
+
+    <button id="supportButton" class="primary">
+      Contact HOMORA Support
+    </button>
+
+  </div>
+
+</section>
 
 </main>
 
@@ -823,7 +845,6 @@ textarea.input{
       ₹250
     </div>
 
-    <!-- QR generated from payment URI -->
     <img
       id="paymentQR"
       class="qr"
@@ -884,14 +905,13 @@ import {
   collection,
   query,
   where,
-  orderBy,
   onSnapshot,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
 
 
 /* ==========================
-   HOMORA FIREBASE
+   FIREBASE
 ========================== */
 
 const firebaseConfig = {
@@ -911,7 +931,7 @@ const db = getFirestore(app);
 
 
 /* ==========================
-   LOCAL AUTH PERSISTENCE
+   PERSIST LOGIN
 ========================== */
 
 await setPersistence(
@@ -933,6 +953,7 @@ let longitude = null;
 
 let confirmationResult = null;
 let recaptchaVerifier = null;
+let unsubscribeBookings = null;
 
 
 /* ==========================
@@ -951,14 +972,24 @@ function esc(value){
 }
 
 
+function cleanPhone(value){
+
+  return String(value || "")
+    .replace(/\D/g,"")
+    .slice(-10);
+
+}
+
+
 function getName(){
 
-  return (
+  const name =
     currentCustomer?.name ||
     currentCustomer?.fullName ||
     currentUser?.displayName ||
-    "Customer"
-  ).trim();
+    "";
+
+  return String(name).trim();
 
 }
 
@@ -967,7 +998,9 @@ function showPage(name){
 
   document
     .querySelectorAll(".page")
-    .forEach(p=>p.classList.add("hidden"));
+    .forEach(p =>
+      p.classList.add("hidden")
+    );
 
   const page =
     document.getElementById(name+"Page");
@@ -978,7 +1011,9 @@ function showPage(name){
 
   document
     .querySelectorAll(".bottom button")
-    .forEach(b=>b.classList.remove("active"));
+    .forEach(b =>
+      b.classList.remove("active")
+    );
 
   const active =
     document.querySelector(
@@ -996,44 +1031,116 @@ function showPage(name){
 }
 
 
+/* ==========================
+   CUSTOMER UI
+========================== */
+
 function updateCustomerUI(){
 
-  const name = getName();
+  const name =
+    getName() || "Customer";
 
-  document.getElementById(
-    "welcomeText"
-  ).textContent =
+  /*
+    IMPORTANT:
+    No Mr / Miss.
+    Only Welcome + customer name.
+  */
+
+  document
+    .getElementById("welcomeText")
+    .textContent =
     `Welcome ${name}`;
 
-  document.getElementById(
-    "profileName"
-  ).textContent = name;
+  document
+    .getElementById("profileName")
+    .textContent =
+    name;
 
-  document.getElementById(
-    "profilePhone"
-  ).textContent =
-    currentUser?.phoneNumber || "—";
+  document
+    .getElementById("profilePhone")
+    .textContent =
+    currentUser?.phoneNumber ||
+    currentCustomer?.phone ||
+    "—";
 
-  document.getElementById(
-    "profileId"
-  ).textContent =
+  document
+    .getElementById("profileId")
+    .textContent =
     currentUser?.uid || "—";
 
-  document.getElementById(
-    "profileAvatar"
-  ).textContent =
+  document
+    .getElementById("profileAvatar")
+    .textContent =
     name.charAt(0).toUpperCase();
 
-  document.getElementById(
-    "customerPhone"
-  ).value =
-    currentUser?.phoneNumber || "";
+  /*
+    Customer can edit this number.
+  */
+
+  document
+    .getElementById("customerPhone")
+    .value =
+    cleanPhone(
+      currentCustomer?.phone ||
+      currentUser?.phoneNumber ||
+      ""
+    );
+
+  document
+    .getElementById("customerName")
+    .value =
+    currentCustomer?.name || "";
 
 }
 
 
 /* ==========================
-   AUTH
+   LOAD CUSTOMER
+========================== */
+
+async function loadCustomer(){
+
+  const ref =
+    doc(
+      db,
+      "customers",
+      currentUser.uid
+    );
+
+  const snap =
+    await getDoc(ref);
+
+  if(snap.exists()){
+
+    currentCustomer = {
+      id:snap.id,
+      ...snap.data()
+    };
+
+  }else{
+
+    currentCustomer = {
+      uid:currentUser.uid,
+      phone:
+        currentUser.phoneNumber || "",
+      name:"",
+      createdAt:
+        serverTimestamp()
+    };
+
+    await setDoc(
+      ref,
+      currentCustomer,
+      {merge:true}
+    );
+
+  }
+
+}
+
+
+/* ==========================
+   AUTH STATE
 ========================== */
 
 onAuthStateChanged(
@@ -1043,6 +1150,12 @@ onAuthStateChanged(
     if(!user){
 
       currentUser = null;
+      currentCustomer = null;
+
+      if(unsubscribeBookings){
+        unsubscribeBookings();
+        unsubscribeBookings = null;
+      }
 
       document
         .getElementById("loginScreen")
@@ -1065,55 +1178,27 @@ onAuthStateChanged(
       .getElementById("app")
       .classList.remove("hidden");
 
-    await loadCustomer();
+    try{
 
-    updateCustomerUI();
+      await loadCustomer();
 
-    showPage("home");
+      updateCustomerUI();
 
-    loadBookings();
+      showPage("home");
+
+      loadBookings();
+
+    }catch(error){
+
+      console.error(
+        "Customer load error:",
+        error
+      );
+
+    }
 
   }
 );
-
-
-/* ==========================
-   CUSTOMER PROFILE
-========================== */
-
-async function loadCustomer(){
-
-  const ref =
-    doc(db,"customers",currentUser.uid);
-
-  const snap =
-    await getDoc(ref);
-
-  if(snap.exists()){
-
-    currentCustomer = {
-      id:snap.id,
-      ...snap.data()
-    };
-
-  }else{
-
-    currentCustomer = {
-      name:"",
-      phone:currentUser.phoneNumber || "",
-      uid:currentUser.uid,
-      createdAt:serverTimestamp()
-    };
-
-    await setDoc(
-      ref,
-      currentCustomer,
-      {merge:true}
-    );
-
-  }
-
-}
 
 
 /* ==========================
@@ -1138,121 +1223,133 @@ function setupRecaptcha(){
 
 document
   .getElementById("sendOtp")
-  .addEventListener("click",async()=>{
+  .addEventListener(
+    "click",
+    async()=>{
 
-    const phone =
-      document
-        .getElementById("phone")
-        .value
-        .replace(/\D/g,"");
-
-    const msg =
-      document.getElementById("loginMsg");
-
-    if(phone.length !== 10){
-
-      msg.textContent =
-        "Enter valid 10 digit mobile number.";
-
-      return;
-    }
-
-    msg.textContent =
-      "Sending OTP...";
-
-    try{
-
-      setupRecaptcha();
-
-      confirmationResult =
-        await signInWithPhoneNumber(
-          auth,
-          "+91"+phone,
-          recaptchaVerifier
+      const phone =
+        cleanPhone(
+          document
+            .getElementById("phone")
+            .value
         );
 
-      document
-        .getElementById("phoneStep")
-        .classList.add("hidden");
+      const msg =
+        document.getElementById(
+          "loginMsg"
+        );
 
-      document
-        .getElementById("otpStep")
-        .classList.remove("hidden");
+      if(phone.length !== 10){
 
-      msg.textContent =
-        "OTP sent successfully.";
+        msg.textContent =
+          "Enter valid 10 digit mobile number.";
 
-    }catch(error){
-
-      console.error(error);
+        return;
+      }
 
       msg.textContent =
-        "OTP error: "+error.message;
+        "Sending OTP...";
 
-      if(recaptchaVerifier){
+      try{
 
-        try{
-          recaptchaVerifier.clear();
-        }catch(e){}
+        setupRecaptcha();
 
-        recaptchaVerifier = null;
+        confirmationResult =
+          await signInWithPhoneNumber(
+            auth,
+            "+91"+phone,
+            recaptchaVerifier
+          );
+
+        document
+          .getElementById("phoneStep")
+          .classList.add("hidden");
+
+        document
+          .getElementById("otpStep")
+          .classList.remove("hidden");
+
+        msg.textContent =
+          "OTP sent successfully.";
+
+      }catch(error){
+
+        console.error(error);
+
+        msg.textContent =
+          "OTP error: "+error.message;
+
+        if(recaptchaVerifier){
+
+          try{
+            recaptchaVerifier.clear();
+          }catch(e){}
+
+          recaptchaVerifier = null;
+
+        }
 
       }
 
     }
-
-});
+  );
 
 
 document
   .getElementById("verifyOtp")
-  .addEventListener("click",async()=>{
+  .addEventListener(
+    "click",
+    async()=>{
 
-    const otp =
-      document
-        .getElementById("otp")
-        .value
-        .trim();
+      const otp =
+        document
+          .getElementById("otp")
+          .value
+          .trim();
 
-    const msg =
-      document.getElementById("loginMsg");
+      const msg =
+        document.getElementById(
+          "loginMsg"
+        );
 
-    if(!confirmationResult){
+      if(!confirmationResult){
 
-      msg.textContent =
-        "Please request OTP again.";
+        msg.textContent =
+          "Please request OTP again.";
 
-      return;
+        return;
+      }
+
+      if(otp.length !== 6){
+
+        msg.textContent =
+          "Enter 6 digit OTP.";
+
+        return;
+      }
+
+      try{
+
+        msg.textContent =
+          "Verifying...";
+
+        await confirmationResult.confirm(
+          otp
+        );
+
+        msg.textContent = "";
+
+      }catch(error){
+
+        console.error(error);
+
+        msg.textContent =
+          "Invalid OTP. Please try again.";
+
+      }
+
     }
-
-    if(otp.length !== 6){
-
-      msg.textContent =
-        "Enter 6 digit OTP.";
-
-      return;
-    }
-
-    try{
-
-      msg.textContent =
-        "Verifying...";
-
-      await confirmationResult.confirm(otp);
-
-      msg.textContent =
-        "";
-
-    }catch(error){
-
-      console.error(error);
-
-      msg.textContent =
-        "Invalid OTP. Please try again.";
-
-    }
-
-});
+  );
 
 
 /* ==========================
@@ -1271,16 +1368,22 @@ document
           card.dataset.service;
 
         document
-          .getElementById("selectedServiceTitle")
+          .getElementById(
+            "selectedServiceTitle"
+          )
           .textContent =
           `Book ${selectedService}`;
 
         document
-          .getElementById("bookingSection")
+          .getElementById(
+            "bookingSection"
+          )
           .classList.remove("hidden");
 
         document
-          .getElementById("bookingSection")
+          .getElementById(
+            "bookingSection"
+          )
           .scrollIntoView({
             behavior:"smooth"
           });
@@ -1297,82 +1400,101 @@ document
 
 document
   .getElementById("locationBtn")
-  .addEventListener("click",()=>{
+  .addEventListener(
+    "click",
+    ()=>{
 
-    const text =
-      document.getElementById("locationText");
+      const text =
+        document.getElementById(
+          "locationText"
+        );
 
-    if(!navigator.geolocation){
-
-      text.textContent =
-        "Location not supported.";
-
-      return;
-    }
-
-    text.textContent =
-      "Getting live location...";
-
-    navigator.geolocation.getCurrentPosition(
-
-      position=>{
-
-        latitude =
-          position.coords.latitude;
-
-        longitude =
-          position.coords.longitude;
+      if(!navigator.geolocation){
 
         text.textContent =
-          `Location added ✓
-           ${latitude.toFixed(6)},
-           ${longitude.toFixed(6)}`;
+          "Location not supported.";
 
-      },
-
-      ()=>{
-        text.textContent =
-          "Location permission denied.";
-      },
-
-      {
-        enableHighAccuracy:true,
-        timeout:10000
+        return;
       }
 
-    );
+      text.textContent =
+        "Getting live location...";
 
-  });
+      navigator.geolocation.getCurrentPosition(
+
+        position=>{
+
+          latitude =
+            position.coords.latitude;
+
+          longitude =
+            position.coords.longitude;
+
+          text.textContent =
+            `Location added ✓
+${latitude.toFixed(6)}, ${longitude.toFixed(6)}`;
+
+        },
+
+        ()=>{
+          text.textContent =
+            "Location permission denied.";
+        },
+
+        {
+          enableHighAccuracy:true,
+          timeout:10000
+        }
+
+      );
+
+    }
+  );
 
 
 /* ==========================
-   PAYMENT QR
+   PAYMENT
 ========================== */
 
 /*
  IMPORTANT:
- Replace this later with HOMORA BUSINESS UPI.
- Do not use personal UPI for production
- if you want the payer-facing account identity
- to be HOMORA.
+ Do NOT put personal UPI here for production.
+
+ Example:
+ const HOMORA_UPI_ID = "homora@yourbank";
+
+ The final UPI must belong to HOMORA's
+ business/merchant account.
+
+ A personal UPI can expose the verified
+ account-holder identity in UPI apps.
 */
 
 const HOMORA_UPI_ID =
   "8446060669@ptyes";
+
+const MERCHANT_NAME =
+  "HOMORA HOME SERVICES";
 
 
 function createPaymentQR(){
 
   const upi =
     "upi://pay?" +
-    "pa="+encodeURIComponent(HOMORA_UPI_ID) +
-    "&pn="+encodeURIComponent("HOMORA HOME SERVICES") +
-    "&am=250" +
+    "pa="+
+      encodeURIComponent(
+        HOMORA_UPI_ID
+      )+
+    "&pn="+
+      encodeURIComponent(
+        MERCHANT_NAME
+      )+
+    "&am=250"+
     "&cu=INR";
 
   const qrUrl =
     "https://api.qrserver.com/v1/create-qr-code/" +
-    "?size=500x500&margin=10&data=" +
+    "?size=500x500&margin=10&data="+
     encodeURIComponent(upi);
 
   document
@@ -1383,79 +1505,120 @@ function createPaymentQR(){
 
 
 /* ==========================
-   PAYMENT OPEN
+   OPEN PAYMENT
 ========================== */
 
 document
   .getElementById("payButton")
-  .addEventListener("click",()=>{
+  .addEventListener(
+    "click",
+    ()=>{
 
-    if(!selectedService){
+      if(!selectedService){
 
-      alert("Please select a service.");
+        alert(
+          "Please select a service."
+        );
 
-      return;
-    }
+        return;
+      }
 
-    const name =
+      const name =
+        document
+          .getElementById(
+            "customerName"
+          )
+          .value
+          .trim();
+
+      const phone =
+        cleanPhone(
+          document
+            .getElementById(
+              "customerPhone"
+            )
+            .value
+        );
+
+      const apartment =
+        document
+          .getElementById(
+            "apartment"
+          )
+          .value
+          .trim();
+
+      const room =
+        document
+          .getElementById(
+            "room"
+          )
+          .value
+          .trim();
+
+      const address =
+        document
+          .getElementById(
+            "address"
+          )
+          .value
+          .trim();
+
+      if(!name){
+
+        alert(
+          "Please enter your name."
+        );
+
+        return;
+      }
+
+      if(phone.length !== 10){
+
+        alert(
+          "Please enter valid 10 digit mobile number."
+        );
+
+        return;
+      }
+
+      if(!apartment){
+
+        alert(
+          "Please enter apartment/building name."
+        );
+
+        return;
+      }
+
+      if(!room){
+
+        alert(
+          "Please enter room/flat number."
+        );
+
+        return;
+      }
+
+      if(!address){
+
+        alert(
+          "Please enter full address."
+        );
+
+        return;
+      }
+
+      createPaymentQR();
+
       document
-        .getElementById("customerName")
-        .value
-        .trim();
+        .getElementById(
+          "paymentModal"
+        )
+        .classList.add("show");
 
-    const apartment =
-      document
-        .getElementById("apartment")
-        .value
-        .trim();
-
-    const room =
-      document
-        .getElementById("room")
-        .value
-        .trim();
-
-    const address =
-      document
-        .getElementById("address")
-        .value
-        .trim();
-
-    if(!name){
-
-      alert("Please enter your name.");
-
-      return;
     }
-
-    if(!apartment){
-
-      alert("Please enter apartment/building name.");
-
-      return;
-    }
-
-    if(!room){
-
-      alert("Please enter room/flat number.");
-
-      return;
-    }
-
-    if(!address){
-
-      alert("Please enter full address.");
-
-      return;
-    }
-
-    createPaymentQR();
-
-    document
-      .getElementById("paymentModal")
-      .classList.add("show");
-
-  });
+  );
 
 
 /* ==========================
@@ -1464,13 +1627,18 @@ document
 
 document
   .getElementById("closePayment")
-  .addEventListener("click",()=>{
+  .addEventListener(
+    "click",
+    ()=>{
 
-    document
-      .getElementById("paymentModal")
-      .classList.remove("show");
+      document
+        .getElementById(
+          "paymentModal"
+        )
+        .classList.remove("show");
 
-  });
+    }
+  );
 
 
 /* ==========================
@@ -1479,210 +1647,334 @@ document
 
 document
   .getElementById("paidButton")
-  .addEventListener("click",async()=>{
+  .addEventListener(
+    "click",
+    async()=>{
 
-    if(!currentUser){
+      if(!currentUser){
 
-      alert("Please login again.");
+        alert(
+          "Please login again."
+        );
 
-      return;
-    }
+        return;
+      }
 
-    const name =
-      document
-        .getElementById("customerName")
-        .value
-        .trim();
+      const name =
+        document
+          .getElementById(
+            "customerName"
+          )
+          .value
+          .trim();
 
-    const phone =
-      currentUser.phoneNumber || "";
+      const phone =
+        cleanPhone(
+          document
+            .getElementById(
+              "customerPhone"
+            )
+            .value
+        );
 
-    const apartment =
-      document
-        .getElementById("apartment")
-        .value
-        .trim();
+      const apartment =
+        document
+          .getElementById(
+            "apartment"
+          )
+          .value
+          .trim();
 
-    const room =
-      document
-        .getElementById("room")
-        .value
-        .trim();
+      const room =
+        document
+          .getElementById(
+            "room"
+          )
+          .value
+          .trim();
 
-    const landmark =
-      document
-        .getElementById("landmark")
-        .value
-        .trim();
+      const landmark =
+        document
+          .getElementById(
+            "landmark"
+          )
+          .value
+          .trim();
 
-    const address =
-      document
-        .getElementById("address")
-        .value
-        .trim();
+      const address =
+        document
+          .getElementById(
+            "address"
+          )
+          .value
+          .trim();
 
-    const paidButton =
-      document.getElementById("paidButton");
+      if(!name){
 
-    paidButton.disabled = true;
+        alert(
+          "Please enter your name."
+        );
 
-    paidButton.textContent =
-      "Submitting...";
+        return;
+      }
 
-    try{
+      if(phone.length !== 10){
 
-      const booking = {
+        alert(
+          "Please enter valid 10 digit mobile number."
+        );
 
-        customerId:
-          currentUser.uid,
+        return;
+      }
 
-        customerName:
-          name,
+      const paidButton =
+        document.getElementById(
+          "paidButton"
+        );
 
-        customerPhone:
-          phone,
+      paidButton.disabled = true;
 
-        service:
-          selectedService,
+      paidButton.textContent =
+        "Submitting...";
 
-        amount:
-          250,
+      try{
 
-        currency:
-          "INR",
+        /*
+          SAVE CUSTOMER PROFILE
+        */
 
-        apartmentName:
-          apartment,
+        await setDoc(
 
-        roomNumber:
-          room,
+          doc(
+            db,
+            "customers",
+            currentUser.uid
+          ),
 
-        landmark:
-          landmark,
+          {
+            uid:
+              currentUser.uid,
 
-        address:
-          address,
+            name:
+              name,
 
-        latitude:
-          latitude,
+            phone:
+              "+91"+phone,
 
-        longitude:
-          longitude,
+            updatedAt:
+              serverTimestamp()
 
-        locationSource:
-          latitude !== null
-            ? "customer_live_location"
-            : "address_only",
+          },
 
-        workerId:
-          null,
+          {
+            merge:true
+          }
 
-        workerName:
-          null,
-
-        status:
-          "pending",
-
-        paymentStatus:
-          "submitted",
-
-        paymentAmount:
-          250,
-
-        paymentMethod:
-          "UPI_QR",
-
-        paymentMerchantLabel:
-          "HOMORA HOME SERVICES",
-
-        createdAt:
-          serverTimestamp(),
-
-        updatedAt:
-          serverTimestamp()
-
-      };
-
-
-      const ref =
-        await addDoc(
-          collection(db,"bookings"),
-          booking
         );
 
 
-      await setDoc(
+        /*
+          CREATE BOOKING
+        */
 
-        doc(
-          db,
-          "payments",
-          ref.id
-        ),
-
-        {
-          bookingId:
-            ref.id,
+        const booking = {
 
           customerId:
             currentUser.uid,
 
+          customerName:
+            name,
+
+          customerPhone:
+            "+91"+phone,
+
+          service:
+            selectedService,
+
           amount:
             250,
 
-          method:
-            "UPI_QR",
+          currency:
+            "INR",
+
+          apartmentName:
+            apartment,
+
+          roomNumber:
+            room,
+
+          landmark:
+            landmark,
+
+          address:
+            address,
+
+          latitude:
+            latitude,
+
+          longitude:
+            longitude,
+
+          locationSource:
+            latitude !== null
+              ? "customer_live_location"
+              : "address_only",
+
+          workerId:
+            null,
+
+          workerName:
+            null,
 
           status:
+            "pending",
+
+          paymentStatus:
             "submitted",
 
-          merchantLabel:
-            "HOMORA HOME SERVICES",
+          paymentAmount:
+            250,
+
+          paymentMethod:
+            "UPI_QR",
+
+          paymentMerchantLabel:
+            MERCHANT_NAME,
 
           createdAt:
+            serverTimestamp(),
+
+          updatedAt:
             serverTimestamp()
+
+        };
+
+
+        const ref =
+          await addDoc(
+            collection(
+              db,
+              "bookings"
+            ),
+            booking
+          );
+
+
+        /*
+          PAYMENT RECORD
+        */
+
+        await setDoc(
+
+          doc(
+            db,
+            "payments",
+            ref.id
+          ),
+
+          {
+
+            bookingId:
+              ref.id,
+
+            customerId:
+              currentUser.uid,
+
+            customerName:
+              name,
+
+            amount:
+              250,
+
+            method:
+              "UPI_QR",
+
+            status:
+              "submitted",
+
+            merchantLabel:
+              MERCHANT_NAME,
+
+            createdAt:
+              serverTimestamp()
+
+          }
+
+        );
+
+
+        /*
+          UPDATE LOCAL CUSTOMER
+        */
+
+        currentCustomer = {
+          ...(currentCustomer || {}),
+          name:name,
+          phone:"+91"+phone
+        };
+
+        updateCustomerUI();
+
+
+        document
+          .getElementById(
+            "paymentModal"
+          )
+          .classList.remove("show");
+
+
+        alert(
+          "Booking received successfully! HOMORA will assign a worker."
+        );
+
+
+        document
+          .getElementById(
+            "bookingSection"
+          )
+          .classList.add("hidden");
+
+
+        showPage("bookings");
+
+
+      }catch(error){
+
+        console.error(
+          "BOOKING ERROR:",
+          error
+        );
+
+        if(
+          error.code ===
+          "permission-denied"
+        ){
+
+          alert(
+            "Booking blocked by Firebase Firestore Rules. Firebase Rules ko update karna hoga."
+          );
+
+        }else{
+
+          alert(
+            "Booking error: "+
+            error.message
+          );
 
         }
 
-      );
+      }finally{
 
+        paidButton.disabled =
+          false;
 
-      document
-        .getElementById("paymentModal")
-        .classList.remove("show");
+        paidButton.textContent =
+          "I Have Paid";
 
-
-      alert(
-        "Booking received successfully! HOMORA will assign a worker."
-      );
-
-
-      document
-        .getElementById("bookingSection")
-        .classList.add("hidden");
-
-      showPage("bookings");
-
-      loadBookings();
-
-
-    }catch(error){
-
-      console.error(error);
-
-      alert(
-        "Booking error: "+error.message
-      );
-
-    }finally{
-
-      paidButton.disabled = false;
-
-      paidButton.textContent =
-        "I Have Paid";
+      }
 
     }
-
-  });
+  );
 
 
 /* ==========================
@@ -1691,100 +1983,161 @@ document
 
 function loadBookings(){
 
-  if(!currentUser) return;
+  if(!currentUser)
+    return;
+
+  if(unsubscribeBookings){
+
+    unsubscribeBookings();
+
+    unsubscribeBookings = null;
+
+  }
 
   const list =
-    document.getElementById("bookingList");
+    document.getElementById(
+      "bookingList"
+    );
 
   const q =
     query(
-      collection(db,"bookings"),
+
+      collection(
+        db,
+        "bookings"
+      ),
+
       where(
         "customerId",
         "==",
         currentUser.uid
-      ),
-      orderBy(
-        "createdAt",
-        "desc"
       )
+
     );
 
 
-  onSnapshot(
+  unsubscribeBookings =
+    onSnapshot(
 
-    q,
+      q,
 
-    snap=>{
+      snap=>{
 
-      if(snap.empty){
+        if(snap.empty){
+
+          list.innerHTML =
+            `<p style="color:#888">
+              No bookings yet.
+            </p>`;
+
+          return;
+        }
+
+
+        const docs =
+          [...snap.docs].sort(
+            (a,b)=>{
+
+              const ad =
+                a.data().createdAt?.seconds || 0;
+
+              const bd =
+                b.data().createdAt?.seconds || 0;
+
+              return bd-ad;
+
+            }
+          );
+
 
         list.innerHTML =
-          `<p style="color:#888">
-             No bookings yet.
-           </p>`;
+          docs.map(d=>{
 
-        return;
+            const b =
+              d.data();
+
+            return `
+
+              <div class="bookingCard">
+
+                <h3>
+                  ${esc(
+                    b.service ||
+                    "Service"
+                  )}
+                </h3>
+
+                <p style="margin-top:8px">
+                  📅 Booking received
+                </p>
+
+                <p style="margin-top:6px">
+                  🏢 ${esc(
+                    b.apartmentName ||
+                    "—"
+                  )}
+                </p>
+
+                <p style="margin-top:6px">
+                  🚪 Room ${esc(
+                    b.roomNumber ||
+                    "—"
+                  )}
+                </p>
+
+                <p style="margin-top:6px">
+                  💰 ₹${Number(
+                    b.amount ||
+                    250
+                  )}
+                </p>
+
+                <p style="margin-top:6px">
+                  👷 Worker:
+                  ${esc(
+                    b.workerName ||
+                    "Not assigned yet"
+                  )}
+                </p>
+
+                <p style="margin-top:6px">
+                  💳 Payment:
+                  ${esc(
+                    b.paymentStatus ||
+                    "pending"
+                  )}
+                </p>
+
+                <span class="badge">
+                  ${esc(
+                    b.status ||
+                    "pending"
+                  )}
+                </span>
+
+              </div>
+
+            `;
+
+          }).join("");
+
+      },
+
+      error=>{
+
+        console.error(
+          "BOOKING LOAD ERROR:",
+          error
+        );
+
+        list.innerHTML =
+          `<p style="color:#c00">
+            Unable to load bookings.
+          </p>`;
+
       }
 
-      list.innerHTML =
-        snap.docs.map(d=>{
-
-          const b = d.data();
-
-          return `
-
-            <div class="bookingCard">
-
-              <h3>
-                ${esc(b.service || "Service")}
-              </h3>
-
-              <p style="margin-top:8px">
-                📅 Booking received
-              </p>
-
-              <p style="margin-top:6px">
-                🏢 ${esc(b.apartmentName || "—")}
-              </p>
-
-              <p style="margin-top:6px">
-                🚪 Room ${esc(b.roomNumber || "—")}
-              </p>
-
-              <p style="margin-top:6px">
-                💰 ₹${Number(b.amount || 250)}
-              </p>
-
-              <p style="margin-top:6px">
-                👷 Worker:
-                ${esc(b.workerName || "Not assigned yet")}
-              </p>
-
-              <span class="badge">
-                ${esc(b.status || "pending")}
-              </span>
-
-            </div>
-
-          `;
-
-        }).join("");
-
-    },
-
-    error=>{
-
-      console.error(error);
-
-      list.innerHTML =
-        `<p style="color:#c00">
-          Unable to load bookings.
-        </p>`;
-
-    }
-
-  );
+    );
 
 }
 
@@ -1797,21 +2150,26 @@ document
   .querySelectorAll("[data-tab]")
   .forEach(button=>{
 
-    button.addEventListener("click",()=>{
+    button.addEventListener(
+      "click",
+      ()=>{
 
-      const tab =
-        button.dataset.tab;
+        const tab =
+          button.dataset.tab;
 
-      if(tab === "home")
-        showPage("home");
+        if(
+          tab === "home" ||
+          tab === "bookings" ||
+          tab === "profile" ||
+          tab === "help"
+        ){
 
-      if(tab === "bookings")
-        showPage("bookings");
+          showPage(tab);
 
-      if(tab === "profile")
-        showPage("profile");
+        }
 
-    });
+      }
+    );
 
   });
 
@@ -1822,93 +2180,20 @@ document
 
 document
   .getElementById("menuButton")
-  .addEventListener("click",()=>{
+  .addEventListener(
+    "click",
+    ()=>{
 
-    document
-      .getElementById("menuPanel")
-      .classList.toggle("open");
-
-  });
-
-
-document
-  .querySelectorAll(".menuPanel .menuItem[data-tab]")
-  .forEach(item=>{
-
-    item.addEventListener("click",()=>{
-
-      const tab =
-        item.dataset.tab;
-
-      showPage(tab);
-
-    });
-
-  });
-
-
-/* ==========================
-   SUPPORT
-========================== */
-
-document
-  .getElementById("supportButton")
-  .addEventListener("click",async()=>{
-
-    if(!currentUser) return;
-
-    const message =
-      prompt(
-        "HOMORA Support ke liye apni problem likho:"
-      );
-
-    if(!message) return;
-
-    try{
-
-      await addDoc(
-
-        collection(db,"support"),
-
-        {
-          customerId:
-            currentUser.uid,
-
-          customerName:
-            getName(),
-
-          customerPhone:
-            currentUser.phoneNumber || "",
-
-          subject:
-            "Customer Support",
-
-          message:
-            message,
-
-          status:
-            "pending",
-
-          createdAt:
-            serverTimestamp()
-
-        }
-
-      );
-
-      alert(
-        "Support request sent successfully."
-      );
-
-    }catch(error){
-
-      alert(
-        "Support error: "+error.message
-      );
+      document
+        .getElementById(
+          "menuPanel"
+        )
+        .classList.toggle(
+          "open"
+        );
 
     }
-
-  });
+  );
 
 
 /* ==========================
@@ -1917,38 +2202,107 @@ document
 
 document
   .getElementById("logoutBtn")
-  .addEventListener("click",async()=>{
+  .addEventListener(
+    "click",
+    async()=>{
 
-    await signOut(auth);
+      try{
 
-    location.reload();
+        await signOut(auth);
 
-  });
+      }catch(error){
+
+        console.error(
+          "Logout error:",
+          error
+        );
+
+      }
+
+    }
+  );
 
 
 /* ==========================
-   CLOSE MENU OUTSIDE
+   SUPPORT
 ========================== */
 
-document.addEventListener("click",e=>{
+document
+  .getElementById("supportButton")
+  .addEventListener(
+    "click",
+    async()=>{
 
-  const menu =
-    document.getElementById("menuPanel");
+      if(!currentUser)
+        return;
 
-  const button =
-    document.getElementById("menuButton");
+      const message =
+        prompt(
+          "HOMORA Support ke liye apni problem likho:"
+        );
 
-  if(
-    menu.classList.contains("open") &&
-    !menu.contains(e.target) &&
-    !button.contains(e.target)
-  ){
+      if(!message)
+        return;
 
-    menu.classList.remove("open");
+      try{
 
-  }
+        await addDoc(
 
-});
+          collection(
+            db,
+            "support"
+          ),
+
+          {
+
+            customerId:
+              currentUser.uid,
+
+            customerName:
+              getName(),
+
+            customerPhone:
+              currentUser.phoneNumber ||
+              currentCustomer?.phone ||
+              "",
+
+            subject:
+              "Customer Support",
+
+            message:
+              message,
+
+            status:
+              "pending",
+
+            createdAt:
+              serverTimestamp()
+
+          }
+
+        );
+
+        alert(
+          "Support request sent successfully."
+        );
+
+      }catch(error){
+
+        console.error(
+          "Support error:",
+          error
+        );
+
+        alert(
+          "Support error: "+
+          error.message
+        );
+
+      }
+
+    }
+  );
+
 
 </script>
 
